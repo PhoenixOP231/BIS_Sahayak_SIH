@@ -23,9 +23,24 @@ describe('RAG Chat Assistant & Citation Generation', () => {
     expect(response.answer.toLowerCase()).toContain('bis sahayak');
   });
 
-  it('should handle complaint and fake product guidance', async () => {
-    const response = await generateRAGAnswer('How do I report a fake ISI mark on a product?', [], 'consumer', 'en');
+  it('should handle informal casual slang like Yo without dumping random standards', async () => {
+    const response = await generateRAGAnswer('Yo', [], 'consumer', 'en');
     expect(response.answer).toBeDefined();
-    expect(response.answer).toContain('BIS Care');
+    expect(response.answer).toContain('BIS Sahayak');
+    expect(response.citations.length).toBe(0);
+  });
+
+  it('should handle gratitude and acknowledgments gracefully', async () => {
+    const response = await generateRAGAnswer('Thanks for the help!', [], 'consumer', 'en');
+    expect(response.answer).toBeDefined();
+    expect(response.answer.toLowerCase()).toContain('welcome');
+    expect(response.citations.length).toBe(0);
+  });
+
+  it('should provide short answer first with expandable details for products', async () => {
+    const response = await generateRAGAnswer('What standard applies to LPG cylinders?', [], 'consumer', 'en');
+    expect(response.answer).toContain('### ⚡ Quick Answer');
+    expect(response.answer).toContain('<details>');
+    expect(response.citations.length).toBeGreaterThan(0);
   });
 });

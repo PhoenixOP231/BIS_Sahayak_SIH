@@ -124,7 +124,10 @@ const STOP_WORDS = new Set([
   'is', 'are', 'and', 'the', 'for', 'with', 'from', 'per', 'not', 'can', 'may', 'shall', 'should', 'all',
   'what', 'which', 'who', 'how', 'when', 'where', 'why', 'about', 'under', 'into', 'over', 'after',
   'standard', 'standards', 'isi', 'mark', 'bis', 'act', 'code', 'product', 'products',
-  'क्या', 'है', 'पर', 'या', 'का', 'की', 'के', 'में', 'को', 'से', 'होना', 'चाहिए', 'और', 'लिए', 'यह', 'वह', 'मानक', 'मार्क', 'उत्पाद'
+  'yo', 'hi', 'hey', 'hello', 'sup', 'whats', 'whatsup', 'wazzup', 'hola', 'hie', 'heyy', 'hii', 'gm', 'gn',
+  'ok', 'okay', 'cool', 'nice', 'great', 'awesome', 'thanks', 'thank', 'thx', 'tysm', 'bye', 'goodbye', 'help',
+  'kya', 'hai', 'kaise', 'bhai', 'bro', 'dost', 'namaste', 'pranam', 'shukriya', 'dhanyawad',
+  'क्या', 'है', 'पर', 'या', 'का', 'की', 'के', 'में', 'को', 'से', 'होना', 'चाहिए', 'और', 'लिए', 'यह', 'वह', 'मानक', 'मार्क', 'उत्पाद', 'नमस्ते', 'प्रणाम', 'धन्यवाद', 'शुक्रिया', 'हेलो', 'हाय'
 ]);
 
 export async function searchHybridStandards(query: string, topK = 5): Promise<ScoredStandardChunk[]> {
@@ -134,6 +137,11 @@ export async function searchHybridStandards(query: string, topK = 5): Promise<Sc
     .replace(/[^\p{L}\p{N}]/gu, ' ')
     .split(/\s+/)
     .filter(w => w.length >= 2 && !STOP_WORDS.has(w));
+
+  // If query consists solely of greetings / stop words, return empty results to allow conversational NLP
+  if (queryTokens.length === 0) {
+    return [];
+  }
 
   const localChunks = loadLocalChunks();
   const scored: ScoredStandardChunk[] = [];

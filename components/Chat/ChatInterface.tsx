@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Sparkles, User, Shield, Volume2, VolumeX, Copy, Check, RotateCcw } from 'lucide-react';
 import { CitationChip } from './CitationChip';
+import { ChatMessageContent } from './ChatMessageContent';
 import { StandardDrawer } from '../Standards/StandardDrawer';
 import { CitationItem } from '@/lib/gemini';
 import { UI_TEXT, Language } from '@/lib/translations';
@@ -253,9 +254,7 @@ export function ChatInterface({ mode, language, initialQuery, onClearInitialQuer
                   }`}
                 >
                   {/* Markdown-like Text Formatter */}
-                  <div className={`text-sm leading-relaxed whitespace-pre-wrap ${isUser ? 'text-slate-100' : 'text-slate-800'}`}>
-                    {msg.content}
-                  </div>
+                  <ChatMessageContent content={msg.content} isUser={isUser} />
 
                   {/* Citation Chips */}
                   {!isUser && msg.citations && msg.citations.length > 0 && (

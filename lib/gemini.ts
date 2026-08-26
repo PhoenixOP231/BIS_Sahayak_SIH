@@ -25,183 +25,234 @@ export interface AIResponse {
 }
 
 const CONSUMER_SYSTEM_PROMPT = `
-You are "BIS Sahayak" (बीआईएस सहायक), a helpful, friendly, and expert AI Guide for the Bureau of Indian Standards (BIS) and Ministry of Consumer Affairs, Government of India.
+You are "BIS Sahayak" (बीआईएस सहायक), a helpful, friendly, and concise AI Assistant for the Bureau of Indian Standards (BIS) and Ministry of Consumer Affairs, Government of India.
 
-YOUR TONE & PERSPECTIVE:
-- Always answer conversationally from the USER'S PERSPECTIVE in simple, clear, and reassuring everyday language.
-- Never produce raw, rigid, or textbook-like technical dumps. Explain *why* safety rules matter to them and their family.
-- If the user asks a casual or conversational question (e.g., "Hi", "How are you?", "Who are you?", "Help me with my kitchen"), respond warmly and naturally like a knowledgeable friend.
-- When explaining products, highlight 3 practical things:
-  1. What this product standard means in simple terms.
-  2. What to look for on the product (the authentic ISI mark, the IS number on top, and the 7 or 8-digit CM/L license number at the bottom).
-  3. Remind them they can verify any product's license or report fake goods on the official "BIS Care" mobile app.
-- If answering in Hindi, use natural, respectful, conversational Hindi (Devanagari).
+RESPONSE STRUCTURE (CRITICAL):
+1. Keep the primary answer very short, crisp, and direct (2 to 3 sentences in plain, everyday language).
+2. Follow with 2 to 3 practical bullet points under "### 🔍 Key Takeaways".
+3. Place all detailed clause citations, test parameters, and regulatory background inside an expandable HTML details block:
+   <details>
+   <summary><b>📖 More Information & Technical Specifications</b></summary>
+   [Detailed explanation, test tolerances, standard scope, and QCO order]
+   </details>
+4. If the user asks a casual or greeting question (e.g. "Yo", "Hi", "Thanks", "How are you?"), respond warmly and concisely in 2 sentences.
+5. When answering in Hindi, use warm, natural, and accessible Devanagari Hindi.
 `;
 
 const INDUSTRY_SYSTEM_PROMPT = `
-You are "BIS Sahayak" (बीआईएस सहायक) in Technical Industry & MSME Mode, a knowledgeable, practical engineering and regulatory compliance advisor for manufacturers, testing labs, and contractors.
+You are "BIS Sahayak" (बीआईएस सहायक) in Technical Industry & MSME Mode, an expert regulatory and engineering compliance advisor.
 
-YOUR TONE & PERSPECTIVE:
-- Speak directly, professionally, and conversationally to the engineer, manufacturer, or procurement officer.
-- Provide clear answers with practical context before diving into exact technical parameters, IS numbers, and testing limits.
-- Explain compliance requirements clearly (Scheme-I certification, mandatory Quality Control Orders / QCOs, sampling, and proof tests).
-- If answering in Hindi, use professional and natural Devanagari terminology.
+RESPONSE STRUCTURE (CRITICAL):
+1. Provide a crisp 2-sentence executive summary first.
+2. Follow with key acceptance thresholds in 2-3 concise bullet points.
+3. Put deep clause breakdowns, routine testing tables, and conformity scheme details inside:
+   <details>
+   <summary><b>📖 Technical Specifications & Compliance Clauses</b></summary>
+   [Clauses, numerical limits, test methods, QCO mandates]
+   </details>
 `;
 
-// Conversational Intent Matcher for natural Q&A
 function generateConversationalNLPAnswer(
   query: string,
   mode: 'consumer' | 'industry',
   language: Language,
   topStd: any
 ): string {
-  const q = query.toLowerCase().trim();
+  const q = query.toLowerCase().trim().replace(/[^a-zA-Z0-9\u0900-\u097F\s]/g, '');
 
-  // 1. Greetings & Pleasantries
-  if (/^(hi|hello|hey|namaste|pranam|greetings|good morning|good evening|kaise ho|kya haal|नमस्ते|प्रणाम|हेलो|हाय)/i.test(q)) {
+  // 1. Casual Greetings & Slang
+  if (/^(yo|sup|wassup|whatsup|wazzup|hey|hi|hello|namaste|pranam|hola|howdy|hlo|hii|heyy|heya|kaise ho|kya haal|bhai|bro|dost|नमस्ते|प्रणाम|हेलो|हाय|हलो)$/i.test(q) ||
+      /^(yo|hey|hi|hello|namaste|pranam|hola|howdy|hlo|hii|heyy)\s+/i.test(q)) {
     if (language === 'hi') {
       return `नमस्ते! मैं आपका **बीआईएस सहायक (BIS Sahayak)** हूँ। 😊
 
-मैं भारतीय मानकों (Indian Standards), उत्पाद सुरक्षा, और असली **ISI मार्क** की पहचान करने में आपकी मदद के लिए हमेशा तैयार हूँ।
+मैं भारतीय मानकों (Indian Standards), उत्पाद सुरक्षा और असली **ISI मार्क** की जांच में आपकी मदद के लिए उपस्थित हूँ।
 
-आप मुझसे किसी भी उत्पाद के बारे में पूछ सकते हैं, जैसे:
-• *"क्या मेरे प्रेशर कुकर पर ISI मार्क होना अनिवार्य है?"*
-• *"घर बनाने के लिए कौन सा TMT सरिया (Fe 500D) सुरक्षित है?"*
-• *"पीने के पानी की बोतल पर असली ISI मार्क कैसे पहचानें?"*
-• *"नकली उत्पाद की शिकायत कैसे दर्ज करें?"*
+### 🔍 आप मुझसे क्या पूछ सकते हैं:
+• किसी भी उत्पाद की सुरक्षा (प्रेशर कुकर, TMT सरिया, हेलमेट, पानी की बोतल आदि)
+• असली ISI मार्क और 7/8 अंकों के CM/L लाइसेंस की पहचान
+• नकली सामान की शिकायत और BIS Care ऐप का उपयोग
 
-बताइए, आज मैं आपकी क्या मदद कर सकता हूँ?`;
+बताइए, आज मैं आपकी क्या सहायता कर सकता हूँ?`;
     } else {
-      return `Namaste! I am your **BIS Sahayak (AI Assistant)**. 😊
+      return `Hello! I am your **BIS Sahayak (AI Assistant)**. 😊
 
-I am here to help you easily understand Indian Standards, ensure product safety, and verify authentic **ISI marks** and **BIS Hallmarks**.
+I am here to help you easily verify product safety, understand Indian Standards, and spot genuine **ISI marks** and **BIS Hallmarks**.
 
-You can ask me questions in plain English or Hindi, such as:
-• *"Is my domestic pressure cooker certified under mandatory QCO?"*
-• *"Which TMT steel rebar (Fe 500D) should I choose for home construction?"*
-• *"How do I check if packaged drinking water has a genuine ISI license?"*
-• *"How do I verify a product or lodge a complaint on the BIS Care App?"*
+### 🔍 You can ask me things like:
+• *"Is my pressure cooker certified under mandatory BIS rules?"*
+• *"Which TMT steel rebar (Fe 500D) should I use for home construction?"*
+• *"How do I verify a product or report fake goods on the BIS Care App?"*
 
 How can I help you today?`;
     }
   }
 
-  // 2. Who are you / Bot Identity
+  // 2. Acknowledgments, Thanks & Goodbyes
+  if (/^(ok|okay|k|cool|great|awesome|nice|thanks|thank you|thx|tysm|dhanyawad|shukriya|got it|understood|bye|goodbye|see you|tc|take care|ठीक है|धन्यवाद|शुक्रिया|अलविदा)$/i.test(q) ||
+      /^(thanks|thank you|dhanyawad|shukriya)\s+/i.test(q)) {
+    if (language === 'hi') {
+      return `आपका बहुत-बहुत धन्यवाद! 🙏
+
+यदि आपको किसी अन्य उत्पाद, ISI मार्क या भारतीय मानक (IS) के बारे में कोई भी जानकारी चाहिए, तो कभी भी पूछ सकते हैं। सुरक्षित रहें और केवल प्रमाणित सामान खरीदें!`;
+    } else {
+      return `You're most welcome! Glad I could help. 😊
+
+Feel free to ask anytime if you need help verifying an ISI mark, testing parameters, or Indian Standards. Always stay safe and buy certified goods!`;
+    }
+  }
+
+  // 3. Bot Identity & Purpose
   if (/who are you|what can you do|kya kar sakte|tum kaun|aap kaun|about yourself|तुम्हारा काम/i.test(q)) {
     if (language === 'hi') {
-      return `मैं **बीआईएस सहायक (BIS Sahayak)** हूँ — भारतीय मानक ब्यूरो (BIS) और उपभोक्ता मामले मंत्रालय के दिशा-निर्देशों पर आधारित एक स्मार्ट एआई सहायक।
+      return `मैं **बीआईएस सहायक (BIS Sahayak)** हूँ — भारतीय मानक ब्यूरो (BIS) और उपभोक्ता मामले मंत्रालय के लिए बनाया गया एक आधिकारिक एआई सहायक।
 
-मेरा काम भारतीय नागरिकों, उपभोक्ताओं और उद्योगों को मानकों की जानकारी सरल भाषा में देना है:
-1. **उपभोक्ता सुरक्षा:** रोजमर्रा के सामान (प्रेशर कुकर, हेलमेट, पानी की बोतल, बिजली के तार, खिलौने) पर असली ISI मार्क की पुष्टि करना।
-2. **उद्योग व निर्माण सहायता:** तकनीकी परीक्षण सीमाएं (जैसे TMT सरिए की तन्यता, सीमेंट की मजबूती, केबल इंसुलेशन) समझाना।
-3. **लाइसेंस सत्यापन:** 7 या 8 अंकों के **CM/L लाइसेंस** की प्रामाणिकता जांचना।
-
-आप किसी भी उत्पाद या मानक का नाम लिखकर सीधे सवाल पूछ सकते हैं!`;
+### 🔍 मेरी प्रमुख सेवाएं:
+• **उपभोक्ता सुरक्षा:** रोजमर्रा के सामान पर असली ISI मार्क की पहचान करना।
+• **लाइसेंस सत्यापन:** 7 या 8 अंकों के **CM/L लाइसेंस नंबर** की प्रामाणिकता जांचना।
+• **उद्योग सहायता:** तकनीकी परीक्षण मानक और अनिवार्य गुणवत्ता नियंत्रण आदेश (QCO) समझाना।`;
     } else {
-      return `I am **BIS Sahayak**, an intelligent AI assistant developed to bridge the gap between Indian Standards (BIS) and everyday citizens, consumers, and MSMEs.
+      return `I am **BIS Sahayak**, an AI Assistant designed for the Bureau of Indian Standards (BIS) and Ministry of Consumer Affairs, Government of India.
 
-Here is how I can assist you:
-1. **Consumer Safety & Protection:** Understand whether products like pressure cookers, helmets, packaged water, cables, and toys meet mandatory safety laws.
-2. **Quality Verification:** Guide you on how to spot authentic **ISI marks** and verify 7/8-digit **CM/L license numbers**.
-3. **Engineering & Industry Parameters:** Provide testing limits (e.g. proof stress, elongation, burst pressure, microbiological purity) under official Indian Standards.
-
-Feel free to ask any question about products, standards, or consumer rights!`;
+### 🔍 Key Capabilities:
+• **Consumer Safety:** Clarify product safety standards (IS) and mandatory Quality Control Orders (QCOs).
+• **License Verification:** Guide you on verifying authentic 7/8-digit **CM/L license numbers**.
+• **Industry & MSME Guidance:** Provide exact testing limits and procurement specifications.`;
     }
   }
 
-  // 3. Fake Products / Complaints / BIS Care
-  if (/complaint|fake|nakli|counterfeit|shikayat|report|bis care|dhokha|शिकायत|नकली/i.test(q)) {
+  // 4. Complaints, Counterfeit, & BIS Care
+  if (/complaint|fake|nakli|counterfeit|shikayat|report|bis care|dhokha|शिकायत|नकली|फ्रॉड/i.test(q)) {
     if (language === 'hi') {
-      return `यदि आपको किसी उत्पाद पर नकली या संदिग्ध **ISI मार्क** दिखाई देता है, तो आप तुरंत यह कदम उठा सकते हैं:
+      return `### ⚡ संक्षिप्त उत्तर
+यदि कोई उत्पाद बिना वैध ISI मार्क के बेचा जा रहा है या मार्क नकली है, तो आप **BIS Care App** के माध्यम से सीधे उपभोक्ता मामले मंत्रालय को शिकायत दर्ज कर सकते हैं।
 
-1. **CM/L लाइसेंस नंबर जांचें:** असली ISI मार्क के नीचे 7 या 8 अंकों का CM/L नंबर लिखा होता है (उदा. CM/L-8400123)। अगर नंबर नहीं है, तो वह अवैध है।
-2. **BIS Care मोबाइल ऐप का उपयोग करें:** गूगल प्ले स्टोर या एप्पल ऐप स्टोर से **BIS Care App** डाउनलोड करें और 'Verify License Details' पर जाकर CM/L नंबर डालें। इससे निर्माता का नाम और फैक्ट्री का पता तुरंत दिख जाएगा।
-3. **ऑनलाइन शिकायत दर्ज करें:** BIS Care ऐप में **'Complaints'** सेक्शन पर जाकर उत्पाद की फोटो और दुकान का पता अपलोड करके सीधे उपभोक्ता मामले मंत्रालय को शिकायत भेज सकते हैं।
+### 🔍 मुख्य कदम:
+• **CM/L लाइसेंस जांचें:** असली ISI मार्क के नीचे 7 या 8 अंकों का CM/L नंबर होना अनिवार्य है।
+• **BIS Care ऐप डाउनलोड करें:** ऐप में 'Verify License Details' से फैक्ट्री की जांच करें।
+• **शिकायत दर्ज करें:** ऐप के 'Complaints' सेक्शन में फोटो और दुकान का पता अपलोड करें।
 
-उपभोक्ता संरक्षण अधिनियम और BIS Act, 2016 के तहत अनिवार्य QCO उत्पादों पर नकली मार्क लगाना एक गैर-जमानती दंडात्मक अपराध है।`;
+<details>
+<summary><b>📖 कानूनी अधिकार एवं BIS Act, 2016 (विस्तृत जानकारी)</b></summary>
+
+भारतीय मानक ब्यूरो अधिनियम, 2016 के तहत, अनिवार्य QCO के अंतर्गत आने वाले उत्पादों पर नकली ISI मार्क लगाना या बिना लाइसेंस बेचना एक गैर-जमानती दंडात्मक अपराध है। इसमें भारी जुर्माना और कारावास का प्रावधान है।
+</details>`;
     } else {
-      return `If you suspect a product is counterfeit or carrying a fake **ISI mark**, here is what you should do:
+      return `### ⚡ Quick Answer
+If you encounter a counterfeit product or fake ISI mark, you can verify manufacturer validity and lodge a direct complaint using the official **BIS Care Mobile App**.
 
-1. **Inspect the CM/L License Number:** Every authentic ISI mark must display a 7 or 8-digit CM/L license number directly under the logo (e.g. CM/L-8400123). Products with only the ISI logo and no number are counterfeit.
-2. **Verify via BIS Care App:** Download the official **BIS Care Mobile App** and tap **'Verify License Details'**. Entering the CM/L number will instantly show the genuine manufacturer name, factory address, brand, and validity.
-3. **Lodge an Instant Complaint:** Within the BIS Care App, use the **'Complaints'** portal to upload photos of the fake product and store location for direct enforcement action.
+### 🔍 What to Check:
+• **7/8-Digit CM/L License:** Authentic ISI marks must display a license number under the logo (e.g. CM/L-8400123).
+• **BIS Care App Verification:** Open the app and enter the CM/L number to see the registered factory address and brand.
+• **Lodge Complaint:** Use the 'Complaints' portal inside BIS Care to report violations for immediate enforcement action.
 
-Under the BIS Act, 2016, selling sub-standard goods under mandatory Quality Control Orders (QCO) is a serious punishable offense.`;
+<details>
+<summary><b>📖 Legal Rights & BIS Act, 2016 (Click to expand)</b></summary>
+
+Under Section 29 of the BIS Act, 2016, manufacturing or selling sub-standard goods under mandatory Quality Control Orders (QCO) is punishable with heavy monetary penalties and imprisonment.
+</details>`;
     }
   }
 
-  // 4. Specific Product Answers based on retrieved Indian Standard
+  // 5. Specific Product Answers based on retrieved Standard
   if (topStd) {
     if (language === 'hi') {
       if (mode === 'consumer') {
-        return `**${topStd.isNumber} (${topStd.titleHi || topStd.title})** के बारे में सरल व आवश्यक जानकारी:
+        return `### ⚡ संक्षिप्त उत्तर
+**${topStd.isNumber} (${topStd.titleHi || topStd.title})** भारत में इस उत्पाद की गुणवत्ता और सुरक्षा सुनिश्चित करने का आधिकारिक मानक है।
 
-### 🛡️ यह आपके लिए क्यों महत्वपूर्ण है?
-${topStd.scopeHi || topStd.scope}
+### 🔍 खरीदते समय मुख्य जांच:
+• **असली ISI मार्क:** बॉक्स व बॉडी पर **${topStd.isNumber}** और नीचे **7 या 8 अंकों का CM/L लाइसेंस** देखें।
+${topStd.status.includes('Mandatory') ? '• **अनिवार्य कानून (QCO):** यह उत्पाद भारत सरकार के नियम अनुसार अनिवार्य प्रमाणीकरण के अंतर्गत है।\n' : ''}• **BIS Care ऐप:** अपने मोबाइल में लाइसेंस नंबर डालकर निर्माता की वैधता सत्यापित करें।
 
-### 🔍 खरीदते समय क्या ध्यान रखें?
-• **असली ISI मार्क:** उत्पाद के बॉक्स और मुख्य बॉडी दोनों पर **ISI लोगो** जरूर देखें।
-• **मानक संख्या व लाइसेंस:** लोगो के ऊपर **${topStd.isNumber}** और नीचे **7 या 8 अंकों का CM/L लाइसेंस नंबर** होना अनिवार्य है।
-${topStd.status.includes('Mandatory') ? `• **अनिवार्य कानून (QCO):** यह उत्पाद भारत सरकार के गुणवत्ता नियंत्रण आदेश के तहत **अनिवार्य** है। इसे बिना वैध BIS लाइसेंस के बेचना कानूनन अपराध है।\n` : ''}• **BIS Care ऐप से जांच:** आप अपने फोन में **BIS Care ऐप** खोलकर लाइसेंस नंबर डालकर निर्माता की वैधता तुरंत चेक कर सकते हैं।
+<details>
+<summary><b>📖 विस्तृत जानकारी एवं तकनीकी मानक (Click to expand)</b></summary>
 
-क्या आप इस मानक के किसी विशेष सुरक्षा नियम या परीक्षण के बारे में और जानना चाहते हैं?`;
+**कार्यक्षेत्र:** ${topStd.scopeHi || topStd.scope}
+
+**प्रमुख सुरक्षा परीक्षण:**
+${(topStd.keyTests || []).map((t: any) => `• **${t.name}:** ${t.description} (स्वीकार्य सीमा: ${t.parameterLimit})`).join('\n')}
+
+**अनुरूपता योजना:** ${topStd.conformityAssessmentScheme}
+${topStd.qcoOrder ? `**अनिवार्य QCO आदेश:** ${topStd.qcoOrder}\n` : ''}**अंकन आवश्यकताएं:** ${topStd.markingRequirements}
+</details>`;
       } else {
-        return `**${topStd.isNumber}: ${topStd.title} (तकनीकी एवं उद्योग गाइड)**
+        return `### ⚡ Executive Technical Summary
+**${topStd.isNumber}: ${topStd.title}** governs industrial specifications, sampling procedures, and proof acceptance limits.
 
-### 📌 कार्यक्षेत्र एवं प्रयोज्यता:
+### 🔍 Key Compliance Checkpoints:
+• **Conformity Scheme:** ${topStd.conformityAssessmentScheme}
+${topStd.qcoOrder ? `• **Mandatory QCO:** ${topStd.qcoOrder}\n` : ''}• **Standard Mark:** ${topStd.markingRequirements}
+
+<details>
+<summary><b>📖 Technical Parameters & Testing Protocol (Click to expand)</b></summary>
+
+**Scope & Applicability:**
 ${topStd.scope}
 
-### ⚙️ मुख्य गुणवत्ता परीक्षण एवं स्वीकार्य सीमाएं:
-${topStd.keyTests.map((t: any) => `• **${t.name}:** ${t.description} *(मानक सीमा: ${t.parameterLimit})*`).join('\n')}
-
-### 📋 अनुपालन एवं अंकन आवश्यकताएं:
-• **अनुरूपता योजना:** ${topStd.conformityAssessmentScheme}
-${topStd.qcoOrder ? `• **अनिवार्य QCO आदेश:** ${topStd.qcoOrder}\n` : ''}• **अंकन नियम:** ${topStd.markingRequirements}
-
-क्या आपको किसी विशिष्ट धारा (Clause) या परीक्षण विधि पर विस्तृत तकनीकी जानकारी चाहिए?`;
+**Quality & Lab Test Limits:**
+${(topStd.keyTests || []).map((t: any) => `• **${t.name}:** ${t.description} *(Acceptance Limit: ${t.parameterLimit})*`).join('\n')}
+</details>`;
       }
     } else {
       if (mode === 'consumer') {
-        return `Here is what you need to know about **${topStd.isNumber} (${topStd.title})** in simple terms:
+        return `### ⚡ Quick Answer
+**${topStd.isNumber} (${topStd.title})** is the official Indian Standard ensuring safety, reliability, and health compliance for this product.
 
-### 🛡️ Why This Matters for Your Safety
+### 🔍 What to Check When Buying:
+• **Authentic ISI Mark:** Check that **${topStd.isNumber}** is printed on top and a **7 or 8-digit CM/L license number** is at the bottom.
+${topStd.status.includes('Mandatory') ? '• **Mandatory Law (QCO):** This product is legally required to be BIS certified in India before sale.\n' : ''}• **Verify via BIS Care:** Enter the CM/L number in the official **BIS Care App** to confirm factory authenticity.
+
+<details>
+<summary><b>📖 More Information & Specifications (Click to expand)</b></summary>
+
+**Standard Scope:**
 ${topStd.scope}
 
-### 🔍 Practical Checklist When Buying:
-• **Look for the ISI Mark:** Ensure the authentic **ISI logo** is clearly embossed or printed on the product and packaging.
-• **Check the Details:** Verify that the standard number **${topStd.isNumber}** is printed on top and an authentic **7 or 8-digit CM/L license number** is at the bottom.
-${topStd.status.includes('Mandatory') ? `• **Mandatory by Law (QCO):** This product is covered under a mandatory Quality Control Order. Manufacturing or selling it without a BIS license is illegal in India.\n` : ''}• **Instant Mobile Verification:** Use the official **BIS Care App** to type the CM/L number and confirm the manufacturer's factory details.
+**Mandatory Quality & Safety Tests:**
+${(topStd.keyTests || []).map((t: any) => `• **${t.name}:** ${t.description} *(Limit: ${t.parameterLimit})*`).join('\n')}
 
-Would you like to know more about safety tips or specific features for this product?`;
+**Conformity Assessment:** ${topStd.conformityAssessmentScheme}
+${topStd.qcoOrder ? `**Quality Control Order (QCO):** ${topStd.qcoOrder}\n` : ''}**Marking Requirements:** ${topStd.markingRequirements}
+</details>`;
       } else {
-        return `**${topStd.isNumber}: ${topStd.title} — Technical & Compliance Overview**
+        return `### ⚡ Executive Technical Summary
+**${topStd.isNumber}: ${topStd.title}** establishes the regulatory parameters, test methods, and acceptance thresholds for industrial compliance.
 
-### 📌 Scope & Industrial Applicability
+### 🔍 Primary Compliance Checkpoints:
+• **Conformity Assessment Scheme:** ${topStd.conformityAssessmentScheme}
+${topStd.qcoOrder ? `• **Mandatory QCO Order:** ${topStd.qcoOrder}\n` : ''}• **Marking Clause:** ${topStd.markingRequirements}
+
+<details>
+<summary><b>📖 Technical Specifications & Testing Parameters (Click to expand)</b></summary>
+
+**Scope & Industrial Application:**
 ${topStd.scope}
 
-### ⚙️ Critical Quality Parameters & Acceptance Thresholds:
-${topStd.keyTests.map((t: any) => `• **${t.name}:** ${t.description} *(Acceptance Limit: ${t.parameterLimit})*`).join('\n')}
-
-### 📋 Regulatory & Marking Requirements:
-• **Conformity Scheme:** ${topStd.conformityAssessmentScheme}
-${topStd.qcoOrder ? `• **Mandatory QCO Mandate:** ${topStd.qcoOrder}\n` : ''}• **Marking Clause:** ${topStd.markingRequirements}
-
-Let me know if you need specific clause provisions or sampling tolerances!`;
+**Testing Parameters & Acceptance Criteria:**
+${(topStd.keyTests || []).map((t: any) => `• **${t.name}:** ${t.description} *(Acceptance Limit: ${t.parameterLimit})*`).join('\n')}
+</details>`;
       }
     }
   }
 
-  // 5. General Fallback
+  // 6. General Fallback
   if (language === 'hi') {
-    return `भारतीय मानक ब्यूरो (BIS) के अनुसार, उत्पादों की गुणवत्ता और सुरक्षा सुनिश्चित करने के लिए मानक तय किए गए हैं।
+    return `### ⚡ संक्षिप्त उत्तर
+भारतीय मानक ब्यूरो (BIS) के अनुसार, उत्पादों की सुरक्षा और गुणवत्ता सुनिश्चित करने के लिए मानक तय किए गए हैं।
 
-आप जो भी सामान खरीदें, उस पर **ISI मार्क** और नीचे लिखा **7/8 अंकों का CM/L लाइसेंस नंबर** अवश्य देखें। इसे आप सीधे **BIS Care मोबाइल ऐप** से सत्यापित कर सकते हैं।
+### 🔍 मुख्य सलाह:
+• केवल **ISI मार्क** और **7/8 अंकों के CM/L लाइसेंस** वाला सामान खरीदें।
+• प्रामाणिकता जांचने के लिए **BIS Care App** का उपयोग करें।
 
-आप किसी खास उत्पाद (जैसे प्रेशर कुकर, पानी की बोतल, सरिया, केबल, हेलमेट) का नाम लिखकर पूछ सकते हैं!`;
+आप किसी खास उत्पाद (जैसे प्रेशर कुकर, पानी की बोतल, सरिया, केबल, हेलमेट) का नाम लिखकर सवाल पूछ सकते हैं!`;
   } else {
-    return `Under the Bureau of Indian Standards framework, Indian Standards (IS) define rigorous quality, durability, and safety criteria for consumer goods and industrial materials.
+    return `### ⚡ Quick Answer
+Indian Standards (IS) under the Bureau of Indian Standards define rigorous quality, durability, and safety criteria for consumer and industrial products.
 
-Always look for the genuine **ISI Mark** along with the **7 or 8-digit CM/L license number**, and verify it using the official **BIS Care App**.
+### 🔍 Quick Checklist:
+• Look for the authentic **ISI Mark** with a valid **7 or 8-digit CM/L license number**.
+• Verify the license using the official **BIS Care Mobile App**.
 
 Feel free to ask about any specific product like pressure cookers, TMT bars, helmets, drinking water, or electrical cables!`;
   }
@@ -234,7 +285,7 @@ export async function generateRAGAnswer(
     }
   }
 
-  if (citationMap.size < 2) {
+  if (relevantChunks.length > 0 && citationMap.size < 2) {
     const qTokens = query.toLowerCase().replace(/[^\p{L}\p{N}]/gu, ' ').split(/\s+/).filter(w => w.length >= 3);
     for (const std of ALL_STANDARDS) {
       if (!citationMap.has(std.id)) {
