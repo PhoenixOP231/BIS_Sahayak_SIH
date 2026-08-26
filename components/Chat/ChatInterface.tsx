@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Send, Sparkles, User, Shield, Volume2, VolumeX, Copy, Check, RotateCcw } from 'lucide-react';
 import { CitationChip } from './CitationChip';
 import { ChatMessageContent } from './ChatMessageContent';
@@ -73,15 +73,7 @@ export function ChatInterface({ mode, language, initialQuery, onClearInitialQuer
     scrollToBottom();
   }, [messages, isLoading]);
 
-  // If initialQuery is passed from Hero quick pills, submit immediately
-  useEffect(() => {
-    if (initialQuery && initialQuery.trim()) {
-      handleSendQuery(initialQuery);
-      if (onClearInitialQuery) onClearInitialQuery();
-    }
-  }, [initialQuery]);
-
-  const handleSendQuery = async (queryToSend?: string) => {
+  const handleSendQuery = useCallback(async (queryToSend?: string) => {
     const q = (queryToSend || input).trim();
     if (!q || isLoading) return;
 
@@ -139,7 +131,15 @@ export function ChatInterface({ mode, language, initialQuery, onClearInitialQuer
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [input, isLoading, messages, mode, language]);
+
+  // If initialQuery is passed from Hero quick pills, submit immediately
+  useEffect(() => {
+    if (initialQuery && initialQuery.trim()) {
+      handleSendQuery(initialQuery);
+      if (onClearInitialQuery) onClearInitialQuery();
+    }
+  }, [initialQuery, handleSendQuery, onClearInitialQuery]);
 
   const handleCopy = (id: string, text: string) => {
     navigator.clipboard.writeText(text);

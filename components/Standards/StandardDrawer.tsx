@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { X, Shield, ExternalLink, CheckCircle, Award, AlertTriangle, FileText, Activity } from 'lucide-react';
+import { X, Shield, ExternalLink, CheckCircle, AlertTriangle, FileText, Activity } from 'lucide-react';
 import { StandardDoc, getStandardById } from '@/lib/standards-data';
 import { UI_TEXT, Language } from '@/lib/translations';
 

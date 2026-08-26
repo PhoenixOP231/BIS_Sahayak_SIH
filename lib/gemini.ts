@@ -369,7 +369,7 @@ export async function generateRAGAnswer(
             language,
           };
         }
-      } catch (err: any) {
+      } catch {
         // Fallback to next model or conversational engine
       }
     }

@@ -1,4 +1,3 @@
-import { neon } from '@neondatabase/serverless';
 import { ALL_STANDARDS, StandardDoc, getStandardById } from './standards-data';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -61,7 +60,7 @@ function loadLocalChunks(): any[] {
       inMemoryChunksCache = JSON.parse(raw);
       return inMemoryChunksCache || [];
     }
-  } catch (e) {
+  } catch {
     // Fall back to building on-the-fly from ALL_STANDARDS
   }
 

@@ -26,12 +26,12 @@ export function Footer({ language }: { language: Language }) {
             </div>
             <p className="text-slate-400 text-xs leading-relaxed max-w-md">
               {language === 'hi'
-                ? 'स्मार्ट इंडिया हैकाथॉन 2026 के लिए विकसित एआई-संचालित भारतीय मानक एवं गुणवत्ता नियंत्रण सहायक। उद्योगों और उपभोक्ताओं के लिए संपूर्ण ज्ञान सेतु।'
-                : 'AI-Powered Intelligent Assistant for Indian Standards, Quality Control Orders, testing parameters, and procurement specification matching. Developed for Smart India Hackathon 2026.'
+                ? 'स्मार्ट इंडिया हैकाथॉन 2026 (SIH26107) के लिए विकसित एआई-संचालित भारतीय मानक एवं गुणवत्ता नियंत्रण सहायक। उद्योगों और उपभोक्ताओं के लिए संपूर्ण ज्ञान सेतु।'
+                : 'AI-Powered Intelligent Assistant for Indian Standards, Quality Control Orders, testing parameters, and ISI certification guidance. Developed for Smart India Hackathon 2026.'
               }
             </p>
             <div className="pt-2 flex items-center gap-2 text-[11px] text-amber-400 font-mono">
-              <span>Problem Statements: SIH26107 & SIH26108</span>
+              <span>Problem Statement: SIH26107</span>
             </div>
           </div>
 
@@ -49,11 +49,6 @@ export function Footer({ language }: { language: Language }) {
               <li>
                 <Link href="/standards" className="hover:text-amber-400 transition">
                   {t.navStandards}
-                </Link>
-              </li>
-              <li>
-                <Link href="/recommend" className="hover:text-amber-400 transition">
-                  {t.navRecommend}
                 </Link>
               </li>
               <li>
@@ -125,7 +120,7 @@ export function Footer({ language }: { language: Language }) {
             © {new Date().getFullYear()} BIS Sahayak • Smart India Hackathon 2026 Project
           </div>
           <div className="flex items-center gap-1">
-            <span>Demo GovTech prototype built for SIH26107 & SIH26108</span>
+            <span>GovTech AI prototype built for Smart India Hackathon 2026 (SIH26107)</span>
           </div>
         </div>
 

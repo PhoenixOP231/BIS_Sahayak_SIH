@@ -58,12 +58,6 @@ export function Navbar({ mode, setMode, language, setLanguage }: NavbarProps) {
               {t.navStandards}
             </Link>
             <Link
-              href="/recommend"
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
-            >
-              {t.navRecommend}
-            </Link>
-            <Link
               href="/verify"
               className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
             >
@@ -172,13 +166,6 @@ export function Navbar({ mode, setMode, language, setLanguage }: NavbarProps) {
               className="px-3 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-amber-50"
             >
               {t.navStandards}
-            </Link>
-            <Link
-              href="/recommend"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-amber-50"
-            >
-              {t.navRecommend}
             </Link>
             <Link
               href="/verify"

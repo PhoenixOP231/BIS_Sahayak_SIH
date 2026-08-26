@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { MarkVerifier } from '@/components/Verifier/MarkVerifier';
-import { Language, UI_TEXT } from '@/lib/translations';
+import { Language } from '@/lib/translations';
 
 export default function VerifyPage() {
   const [mode, setMode] = useState<'consumer' | 'industry'>('consumer');

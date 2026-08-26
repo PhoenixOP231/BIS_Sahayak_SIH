@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search, Filter, RotateCcw } from 'lucide-react';
+import { Search, RotateCcw } from 'lucide-react';
 import { UI_TEXT, Language } from '@/lib/translations';
 
 interface StandardFilterProps {

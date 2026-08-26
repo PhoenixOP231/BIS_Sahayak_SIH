@@ -6,12 +6,12 @@ import { Language, UI_TEXT, SAMPLE_PROMPTS } from '@/lib/translations';
 
 interface HeroSectionProps {
   mode: 'consumer' | 'industry';
-  setMode: (mode: 'consumer' | 'industry') => void;
+  setMode?: (mode: 'consumer' | 'industry') => void;
   language: Language;
   onSelectPrompt: (prompt: string) => void;
 }
 
-export function HeroSection({ mode, setMode, language, onSelectPrompt }: HeroSectionProps) {
+export function HeroSection({ mode, language, onSelectPrompt }: HeroSectionProps) {
   const t = UI_TEXT[language];
   const samplePrompts = SAMPLE_PROMPTS[mode].map((item) => item[language]);
 
@@ -28,7 +28,7 @@ export function HeroSection({ mode, setMode, language, onSelectPrompt }: HeroSec
           {/* GovTech Header Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs animate-pulse">
             <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-            <span>Smart India Hackathon 2026 • SIH26107 / SIH26108</span>
+            <span>Smart India Hackathon 2026 • Problem SIH26107</span>
           </div>
 
           {/* Main Title */}

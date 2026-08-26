@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShieldCheck, Search, AlertCircle, CheckCircle, Smartphone, ExternalLink, Award, FileCheck2 } from 'lucide-react';
+import { ShieldCheck, Search, AlertCircle, CheckCircle, Smartphone, ExternalLink, FileCheck2 } from 'lucide-react';
 import { UI_TEXT, Language } from '@/lib/translations';
 
 export function MarkVerifier({ language }: { language: Language }) {

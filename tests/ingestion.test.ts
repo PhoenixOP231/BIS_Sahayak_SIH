@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { generateLocalEmbedding, chunkStandardDocument } from '../scripts/seed-standards';
 import { ALL_STANDARDS, getStandardById } from '../lib/standards-data';
-import { searchHybridStandards, computeCosineSimilarity } from '../lib/vector-store';
+import { searchHybridStandards } from '../lib/vector-store';
 
 describe('BIS Standards Ingestion & Retrieval Pipeline', () => {
   it('should load all 21 seeded Indian Standards', () => {

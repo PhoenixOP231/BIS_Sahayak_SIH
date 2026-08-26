@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Shield, ExternalLink, Activity, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Activity, ArrowRight } from 'lucide-react';
 import { StandardDoc } from '@/lib/standards-data';
 import { UI_TEXT, Language } from '@/lib/translations';
 

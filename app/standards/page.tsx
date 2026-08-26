@@ -6,7 +6,7 @@ import { Footer } from '@/components/Footer';
 import { StandardCard } from '@/components/Standards/StandardCard';
 import { StandardFilter } from '@/components/Standards/StandardFilter';
 import { StandardDrawer } from '@/components/Standards/StandardDrawer';
-import { ALL_STANDARDS, StandardDoc } from '@/lib/standards-data';
+import { ALL_STANDARDS } from '@/lib/standards-data';
 import { Language, UI_TEXT } from '@/lib/translations';
 import { BookOpen } from 'lucide-react';
 
