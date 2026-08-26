@@ -16,11 +16,15 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'BIS Sahayak ? AI Assistant for Indian Standards & BIS Services (SIH26107)',
-  description: 'Intelligent AI Companion for Indian Standards (IS), QCO compliance, testing procedures, and procurement specification matching. Ministry of Consumer Affairs, Govt of India.',
+  title: 'BIS Sahayak • AI Assistant for Indian Standards & BIS Services (SIH26107)',
+  description: 'Intelligent AI Companion for Indian Standards (IS), QCO compliance, testing procedures, and ISI mark authenticity verification. Ministry of Consumer Affairs, Govt of India.',
   keywords: ['BIS', 'Bureau of Indian Standards', 'ISI Mark', 'Indian Standards', 'SIH2026', 'SIH26107', 'Quality Control Order', 'Consumer Affairs'],
   authors: [{ name: 'Team Antigravity' }],
   creator: 'Smart India Hackathon 2026',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -30,6 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} ${plusJakarta.variable}`}>
+      <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+      </head>
       <body className="min-h-screen flex flex-col font-sans bg-slate-50/50 text-slate-900 selection:bg-amber-200 selection:text-amber-900">
         {children}
         <Toaster position="top-right" richColors closeButton />
