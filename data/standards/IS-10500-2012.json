@@ -1,0 +1,50 @@
+{
+  "id": "IS-10500-2012",
+  "isNumber": "IS 10500:2012",
+  "title": "Drinking Water — Specification",
+  "titleHi": "पीने का पानी — विशिष्‍टि",
+  "category": "Food & Water Safety",
+  "sector": "Public Health & Municipal Engineering",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Uniform Water Quality Standards across Municipal & Jal Jeevan Mission utilities",
+  "year": 2012,
+  "conformityAssessmentScheme": "National Benchmark Standard",
+  "hsCodes": [
+    "2201.10.10"
+  ],
+  "scope": "Prescribes the acceptable and permissible requirements and limits for essential characteristics and desirable parameters of drinking water supplied through municipal piped networks and rural water supply schemes.",
+  "scopeHi": "यह मानक नगर पालिकाओं और जल जीवन मिशन द्वारा आपूर्ति किए जाने वाले नल के पीने के पानी की गुणवत्ता और शुद्धता के मापदंड तय करता है।",
+  "keyTests": [
+    {
+      "name": "pH Value",
+      "description": "Acidity/alkalinity measurement.",
+      "parameterLimit": "Acceptable: 6.5 to 8.5"
+    },
+    {
+      "name": "Total Dissolved Solids (TDS)",
+      "description": "Soluble minerals.",
+      "parameterLimit": "Acceptable: 500 mg/l max (Permissible: 2000 mg/l)"
+    },
+    {
+      "name": "Fluoride and Nitrate",
+      "description": "Ion chromatography test.",
+      "parameterLimit": "Fluoride: 1.0 mg/l max; Nitrate: 45 mg/l max"
+    }
+  ],
+  "markingRequirements": "Used for laboratory compliance certification reports and municipal water audits.",
+  "consumerTips": [
+    "If your tap water TDS is below 300 mg/L with normal pH, simple UV/UF filtration is adequate without heavy RO water waste."
+  ],
+  "industryGuidelines": [
+    "Baseline standard for water treatment plants across Jal Jeevan Mission."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 4.1",
+      "title": "Bacteriological Quality",
+      "content": "Water shall not contain E. coli or thermotolerant coliform bacteria in any 100 ml sample.",
+      "contentHi": "किसी भी 100 मिलीलीटर नमूने में ई. कोलाई बैक्टीरिया नहीं होना चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

@@ -1,0 +1,44 @@
+{
+  "id": "IS-7318-Part-1-2020",
+  "isNumber": "IS 7318 (Part 1):2020",
+  "title": "Approval Testing of Welders for Fusion Welding — Part 1: Steels",
+  "titleHi": "फ्यूजन वेल्डिंग के लिए वेल्डरों का अनुमोदन परीक्षण — भाग 1: स्टील्स",
+  "category": "Industrial & Manufacturing",
+  "sector": "Mechanical & Structural Fabrication",
+  "status": "Voluntary",
+  "year": 2020,
+  "conformityAssessmentScheme": "Personnel & Process Certification",
+  "hsCodes": [
+    "8468.90.00"
+  ],
+  "scope": "Prescribes requirements for welder qualification and approval testing in fusion welding of carbon and alloy steels across all standard welding positions (1G to 6G).",
+  "scopeHi": "यह संरचनात्मक और पाइप वेल्डिंग में वेल्डरों के कौशल और वेल्ड जोड़ों के परीक्षण (एक्स-रे और बेंड टेस्ट) के मानक तय करता है।",
+  "keyTests": [
+    {
+      "name": "Visual Examination of Weld Seam",
+      "description": "Inspection for undercut and porosity.",
+      "parameterLimit": "Zero crack, zero lack of fusion, undercut ≤ 0.5 mm"
+    },
+    {
+      "name": "Radiographic Examination (NDT)",
+      "description": "Volumetric inspection of butt welds.",
+      "parameterLimit": "Acceptance level B under ISO 5817"
+    }
+  ],
+  "markingRequirements": "Welder Qualification Record (WQR) certificate indicating IS 7318-1.",
+  "consumerTips": [
+    "For critical building/bridge fabrication, ensure welders hold active IS 7318 certification."
+  ],
+  "industryGuidelines": [
+    "Welder qualification validity is typically 2 years subject to periodic verification."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 6.2",
+      "title": "Test Conditions",
+      "content": "Test piece welded according to qualified Welding Procedure Specification.",
+      "contentHi": "परीक्षण पीस को योग्य वेल्डिंग प्रक्रिया विनिर्देश के अनुसार वेल्ड किया जाएगा।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

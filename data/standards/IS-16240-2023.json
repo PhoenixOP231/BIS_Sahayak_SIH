@@ -1,0 +1,45 @@
+{
+  "id": "IS-16240-2023",
+  "isNumber": "IS 16240:2023",
+  "title": "Reverse Osmosis (RO) Based Point-of-Use Water Treatment Systems — Specification",
+  "titleHi": "रिवर्स ऑस्मोसिस (आरओ) आधारित वाटर प्यूरीफायर सिस्टम — विशिष्‍टि",
+  "category": "Food & Water Safety",
+  "sector": "Consumer Goods & Environmental Tech",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Water Purification Systems (Quality Control) Order, 2023 (MoEFCC)",
+  "year": 2023,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+  "hsCodes": [
+    "8421.21.90"
+  ],
+  "scope": "Prescribes requirements for residential point-of-use RO water purifiers, mandating minimum water recovery rates, TDS reduction efficiency, and total microbiological safety.",
+  "scopeHi": "यह घरेलू आरओ वाटर प्यूरिफायर में पानी की बर्बादी रोकने (न्यूनतम 40%-60% रिकवरी) और रोगाणु शुद्धिकरण के मानकों को अनिवार्य करता है।",
+  "keyTests": [
+    {
+      "name": "Water Recovery Efficiency Test",
+      "description": "Ratio of permeate pure water to feed.",
+      "parameterLimit": "Minimum 40% recovery"
+    },
+    {
+      "name": "TDS Reduction Percentage",
+      "description": "Efficiency across hard water feed.",
+      "parameterLimit": "Minimum 85% TDS reduction"
+    }
+  ],
+  "markingRequirements": "ISI mark with CM/L number, declared water recovery percentage, input TDS range.",
+  "consumerTips": [
+    "Look for IS 16240 ISI mark to ensure your RO purifier does not excessively waste water."
+  ],
+  "industryGuidelines": [
+    "RO reject water discharge must be labeled with recommended recycling uses."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 6.1",
+      "title": "Water Recovery Ratio",
+      "content": "RO systems shall achieve minimum product water recovery ≥ 40%.",
+      "contentHi": "आरओ प्रणालियों को कम से कम 40% जल रिकवरी दक्षता हासिल करनी होगी।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

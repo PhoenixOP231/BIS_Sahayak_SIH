@@ -1,0 +1,47 @@
+{
+  "id": "IS-694-2010",
+  "isNumber": "IS 694:2010",
+  "title": "PVC Insulated Cables for Working Voltages up to and including 1100 V — Specification",
+  "titleHi": "1100 V तक के कार्यशील वोल्टेज के लिए पीवीसी इन्सुलेटेड केबल — विशिष्‍टि",
+  "category": "Electrical & Electronics",
+  "sector": "Electrotechnical / Wiring",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Cables and Conductors (Quality Control) Order, 2024",
+  "year": 2010,
+  "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+  "hsCodes": [
+    "8544.49.20",
+    "8544.49.99"
+  ],
+  "scope": "Covers the requirements for single-core and multi-core PVC insulated and sheathed/unsheathed electrical cables with copper or aluminium conductors for working voltages up to 1100 V AC, widely used in domestic building wiring and industrial panels.",
+  "scopeHi": "यह मानक 1100 V AC तक के वोल्टेज के लिए तांबे या एल्यूमीनियम कंडक्टर वाले पीवीसी इंसुलेटेड तारों और केबलों की आवश्यकताओं को कवर करता है।",
+  "keyTests": [
+    {
+      "name": "Conductor Resistance Test",
+      "description": "Measures electrical DC resistance per km at 20°C using Kelvin Double Bridge.",
+      "parameterLimit": "Max resistance e.g. 12.1 Ω/km for 1.5 sq mm class 2 copper conductor"
+    },
+    {
+      "name": "Flame Retardance Test (Oxygen & Temperature Index)",
+      "description": "Measures burning behavior and self-extinguishing properties.",
+      "parameterLimit": "Oxygen index > 29% for FR/FRLS cables; Temperature index > 250°C"
+    }
+  ],
+  "markingRequirements": "Cables must have sequential meter marking, IS 694 mark, ISI Logo, CM/L license number, rated voltage (1100V), cable size, and manufacturer trade name.",
+  "consumerTips": [
+    "Never compromise on domestic electrical wiring; counterfeit cables with sub-standard copper cause fires.",
+    "Look for continuous laser or ink jet printing along the wire with IS 694, conductor size, and ISI mark."
+  ],
+  "industryGuidelines": [
+    "Electrolytic grade bright annealed high-conductivity copper (minimum 99.97% purity conforming to IS 8130) is mandatory."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 6.1",
+      "title": "Conductor Properties and Resistance",
+      "content": "Conductors shall consist of annealed high conductivity copper or EC grade aluminium wires conforming to IS 8130.",
+      "contentHi": "कंडक्टर IS 8130 के अनुसार उच्च चालकता वाले तांबे या एल्युमिनियम तारों से बने होंगे।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

@@ -1,0 +1,76 @@
+{
+  "id": "IS-2347-2017",
+  "isNumber": "IS 2347:2017",
+  "title": "Domestic Pressure Cookers — Specification",
+  "titleHi": "घरेलू प्रेशर कुकर — विशिष्‍टि",
+  "category": "Kitchen & Home Appliances",
+  "sector": "Mechanical Engineering",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Domestic Pressure Cooker (Quality Control) Order, 2020 (DPIIT)",
+  "year": 2017,
+  "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+  "hsCodes": [
+    "7615.10.11",
+    "7323.93.00"
+  ],
+  "scope": "Specifies requirements for domestic pressure cookers made of aluminum alloy or stainless steel with capacities from 1L to 15L, operating pressures 0.5 to 1.1 bar.",
+  "scopeHi": "यह मानक 1 लीटर से 15 लीटर क्षमता वाले एल्युमिनियम मिश्र धातु या स्टेनलेस स्टील से बने घरेलू प्रेशर कुकरों के लिए सुरक्षा और गुणवत्ता आवश्यकताओं को निर्दिष्ट करता है।",
+  "keyTests": [
+    {
+      "name": "Operating Pressure Test",
+      "description": "Verifies cooker maintains nominal operating pressure without steam leakage.",
+      "parameterLimit": "Within ±10% of declared operating pressure (typically 1.0 kg/cm²)"
+    },
+    {
+      "name": "Proof Pressure Test",
+      "description": "Body and lid subjected to internal hydrostatic pressure.",
+      "parameterLimit": "Must withstand 2.5 times operating pressure without permanent distortion."
+    },
+    {
+      "name": "Bursting Pressure Test",
+      "description": "Container withstands extreme pressure before rupture.",
+      "parameterLimit": "Shall not burst at less than 4.5 times normal working pressure."
+    },
+    {
+      "name": "Safety Valve Operating Test",
+      "description": "Safety fuse release under excess pressure.",
+      "parameterLimit": "Releases pressure between 1.5 to 2.2 times operating pressure."
+    },
+    {
+      "name": "Gasket Release Mechanism",
+      "description": "Controlled release of excess steam downwards away from user.",
+      "parameterLimit": "Operates if vent tube and safety valve are blocked."
+    }
+  ],
+  "markingRequirements": "Each pressure cooker must bear the ISI Standard Mark along with License Number (CM/L-XXXXXXXXXX), manufacturer name, capacity in liters, working pressure, and material grade.",
+  "consumerTips": [
+    "Always verify the 7 or 8-digit CM/L license number below the ISI logo using the BIS Care App.",
+    "Check that safety valve is metallic fusible alloy certified and gasket is food-grade silicone.",
+    "Never buy pressure cookers without the ISI Mark - it is legally mandatory in India."
+  ],
+  "industryGuidelines": [
+    "Factory audit required for Scheme-I licensing including raw material chemical testing (IS 21/IS 6911).",
+    "Routine batch testing for every 500 units: hydrostatic proof pressure, safety valve release pressure."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 4.1",
+      "title": "Material Specifications",
+      "content": "Bodies and lids shall be manufactured from wrought aluminium alloy (IS 21) or austenitic stainless steel AISI 304 (IS 6911). Handles must be heat-resistant phenolic moulding (IS 1300).",
+      "contentHi": "ढांचा और ढक्कन IS 21 एल्युमिनियम या IS 6911 स्टेनलेस स्टील 304 से बने होंगे।"
+    },
+    {
+      "clauseNumber": "Clause 7.2",
+      "title": "Safety Devices & Pressure Relief",
+      "content": "Every cooker shall be equipped with at least two independent safety relief mechanisms: a weighted pressure regulator/vent tube and a secondary safety valve.",
+      "contentHi": "कुकर में रेगुलेटर वेंट ट्यूब और बैकअप सेफ्टी वाल्व सहित दो स्वतंत्र सुरक्षा उपकरण होने अनिवार्य हैं।"
+    },
+    {
+      "clauseNumber": "Clause 9.3",
+      "title": "Hydrostatic Proof and Burst Pressure",
+      "content": "Body with closed lid shall withstand minimum hydraulic pressure of 250 kPa (2.5 bar) without distortion. Rupture shall not occur below 450 kPa.",
+      "contentHi": "कुकर बिना किसी विरूपण के न्यूनतम 250 kPa (2.5 बार) का दबाव सहन करने योग्य होना चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

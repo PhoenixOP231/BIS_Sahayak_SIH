@@ -1,0 +1,238 @@
+[
+  {
+    "id": "IS-1786-2008",
+    "isNumber": "IS 1786:2008",
+    "title": "High Strength Deformed Steel Bars and Wires for Concrete Reinforcement — Specification (TMT Rebars)",
+    "titleHi": "कंक्रीट सुदृढ़ीकरण के लिए उच्च शक्ति वाले विकृत स्टील बार और तार (टीएमटी सरिया)",
+    "category": "Construction & Infrastructure",
+    "sector": "Civil Engineering & Metallurgy",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Steel and Steel Products (Quality Control) Order, 2020 (Ministry of Steel)",
+    "year": 2008,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+    "hsCodes": [
+      "7214.20.90",
+      "7213.10.90"
+    ],
+    "scope": "Covers the requirements of deformed steel bars and wires for use as reinforcement in concrete in grades Fe 415, Fe 415D, Fe 500, Fe 500D, Fe 550, Fe 550D produced via Thermo-Mechanical Treatment (TMT).",
+    "scopeHi": "यह मकान और पुल निर्माण में प्रयुक्त होने वाले टीएमटी सरिया (Fe 415D, Fe 500D, Fe 550D) की तन्यता, मजबूती और रासायनिक संरचना को नियंत्रित करता है।",
+    "keyTests": [
+      {
+        "name": "0.2% Proof Stress / Yield Stress",
+        "description": "Universal Testing Machine (UTM) tensile test.",
+        "parameterLimit": "Fe 500D: Min 500.0 N/mm²; Fe 550D: Min 550.0 N/mm²"
+      },
+      {
+        "name": "Tensile Strength to Yield Strength Ratio (TS/YS)",
+        "description": "Earthquake resistance metric.",
+        "parameterLimit": "Fe 500D: TS/YS ≥ 1.10; Fe 550D: TS/YS ≥ 1.08"
+      },
+      {
+        "name": "Percentage Elongation at Fracture",
+        "description": "Ductility under seismic stress.",
+        "parameterLimit": "Fe 500D: Min 16.0%; Fe 550D: Min 14.5%"
+      },
+      {
+        "name": "Bend and Re-bend Test",
+        "description": "Bar bent through 135° over mandrel, aged in boiling water (100°C for 30 min), then bent back through 157.5°.",
+        "parameterLimit": "No transverse crack or rupture visible on outer curved surface"
+      }
+    ],
+    "markingRequirements": "Every TMT bar must have brand name, Grade (e.g., Fe 500D), Size (e.g., 16mm), and ISI Mark rolled/embossed at regular intervals not exceeding 1.5m.",
+    "consumerTips": [
+      "For home construction in seismic zones, always insist on Fe 500D or Fe 550D grade TMT bars with D (Ductile)."
+    ],
+    "industryGuidelines": [
+      "Strict restriction on re-rolling scrap without primary ladle refining and TMT cooling control."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 8.1",
+        "title": "Mechanical Properties",
+        "content": "Tensile properties of deformed bars shall conform to Table 3. Total elongation at maximum force (Agst) shall not be less than 5% for D grades.",
+        "contentHi": "D ग्रेड के लिए अधिकतम बल पर बढ़ाव 5% से कम नहीं होना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-269-2015",
+    "isNumber": "IS 269:2015",
+    "title": "Ordinary Portland Cement (33, 43 and 53 Grade) — Specification",
+    "titleHi": "साधारण पोर्टलैंड सीमेंट (33, 43 और 53 ग्रेड) — विशिष्‍टि",
+    "category": "Construction & Infrastructure",
+    "sector": "Civil Engineering & Building Materials",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Cement (Quality Control) Order, 2003 (DPIIT)",
+    "year": 2015,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+    "hsCodes": [
+      "2523.29.10",
+      "2523.29.30",
+      "2523.29.40"
+    ],
+    "scope": "Covers the manufacture, chemical and physical requirements of ordinary Portland cement in 33 Grade, 43 Grade, and 53 Grade.",
+    "scopeHi": "यह मानक 33, 43 और 53 ग्रेड के साधारण पोर्टलैंड सीमेंट (ओपीसी) के रासायनिक और संपीड़न सामर्थ्य मानकों को नियंत्रित करता है।",
+    "keyTests": [
+      {
+        "name": "Compressive Strength (28 Days)",
+        "description": "Testing 70.6 mm mortar cubes.",
+        "parameterLimit": "Grade 53: Min 53.0 MPa at 28 days; Grade 43: Min 43.0 MPa"
+      },
+      {
+        "name": "Initial and Final Setting Time",
+        "description": "Vicat needle apparatus.",
+        "parameterLimit": "Initial setting time ≥ 30 min; Final setting time ≤ 600 min"
+      }
+    ],
+    "markingRequirements": "IS 269, ISI Mark, CM/L number, Grade of cement (e.g. OPC 53), Net weight (50 kg), Week/Month/Year of manufacture.",
+    "consumerTips": [
+      "Never use cement bags older than 90 days from packaging date without re-testing strength."
+    ],
+    "industryGuidelines": [
+      "Insoluble residue ≤ 5.0% and total sulfur content (as SO3) ≤ 3.5%."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 6.2",
+        "title": "Compressive Strength",
+        "content": "Compressive strength of mortar cubes shall not be less than 53 MPa at 28 days for 53 Grade OPC.",
+        "contentHi": "53 ग्रेड ओपीसी के लिए 28 दिनों में शक्ति 53 MPa से कम नहीं होनी चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-4985-2021",
+    "isNumber": "IS 4985:2021",
+    "title": "Unplasticized PVC Pipes for Potable Water Supplies — Specification",
+    "titleHi": "पीने के पानी की आपूर्ति के लिए अनप्लास्टिसाइज़्ड पीवीसी पाइप — विशिष्‍टि",
+    "category": "Pipes & Fittings",
+    "sector": "Civil & Chemical Engineering",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Plumbing and Water Fitting Products (Quality Control) Order",
+    "year": 2021,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+    "hsCodes": [
+      "3917.23.00"
+    ],
+    "scope": "Prescribes requirements for unplasticized polyvinyl chloride (uPVC) pipes for potable water supplies in domestic, agricultural, and municipal plumbing.",
+    "scopeHi": "यह घरों, खेतों और नगर पालिका में पीने के पानी के वितरण के लिए uPVC पाइपों के दबाव और सुरक्षा मानकों को तय करता है।",
+    "keyTests": [
+      {
+        "name": "Hydrostatic Pressure Test",
+        "description": "Sustained pressure test at 20°C and 60°C.",
+        "parameterLimit": "No burst or leak at 4.2 times rated pressure for 1 hour"
+      },
+      {
+        "name": "Lead & Toxic Metal Extraction",
+        "description": "Leaching test for heavy metal stabilizers.",
+        "parameterLimit": "Lead extraction < 0.05 mg/l on third extraction"
+      }
+    ],
+    "markingRequirements": "Continuous linear marking: IS 4985, ISI mark, CM/L license number, Pipe class, Outer diameter, manufacturer name.",
+    "consumerTips": [
+      "Ensure pipes for drinking water are lead-free uPVC certified under IS 4985."
+    ],
+    "industryGuidelines": [
+      "Virgin PVC resin K-value must be between 65 and 68."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 7.1",
+        "title": "Hydrostatic Burst",
+        "content": "Pipes shall withstand short-term hydrostatic pressure without bursting.",
+        "contentHi": "पाइपों को बिना फटे हाइड्रोस्टेटिक दबाव का सामना करना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15477-2019",
+    "isNumber": "IS 15477:2019",
+    "title": "Adhesives for Use with Ceramic, Mosaic and Stone Tiles — Specification",
+    "titleHi": "सिरेमिक, मोज़ेक और पत्थर की टाइलों के लिए चिपकने वाले पदार्थ — विशिष्‍टि",
+    "category": "Construction & Infrastructure",
+    "sector": "Building Materials & Adhesives",
+    "status": "Voluntary",
+    "year": 2019,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+    "hsCodes": [
+      "3506.91.90"
+    ],
+    "scope": "Covers polymer-modified cementitious adhesives for fixing ceramic, vitrified, mosaic, and natural stone tiles on interior and exterior walls and floors.",
+    "scopeHi": "यह फर्श और दीवारों पर टाइल्स व पत्थरों को चिपकाने के लिए सीमेंट और पॉलिमर आधारित टाइल एडहेसिव के चिपकाने के सामर्थ्य को नियंत्रित करता है।",
+    "keyTests": [
+      {
+        "name": "Tensile Adhesion Strength",
+        "description": "Pull-off adhesion on vitrified tiles.",
+        "parameterLimit": "Type 2: ≥ 1.0 N/mm²; Type 4: ≥ 1.5 N/mm²"
+      },
+      {
+        "name": "Slip Resistance",
+        "description": "Vertical cladding slippage.",
+        "parameterLimit": "Slip ≤ 0.5 mm"
+      }
+    ],
+    "markingRequirements": "Bag markings: IS 15477, Adhesive Type (e.g. Type 2), Net weight, Batch number.",
+    "consumerTips": [
+      "For large vitrified tiles or wall cladding, regular cement slurry fails; use Type 2 or Type 3 ISI tile adhesive."
+    ],
+    "industryGuidelines": [
+      "Polymer redispersible powder content must meet flexibility class S1/S2."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.1",
+        "title": "Classification",
+        "content": "Adhesives classified Type 1 to Type 5 based on bond strength.",
+        "contentHi": "टाइल एडहेसिव को ताकत के अनुसार टाइप 1 से 5 तक वर्गीकृत किया गया है।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-7318-Part-1-2020",
+    "isNumber": "IS 7318 (Part 1):2020",
+    "title": "Approval Testing of Welders for Fusion Welding — Part 1: Steels",
+    "titleHi": "फ्यूजन वेल्डिंग के लिए वेल्डरों का अनुमोदन परीक्षण — भाग 1: स्टील्स",
+    "category": "Industrial & Manufacturing",
+    "sector": "Mechanical & Structural Fabrication",
+    "status": "Voluntary",
+    "year": 2020,
+    "conformityAssessmentScheme": "Personnel & Process Certification",
+    "hsCodes": [
+      "8468.90.00"
+    ],
+    "scope": "Prescribes requirements for welder qualification and approval testing in fusion welding of carbon and alloy steels across all standard welding positions (1G to 6G).",
+    "scopeHi": "यह संरचनात्मक और पाइप वेल्डिंग में वेल्डरों के कौशल और वेल्ड जोड़ों के परीक्षण (एक्स-रे और बेंड टेस्ट) के मानक तय करता है।",
+    "keyTests": [
+      {
+        "name": "Visual Examination of Weld Seam",
+        "description": "Inspection for undercut and porosity.",
+        "parameterLimit": "Zero crack, zero lack of fusion, undercut ≤ 0.5 mm"
+      },
+      {
+        "name": "Radiographic Examination (NDT)",
+        "description": "Volumetric inspection of butt welds.",
+        "parameterLimit": "Acceptance level B under ISO 5817"
+      }
+    ],
+    "markingRequirements": "Welder Qualification Record (WQR) certificate indicating IS 7318-1.",
+    "consumerTips": [
+      "For critical building/bridge fabrication, ensure welders hold active IS 7318 certification."
+    ],
+    "industryGuidelines": [
+      "Welder qualification validity is typically 2 years subject to periodic verification."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 6.2",
+        "title": "Test Conditions",
+        "content": "Test piece welded according to qualified Welding Procedure Specification.",
+        "contentHi": "परीक्षण पीस को योग्य वेल्डिंग प्रक्रिया विनिर्देश के अनुसार वेल्ड किया जाएगा।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  }
+]

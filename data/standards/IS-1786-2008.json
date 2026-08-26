@@ -1,0 +1,56 @@
+{
+  "id": "IS-1786-2008",
+  "isNumber": "IS 1786:2008",
+  "title": "High Strength Deformed Steel Bars and Wires for Concrete Reinforcement — Specification (TMT Rebars)",
+  "titleHi": "कंक्रीट सुदृढ़ीकरण के लिए उच्च शक्ति वाले विकृत स्टील बार और तार (टीएमटी सरिया)",
+  "category": "Construction & Infrastructure",
+  "sector": "Civil Engineering & Metallurgy",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Steel and Steel Products (Quality Control) Order, 2020 (Ministry of Steel)",
+  "year": 2008,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+  "hsCodes": [
+    "7214.20.90",
+    "7213.10.90"
+  ],
+  "scope": "Covers the requirements of deformed steel bars and wires for use as reinforcement in concrete in grades Fe 415, Fe 415D, Fe 500, Fe 500D, Fe 550, Fe 550D produced via Thermo-Mechanical Treatment (TMT).",
+  "scopeHi": "यह मकान और पुल निर्माण में प्रयुक्त होने वाले टीएमटी सरिया (Fe 415D, Fe 500D, Fe 550D) की तन्यता, मजबूती और रासायनिक संरचना को नियंत्रित करता है।",
+  "keyTests": [
+    {
+      "name": "0.2% Proof Stress / Yield Stress",
+      "description": "Universal Testing Machine (UTM) tensile test.",
+      "parameterLimit": "Fe 500D: Min 500.0 N/mm²; Fe 550D: Min 550.0 N/mm²"
+    },
+    {
+      "name": "Tensile Strength to Yield Strength Ratio (TS/YS)",
+      "description": "Earthquake resistance metric.",
+      "parameterLimit": "Fe 500D: TS/YS ≥ 1.10; Fe 550D: TS/YS ≥ 1.08"
+    },
+    {
+      "name": "Percentage Elongation at Fracture",
+      "description": "Ductility under seismic stress.",
+      "parameterLimit": "Fe 500D: Min 16.0%; Fe 550D: Min 14.5%"
+    },
+    {
+      "name": "Bend and Re-bend Test",
+      "description": "Bar bent through 135° over mandrel, aged in boiling water (100°C for 30 min), then bent back through 157.5°.",
+      "parameterLimit": "No transverse crack or rupture visible on outer curved surface"
+    }
+  ],
+  "markingRequirements": "Every TMT bar must have brand name, Grade (e.g., Fe 500D), Size (e.g., 16mm), and ISI Mark rolled/embossed at regular intervals not exceeding 1.5m.",
+  "consumerTips": [
+    "For home construction in seismic zones, always insist on Fe 500D or Fe 550D grade TMT bars with D (Ductile)."
+  ],
+  "industryGuidelines": [
+    "Strict restriction on re-rolling scrap without primary ladle refining and TMT cooling control."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 8.1",
+      "title": "Mechanical Properties",
+      "content": "Tensile properties of deformed bars shall conform to Table 3. Total elongation at maximum force (Agst) shall not be less than 5% for D grades.",
+      "contentHi": "D ग्रेड के लिए अधिकतम बल पर बढ़ाव 5% से कम नहीं होना चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

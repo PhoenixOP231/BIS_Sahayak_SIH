@@ -1,0 +1,44 @@
+{
+  "id": "IS-15477-2019",
+  "isNumber": "IS 15477:2019",
+  "title": "Adhesives for Use with Ceramic, Mosaic and Stone Tiles — Specification",
+  "titleHi": "सिरेमिक, मोज़ेक और पत्थर की टाइलों के लिए चिपकने वाले पदार्थ — विशिष्‍टि",
+  "category": "Construction & Infrastructure",
+  "sector": "Building Materials & Adhesives",
+  "status": "Voluntary",
+  "year": 2019,
+  "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+  "hsCodes": [
+    "3506.91.90"
+  ],
+  "scope": "Covers polymer-modified cementitious adhesives for fixing ceramic, vitrified, mosaic, and natural stone tiles on interior and exterior walls and floors.",
+  "scopeHi": "यह फर्श और दीवारों पर टाइल्स व पत्थरों को चिपकाने के लिए सीमेंट और पॉलिमर आधारित टाइल एडहेसिव के चिपकाने के सामर्थ्य को नियंत्रित करता है।",
+  "keyTests": [
+    {
+      "name": "Tensile Adhesion Strength",
+      "description": "Pull-off adhesion on vitrified tiles.",
+      "parameterLimit": "Type 2: ≥ 1.0 N/mm²; Type 4: ≥ 1.5 N/mm²"
+    },
+    {
+      "name": "Slip Resistance",
+      "description": "Vertical cladding slippage.",
+      "parameterLimit": "Slip ≤ 0.5 mm"
+    }
+  ],
+  "markingRequirements": "Bag markings: IS 15477, Adhesive Type (e.g. Type 2), Net weight, Batch number.",
+  "consumerTips": [
+    "For large vitrified tiles or wall cladding, regular cement slurry fails; use Type 2 or Type 3 ISI tile adhesive."
+  ],
+  "industryGuidelines": [
+    "Polymer redispersible powder content must meet flexibility class S1/S2."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 5.1",
+      "title": "Classification",
+      "content": "Adhesives classified Type 1 to Type 5 based on bond strength.",
+      "contentHi": "टाइल एडहेसिव को ताकत के अनुसार टाइप 1 से 5 तक वर्गीकृत किया गया है।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

@@ -1,0 +1,46 @@
+{
+  "id": "IS-15298-Part-2-2016",
+  "isNumber": "IS 15298 (Part 2):2016",
+  "title": "Personal Protective Equipment — Part 2: Safety Footwear",
+  "titleHi": "व्यक्तिगत सुरक्षा उपकरण — भाग 2: सुरक्षा जूते",
+  "category": "Personal Protective Equipment",
+  "sector": "Industrial Safety & Footwear",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Footwear made from Leather and other materials (Quality Control) Order, 2020",
+  "year": 2016,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark)",
+  "hsCodes": [
+    "6403.40.00",
+    "6402.99.10"
+  ],
+  "scope": "Specifies basic and additional requirements for safety footwear used for commercial and industrial workplaces, equipped with safety toecaps.",
+  "scopeHi": "यह औद्योगिक कार्यस्थलों में उपयोग किए जाने वाले सुरक्षा जूतों में स्टील टो-कैप, सोल फिसलन और पंचर प्रतिरोध के मानकों को तय करता है।",
+  "keyTests": [
+    {
+      "name": "Toecap Impact Resistance",
+      "description": "200 Joules impact energy drop.",
+      "parameterLimit": "Clearance beneath toecap ≥ 14 mm"
+    },
+    {
+      "name": "Penetration Resistance of Sole",
+      "description": "1100 N puncture force.",
+      "parameterLimit": "Spike must not penetrate insole barrier"
+    }
+  ],
+  "markingRequirements": "IS 15298 (Part 2), ISI mark, CM/L number, Shoe size, Category (S1, S2, S3, S1P).",
+  "consumerTips": [
+    "S1P or S3 safety shoes include both 200J steel toe cap and steel anti-nail penetration midsole."
+  ],
+  "industryGuidelines": [
+    "Steel toecaps must comply with corrosion resistance testing."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 5.3.2",
+      "title": "Impact Resistance",
+      "content": "Footwear tested at impact energy of 200 J shall retain clearance beneath toecap ≥ 14 mm.",
+      "contentHi": "200 जूल प्रभाव ऊर्जा पर परीक्षण में टो-कैप के नीचे निकासी 14 मिमी से कम नहीं होनी चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

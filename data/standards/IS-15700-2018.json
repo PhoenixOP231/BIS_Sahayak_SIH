@@ -1,0 +1,44 @@
+{
+  "id": "IS-15700-2018",
+  "isNumber": "IS 15700:2018",
+  "title": "Quality Management Systems — Requirements for Service Quality by Public Service Organizations (Sevottam)",
+  "titleHi": "गुणवत्ता प्रबंधन प्रणाली — सार्वजनिक सेवा संगठनों द्वारा सेवा गुणवत्ता की आवश्यकताएं (सेवोत्तम)",
+  "category": "Management Systems & Services",
+  "sector": "Public Administration & Citizen Services",
+  "status": "Voluntary",
+  "year": 2018,
+  "conformityAssessmentScheme": "Management Systems Certification Scheme (MSCS)",
+  "hsCodes": [
+    "9983.11.00"
+  ],
+  "scope": "Specifies requirements for a quality management system where a public service organization needs to demonstrate citizen-centric service delivery.",
+  "scopeHi": "यह सरकारी विभागों और सार्वजनिक संगठनों में पारदर्शी नागरिक चार्टर और लोक शिकायत निवारण प्रणाली (सेवोत्तम मॉडल) के मानक तय करता है।",
+  "keyTests": [
+    {
+      "name": "Citizen Charter Implementation Audit",
+      "description": "Verifies defined service delivery timeframes.",
+      "parameterLimit": "100% published charter commitments with KPIs"
+    },
+    {
+      "name": "Public Grievance Redressal Audit",
+      "description": "Grievance receipt and escalation timelines.",
+      "parameterLimit": "Timebound resolution within 30 days"
+    }
+  ],
+  "markingRequirements": "BIS Sevottam Certificate display on departmental portals.",
+  "consumerTips": [
+    "Sevottam charters bind government offices to deliver citizen services within defined days."
+  ],
+  "industryGuidelines": [
+    "Applies to government departments and public utilities."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 5.2",
+      "title": "Citizen Charter",
+      "content": "Public organization shall publish a Citizen Charter detailing service standards and grievance channels.",
+      "contentHi": "सार्वजनिक सेवा संगठन सेवा मानकों और शिकायत निवारण का नागरिक चार्टर प्रकाशित करेगा।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

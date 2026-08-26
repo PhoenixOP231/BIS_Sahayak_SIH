@@ -1,0 +1,45 @@
+{
+  "id": "IS-4985-2021",
+  "isNumber": "IS 4985:2021",
+  "title": "Unplasticized PVC Pipes for Potable Water Supplies — Specification",
+  "titleHi": "पीने के पानी की आपूर्ति के लिए अनप्लास्टिसाइज़्ड पीवीसी पाइप — विशिष्‍टि",
+  "category": "Pipes & Fittings",
+  "sector": "Civil & Chemical Engineering",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Plumbing and Water Fitting Products (Quality Control) Order",
+  "year": 2021,
+  "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+  "hsCodes": [
+    "3917.23.00"
+  ],
+  "scope": "Prescribes requirements for unplasticized polyvinyl chloride (uPVC) pipes for potable water supplies in domestic, agricultural, and municipal plumbing.",
+  "scopeHi": "यह घरों, खेतों और नगर पालिका में पीने के पानी के वितरण के लिए uPVC पाइपों के दबाव और सुरक्षा मानकों को तय करता है।",
+  "keyTests": [
+    {
+      "name": "Hydrostatic Pressure Test",
+      "description": "Sustained pressure test at 20°C and 60°C.",
+      "parameterLimit": "No burst or leak at 4.2 times rated pressure for 1 hour"
+    },
+    {
+      "name": "Lead & Toxic Metal Extraction",
+      "description": "Leaching test for heavy metal stabilizers.",
+      "parameterLimit": "Lead extraction < 0.05 mg/l on third extraction"
+    }
+  ],
+  "markingRequirements": "Continuous linear marking: IS 4985, ISI mark, CM/L license number, Pipe class, Outer diameter, manufacturer name.",
+  "consumerTips": [
+    "Ensure pipes for drinking water are lead-free uPVC certified under IS 4985."
+  ],
+  "industryGuidelines": [
+    "Virgin PVC resin K-value must be between 65 and 68."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 7.1",
+      "title": "Hydrostatic Burst",
+      "content": "Pipes shall withstand short-term hydrostatic pressure without bursting.",
+      "contentHi": "पाइपों को बिना फटे हाइड्रोस्टेटिक दबाव का सामना करना चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

@@ -1,0 +1,228 @@
+[
+  {
+    "id": "IS-2347-2017",
+    "isNumber": "IS 2347:2017",
+    "title": "Domestic Pressure Cookers — Specification",
+    "titleHi": "घरेलू प्रेशर कुकर — विशिष्‍टि",
+    "category": "Kitchen & Home Appliances",
+    "sector": "Mechanical Engineering",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Domestic Pressure Cooker (Quality Control) Order, 2020 (DPIIT)",
+    "year": 2017,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+    "hsCodes": [
+      "7615.10.11",
+      "7323.93.00"
+    ],
+    "scope": "Specifies requirements for domestic pressure cookers made of aluminum alloy or stainless steel with capacities from 1L to 15L, operating pressures 0.5 to 1.1 bar.",
+    "scopeHi": "यह मानक 1 लीटर से 15 लीटर क्षमता वाले एल्युमिनियम मिश्र धातु या स्टेनलेस स्टील से बने घरेलू प्रेशर कुकरों के लिए सुरक्षा और गुणवत्ता आवश्यकताओं को निर्दिष्ट करता है।",
+    "keyTests": [
+      {
+        "name": "Operating Pressure Test",
+        "description": "Verifies cooker maintains nominal operating pressure without steam leakage.",
+        "parameterLimit": "Within ±10% of declared operating pressure (typically 1.0 kg/cm²)"
+      },
+      {
+        "name": "Proof Pressure Test",
+        "description": "Body and lid subjected to internal hydrostatic pressure.",
+        "parameterLimit": "Must withstand 2.5 times operating pressure without permanent distortion."
+      },
+      {
+        "name": "Bursting Pressure Test",
+        "description": "Container withstands extreme pressure before rupture.",
+        "parameterLimit": "Shall not burst at less than 4.5 times normal working pressure."
+      },
+      {
+        "name": "Safety Valve Operating Test",
+        "description": "Safety fuse release under excess pressure.",
+        "parameterLimit": "Releases pressure between 1.5 to 2.2 times operating pressure."
+      },
+      {
+        "name": "Gasket Release Mechanism",
+        "description": "Controlled release of excess steam downwards away from user.",
+        "parameterLimit": "Operates if vent tube and safety valve are blocked."
+      }
+    ],
+    "markingRequirements": "Each pressure cooker must bear the ISI Standard Mark along with License Number (CM/L-XXXXXXXXXX), manufacturer name, capacity in liters, working pressure, and material grade.",
+    "consumerTips": [
+      "Always verify the 7 or 8-digit CM/L license number below the ISI logo using the BIS Care App.",
+      "Check that safety valve is metallic fusible alloy certified and gasket is food-grade silicone.",
+      "Never buy pressure cookers without the ISI Mark - it is legally mandatory in India."
+    ],
+    "industryGuidelines": [
+      "Factory audit required for Scheme-I licensing including raw material chemical testing (IS 21/IS 6911).",
+      "Routine batch testing for every 500 units: hydrostatic proof pressure, safety valve release pressure."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 4.1",
+        "title": "Material Specifications",
+        "content": "Bodies and lids shall be manufactured from wrought aluminium alloy (IS 21) or austenitic stainless steel AISI 304 (IS 6911). Handles must be heat-resistant phenolic moulding (IS 1300).",
+        "contentHi": "ढांचा और ढक्कन IS 21 एल्युमिनियम या IS 6911 स्टेनलेस स्टील 304 से बने होंगे।"
+      },
+      {
+        "clauseNumber": "Clause 7.2",
+        "title": "Safety Devices & Pressure Relief",
+        "content": "Every cooker shall be equipped with at least two independent safety relief mechanisms: a weighted pressure regulator/vent tube and a secondary safety valve.",
+        "contentHi": "कुकर में रेगुलेटर वेंट ट्यूब और बैकअप सेफ्टी वाल्व सहित दो स्वतंत्र सुरक्षा उपकरण होने अनिवार्य हैं।"
+      },
+      {
+        "clauseNumber": "Clause 9.3",
+        "title": "Hydrostatic Proof and Burst Pressure",
+        "content": "Body with closed lid shall withstand minimum hydraulic pressure of 250 kPa (2.5 bar) without distortion. Rupture shall not occur below 450 kPa.",
+        "contentHi": "कुकर बिना किसी विरूपण के न्यूनतम 250 kPa (2.5 बार) का दबाव सहन करने योग्य होना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-302-Part-1-2008",
+    "isNumber": "IS 302 (Part 1):2008",
+    "title": "Safety of Household and Similar Electrical Appliances — General Requirements",
+    "titleHi": "घरेलू और समान विद्युत उपकरणों की सुरक्षा — सामान्य आवश्यकताएं",
+    "category": "Electrical & Electronics",
+    "sector": "Electrotechnical",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Electrical Appliances (Quality Control) Order, 2023",
+    "year": 2008,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark) / CRS",
+    "hsCodes": [
+      "8516.40.00",
+      "8516.79.20",
+      "8509.40.10"
+    ],
+    "scope": "Deals with safety of electrical appliances for household purposes, rated voltage not more than 250V single-phase (electric irons, immersion heaters, mixer grinders, toasters, geysers).",
+    "scopeHi": "यह मानक घरेलू उपयोग के विद्युत उपकरणों (इलेक्ट्रिक आयरन, वॉटर हीटर, मिक्सी) की सुरक्षा से संबंधित है।",
+    "keyTests": [
+      {
+        "name": "High Voltage Electric Strength Test",
+        "description": "Tests insulation barrier breakdown between live parts and enclosure.",
+        "parameterLimit": "Withstand 1250V AC (Class I) or 3750V AC (Class II) for 1 minute"
+      },
+      {
+        "name": "Leakage Current & Earth Continuity",
+        "description": "Verifies protection against electric shock during normal operation.",
+        "parameterLimit": "Earth resistance < 0.1 Ω; Leakage current < 0.75 mA for Class I portable appliances"
+      },
+      {
+        "name": "Thermal Heating & Abnormal Operation",
+        "description": "Operated at 1.15 times rated power under locked rotor conditions.",
+        "parameterLimit": "Enclosure temp rise must not exceed safe limit (60K for handles)"
+      }
+    ],
+    "markingRequirements": "Mandatory marking of Rated Voltage (V), Rated Power (W/kW), Model name, Manufacturer name or Trademark, and ISI Standard Mark with CM/L license number.",
+    "consumerTips": [
+      "Check for 3-pin earthed plugs on high wattage heating appliances (irons, geysers, room heaters).",
+      "Ensure electric immersion rods have the ISI mark; uncertified rods cause severe shock hazards."
+    ],
+    "industryGuidelines": [
+      "100% routine testing for High Voltage dielectric breakdown and Earth bond continuity on assembly lines."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 8.1",
+        "title": "Protection Against Electric Shock",
+        "content": "Appliances shall be constructed so that adequate protection exists against accidental contact with live parts.",
+        "contentHi": "उपकरणों में सक्रिय विद्युत भागों के आकस्मिक संपर्क से पूर्ण सुरक्षा होनी चाहिए।"
+      },
+      {
+        "clauseNumber": "Clause 13.2",
+        "title": "Leakage Current at Operating Temperature",
+        "content": "Leakage current shall not exceed 0.75 mA for portable Class I appliances and 0.25 mA for Class II appliances.",
+        "contentHi": "क्लास I पोर्टेबल उपकरणों के लिए लीकेज करंट 0.75 mA से अधिक नहीं होना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-1293-2019",
+    "isNumber": "IS 1293:2019",
+    "title": "Plugs and Socket-Outlets of Rated Voltage up to 250 V and Current up to 16 A — Specification",
+    "titleHi": "250 V तक के वोल्टेज और 16 A तक के करंट के लिए प्लग और सॉकेट — विशिष्‍टि",
+    "category": "Electrical & Electronics",
+    "sector": "Electrotechnical",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Plugs and Socket-Outlets (Quality Control) Order, 2020",
+    "year": 2019,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+    "hsCodes": [
+      "8536.69.10",
+      "8536.69.90"
+    ],
+    "scope": "Covers plugs and fixed or portable socket-outlets for AC only, rated from 2.5 A up to 16 A / 250 V for household and commercial electrical installations.",
+    "scopeHi": "यह घरों और कार्यालयों में प्रयुक्त होने वाले 6A और 16A 3-पिन प्लग और सॉकेट के आयाम, इन्सुलेशन और सुरक्षा शटर मानकों को नियंत्रित करता है।",
+    "keyTests": [
+      {
+        "name": "Safety Shutter Engagement Test",
+        "description": "Ensures foreign objects cannot enter live contacts.",
+        "parameterLimit": "1 mm probe must not touch live parts under 20 N force"
+      },
+      {
+        "name": "Temperature Rise Test",
+        "description": "Tested at 1.25 times rated current for 1 hour.",
+        "parameterLimit": "Terminal temp rise ≤ 45 K"
+      }
+    ],
+    "markingRequirements": "Indelibly stamped: IS 1293, ISI logo, CM/L number, Rated Voltage (250V), Rated Current (6A or 16A), Terminal markings (L, N, E).",
+    "consumerTips": [
+      "Never use ungrounded 2-pin plugs on metal-cased appliances; use ISI 3-pin plugs."
+    ],
+    "industryGuidelines": [
+      "Brass terminals must pass mercurous nitrate stress corrosion test."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 9.1",
+        "title": "Live Part Contact Protection",
+        "content": "Sockets shall prevent access to live parts when a plug is withdrawn.",
+        "contentHi": "प्लग निकालने पर सॉकेट के शटर स्वतः बंद होने चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15885-Part-2-Sec-13-2012",
+    "isNumber": "IS 15885 (Part 2/Sec 13):2012",
+    "title": "Safety of Lamp Controlgear — Electronic Controlgear for LED Modules (LED Drivers)",
+    "titleHi": "लैंप कंट्रोलगियर की सुरक्षा — एलईडी ड्राइवर",
+    "category": "Electrical & Electronics",
+    "sector": "Electronics & IT Goods (CRS)",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Electronics and Information Technology Goods (Compulsory Registration) Order (MeitY)",
+    "year": 2012,
+    "conformityAssessmentScheme": "CRS (Compulsory Registration Scheme - R-XXXXXXXX)",
+    "hsCodes": [
+      "8504.40.90"
+    ],
+    "scope": "Covers safety requirements for electronic controlgear for DC supplies up to 250 V or AC supplies up to 1000 V for constant voltage or constant current LED modules.",
+    "scopeHi": "यह एलईडी बल्ब और स्ट्रीट लाइट्स के लिए एलईडी ड्राइवरों के बीआईएस पंजीकरण को अनिवार्य करता है।",
+    "keyTests": [
+      {
+        "name": "Surge Protection Immunity Test",
+        "description": "High-voltage surge testing.",
+        "parameterLimit": "Withstand min 2.5 kV (indoor) or 4 kV (outdoor)"
+      },
+      {
+        "name": "Total Harmonic Distortion (THD)",
+        "description": "Harmonics drawn from mains.",
+        "parameterLimit": "THD ≤ 10% to 25%"
+      }
+    ],
+    "markingRequirements": "BIS CRS Standard Mark with R-XXXXXXXX registration number.",
+    "consumerTips": [
+      "Check for R-XXXXXXXX registration mark on LED power supplies to prevent surge fire hazards."
+    ],
+    "industryGuidelines": [
+      "Evaluated at BIS recognized test laboratory under MeitY scheme."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 14.1",
+        "title": "Fault Conditions",
+        "content": "Controlgear shall remain safe during short circuit or open circuit conditions.",
+        "contentHi": "कंट्रोलगियर शॉर्ट-सर्किट या लोड कटने पर सुरक्षित रहना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  }
+]

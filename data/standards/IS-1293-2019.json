@@ -1,0 +1,46 @@
+{
+  "id": "IS-1293-2019",
+  "isNumber": "IS 1293:2019",
+  "title": "Plugs and Socket-Outlets of Rated Voltage up to 250 V and Current up to 16 A — Specification",
+  "titleHi": "250 V तक के वोल्टेज और 16 A तक के करंट के लिए प्लग और सॉकेट — विशिष्‍टि",
+  "category": "Electrical & Electronics",
+  "sector": "Electrotechnical",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Plugs and Socket-Outlets (Quality Control) Order, 2020",
+  "year": 2019,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+  "hsCodes": [
+    "8536.69.10",
+    "8536.69.90"
+  ],
+  "scope": "Covers plugs and fixed or portable socket-outlets for AC only, rated from 2.5 A up to 16 A / 250 V for household and commercial electrical installations.",
+  "scopeHi": "यह घरों और कार्यालयों में प्रयुक्त होने वाले 6A और 16A 3-पिन प्लग और सॉकेट के आयाम, इन्सुलेशन और सुरक्षा शटर मानकों को नियंत्रित करता है।",
+  "keyTests": [
+    {
+      "name": "Safety Shutter Engagement Test",
+      "description": "Ensures foreign objects cannot enter live contacts.",
+      "parameterLimit": "1 mm probe must not touch live parts under 20 N force"
+    },
+    {
+      "name": "Temperature Rise Test",
+      "description": "Tested at 1.25 times rated current for 1 hour.",
+      "parameterLimit": "Terminal temp rise ≤ 45 K"
+    }
+  ],
+  "markingRequirements": "Indelibly stamped: IS 1293, ISI logo, CM/L number, Rated Voltage (250V), Rated Current (6A or 16A), Terminal markings (L, N, E).",
+  "consumerTips": [
+    "Never use ungrounded 2-pin plugs on metal-cased appliances; use ISI 3-pin plugs."
+  ],
+  "industryGuidelines": [
+    "Brass terminals must pass mercurous nitrate stress corrosion test."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 9.1",
+      "title": "Live Part Contact Protection",
+      "content": "Sockets shall prevent access to live parts when a plug is withdrawn.",
+      "contentHi": "प्लग निकालने पर सॉकेट के शटर स्वतः बंद होने चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

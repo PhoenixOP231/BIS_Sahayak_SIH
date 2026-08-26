@@ -1,0 +1,45 @@
+{
+  "id": "IS-15652-2006",
+  "isNumber": "IS 15652:2006",
+  "title": "Insulating Mats for Electrical Purposes — Specification",
+  "titleHi": "विद्युत उद्देश्यों के लिए इंसुलेटिंग मैट — विशिष्‍टि",
+  "category": "Electrical & Electronics",
+  "sector": "Electrotechnical & Workplace Safety",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Electrical Safety Equipment Quality Control Order",
+  "year": 2006,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark)",
+  "hsCodes": [
+    "3918.10.00"
+  ],
+  "scope": "Covers elastomer/polymer insulating floor mats used near high voltage electrical switchboards for protection against electric shock up to 33 kV.",
+  "scopeHi": "यह सबस्टेशनों और हाई-वोल्टेज बिजली के पैनलों के पास काम करने वाले कर्मचारियों को बिजली के झटके से बचाने वाली इंसुलेटिंग मैट के मानक तय करता है।",
+  "keyTests": [
+    {
+      "name": "Dielectric Strength & Proof Voltage",
+      "description": "Proof voltage for 1 minute.",
+      "parameterLimit": "Class A (3.3kV): 10kV; Class B (11kV): 22kV; Class C (33kV): 36kV"
+    },
+    {
+      "name": "Leakage Current Test",
+      "description": "Current under maximum voltage.",
+      "parameterLimit": "Leakage < 10 µA/m²"
+    }
+  ],
+  "markingRequirements": "IS 15652, ISI mark, CM/L number, Voltage Class (A/B/C), Working Voltage.",
+  "consumerTips": [
+    "Obsolete rubber mats under IS 5424 are banned; use synthetic elastomer mats with IS 15652."
+  ],
+  "industryGuidelines": [
+    "100% dielectric proof testing at factory before dispatch."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 5.1",
+      "title": "Voltage Classification",
+      "content": "Mats classified into Class A (3.3kV), Class B (11kV), Class C (33kV).",
+      "contentHi": "मैट्स को क्लास A, B और C में वर्गीकृत किया गया है।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

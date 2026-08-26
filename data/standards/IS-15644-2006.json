@@ -1,0 +1,46 @@
+{
+  "id": "IS-15644-2006",
+  "isNumber": "IS 15644:2006",
+  "title": "Safety of Electric Toys",
+  "titleHi": "विद्युत खिलौनों की सुरक्षा",
+  "category": "Toys & Children Products",
+  "sector": "Consumer Safety & Electrotechnical",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Toys (Quality Control) Order, 2020",
+  "year": 2006,
+  "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+  "hsCodes": [
+    "9503.00.30"
+  ],
+  "scope": "Covers the safety requirements for electric toys operating from batteries, transformers, or solar cells with rated supply voltage not exceeding 24 V DC/AC.",
+  "scopeHi": "यह 24V से कम वोल्टेज पर बैटरी या अडैप्टर से चलने वाले इलेक्ट्रॉनिक और रिमोट कंट्रोल खिलौनों की सुरक्षा आवश्यकताओं को कवर करता है।",
+  "keyTests": [
+    {
+      "name": "Operating Voltage Limit Test",
+      "description": "Verifies toy cannot be connected to supplies higher than 24V extra-low voltage.",
+      "parameterLimit": "Nominal voltage ≤ 24 V"
+    },
+    {
+      "name": "Thermal Heating & Battery Compartment Test",
+      "description": "Toy operated under locked rotor/short-circuit conditions.",
+      "parameterLimit": "Battery surface temp rise < 45K; Casing < 25K"
+    }
+  ],
+  "markingRequirements": "ISI mark, CM/L number, battery type/polarity indication, rated voltage.",
+  "consumerTips": [
+    "Never mix old and new batteries in electric toys.",
+    "Check that battery compartments require a tool to open."
+  ],
+  "industryGuidelines": [
+    "Must comply concurrently with IS 9873 Parts 1, 2, 3 and IS 15644."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 7.1",
+      "title": "Supply Voltage Constraints",
+      "content": "Electric toys shall not be powered by voltages exceeding 24 V DC or AC RMS.",
+      "contentHi": "इलेक्ट्रिक खिलौनों को 24 V DC या AC से अधिक वोल्टेज पर नहीं चलाया जाएगा।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

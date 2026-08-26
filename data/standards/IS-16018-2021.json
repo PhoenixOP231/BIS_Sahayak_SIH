@@ -1,0 +1,46 @@
+{
+  "id": "IS-16018-2021",
+  "isNumber": "IS 16018:2021",
+  "title": "Helmets for Riders of Two-Wheeled Motor Vehicles — Specification",
+  "titleHi": "दोपहिया मोटर वाहन सवारों के लिए हेलमेट — विशिष्‍टि",
+  "category": "Automotive & Road Safety",
+  "sector": "Transport & Public Safety",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Helmet for Two-Wheeler Riders (Quality Control) Order, 2020 (MoRTH)",
+  "year": 2021,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark)",
+  "hsCodes": [
+    "6506.10.00"
+  ],
+  "scope": "Prescribes requirements for protective helmets for everyday use by drivers and passengers of two-wheeled motor vehicles to safeguard against head injuries.",
+  "scopeHi": "यह दोपहिया वाहन चालकों के लिए सुरक्षा हेलमेट के प्रभाव अवशोषण, वजन सीमा और स्ट्रैप मजबूती के मानकों को अनिवार्य करता है।",
+  "keyTests": [
+    {
+      "name": "Impact Attenuation Test",
+      "description": "Helmet dropped onto steel anvils at 7.5 m/s.",
+      "parameterLimit": "Peak head acceleration ≤ 275 g"
+    },
+    {
+      "name": "Retention System Dynamic Test",
+      "description": "Drop-weight loading on chin strap.",
+      "parameterLimit": "Dynamic extension ≤ 35 mm; Residual ≤ 25 mm"
+    }
+  ],
+  "markingRequirements": "Sticker on shell & lining: IS 16018 ISI mark, CM/L number, Helmet size, Weight in grams (max 1.2 kg), Month/Year.",
+  "consumerTips": [
+    "Wearing a non-ISI helmet is illegal in India under the Motor Vehicles Act.",
+    "BIS caps helmet weight at 1.2 kg to prevent neck injury."
+  ],
+  "industryGuidelines": [
+    "Expanded Polystyrene (EPS) density optimized for multi-impact progressive crush absorption."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 5.1",
+      "title": "Mass of Helmets",
+      "content": "Maximum mass of complete helmet shall not exceed 1.20 kg (1200 grams).",
+      "contentHi": "हेलमेट का कुल वजन 1.20 किलोग्राम (1200 ग्राम) से अधिक नहीं होना चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

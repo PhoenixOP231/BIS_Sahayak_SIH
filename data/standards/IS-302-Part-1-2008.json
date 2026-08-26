@@ -1,0 +1,59 @@
+{
+  "id": "IS-302-Part-1-2008",
+  "isNumber": "IS 302 (Part 1):2008",
+  "title": "Safety of Household and Similar Electrical Appliances — General Requirements",
+  "titleHi": "घरेलू और समान विद्युत उपकरणों की सुरक्षा — सामान्य आवश्यकताएं",
+  "category": "Electrical & Electronics",
+  "sector": "Electrotechnical",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Electrical Appliances (Quality Control) Order, 2023",
+  "year": 2008,
+  "conformityAssessmentScheme": "Scheme-I (ISI Mark) / CRS",
+  "hsCodes": [
+    "8516.40.00",
+    "8516.79.20",
+    "8509.40.10"
+  ],
+  "scope": "Deals with safety of electrical appliances for household purposes, rated voltage not more than 250V single-phase (electric irons, immersion heaters, mixer grinders, toasters, geysers).",
+  "scopeHi": "यह मानक घरेलू उपयोग के विद्युत उपकरणों (इलेक्ट्रिक आयरन, वॉटर हीटर, मिक्सी) की सुरक्षा से संबंधित है।",
+  "keyTests": [
+    {
+      "name": "High Voltage Electric Strength Test",
+      "description": "Tests insulation barrier breakdown between live parts and enclosure.",
+      "parameterLimit": "Withstand 1250V AC (Class I) or 3750V AC (Class II) for 1 minute"
+    },
+    {
+      "name": "Leakage Current & Earth Continuity",
+      "description": "Verifies protection against electric shock during normal operation.",
+      "parameterLimit": "Earth resistance < 0.1 Ω; Leakage current < 0.75 mA for Class I portable appliances"
+    },
+    {
+      "name": "Thermal Heating & Abnormal Operation",
+      "description": "Operated at 1.15 times rated power under locked rotor conditions.",
+      "parameterLimit": "Enclosure temp rise must not exceed safe limit (60K for handles)"
+    }
+  ],
+  "markingRequirements": "Mandatory marking of Rated Voltage (V), Rated Power (W/kW), Model name, Manufacturer name or Trademark, and ISI Standard Mark with CM/L license number.",
+  "consumerTips": [
+    "Check for 3-pin earthed plugs on high wattage heating appliances (irons, geysers, room heaters).",
+    "Ensure electric immersion rods have the ISI mark; uncertified rods cause severe shock hazards."
+  ],
+  "industryGuidelines": [
+    "100% routine testing for High Voltage dielectric breakdown and Earth bond continuity on assembly lines."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 8.1",
+      "title": "Protection Against Electric Shock",
+      "content": "Appliances shall be constructed so that adequate protection exists against accidental contact with live parts.",
+      "contentHi": "उपकरणों में सक्रिय विद्युत भागों के आकस्मिक संपर्क से पूर्ण सुरक्षा होनी चाहिए।"
+    },
+    {
+      "clauseNumber": "Clause 13.2",
+      "title": "Leakage Current at Operating Temperature",
+      "content": "Leakage current shall not exceed 0.75 mA for portable Class I appliances and 0.25 mA for Class II appliances.",
+      "contentHi": "क्लास I पोर्टेबल उपकरणों के लिए लीकेज करंट 0.75 mA से अधिक नहीं होना चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

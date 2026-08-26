@@ -1,0 +1,45 @@
+{
+  "id": "IS-12254-2021",
+  "isNumber": "IS 12254:2021",
+  "title": "Polyvinyl Chloride (PVC) Industrial Boots — Specification",
+  "titleHi": "पॉलीविनाइल क्लोराइड (पीवीसी) औद्योगिक बूट — विशिष्‍टि",
+  "category": "Personal Protective Equipment",
+  "sector": "Industrial Safety & Chemical Processing",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Footwear (Quality Control) Order, 2020",
+  "year": 2021,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+  "hsCodes": [
+    "6401.92.00"
+  ],
+  "scope": "Covers requirements for waterproof molded PVC industrial boots intended for protection against water, acids, alkalis, oil, and mud in mines and chemical plants.",
+  "scopeHi": "यह खदानों और रासायनिक संयंत्रों में उपयोग किए जाने वाले वाटरप्रूफ और केमिकल-रेसिस्टेंट पीवीसी औद्योगिक जूतों के मानक तय करता है।",
+  "keyTests": [
+    {
+      "name": "Flexing Resistance",
+      "description": "Ross flexing machine 150,000 cycles.",
+      "parameterLimit": "Zero crack growth > 4 mm"
+    },
+    {
+      "name": "Chemical Resistance",
+      "description": "Acid & Alkali immersion 48 hrs.",
+      "parameterLimit": "Tensile strength retention ≥ 80%"
+    }
+  ],
+  "markingRequirements": "Molded on upper calf: IS 12254, ISI mark, CM/L number, Boot size.",
+  "consumerTips": [
+    "Ensure industrial gumboots have the authentic ISI stamp on the upper rim."
+  ],
+  "industryGuidelines": [
+    "No banned phthalate plasticizers or low-grade scrap permitted."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 4.2",
+      "title": "Waterproof Integrity",
+      "content": "Tested for water-tightness under 15 kPa air pressure while immersed.",
+      "contentHi": "पानी में डुबोने पर कोई बुलबुला नहीं निकलना चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

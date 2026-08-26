@@ -1,0 +1,45 @@
+{
+  "id": "IS-15885-Part-2-Sec-13-2012",
+  "isNumber": "IS 15885 (Part 2/Sec 13):2012",
+  "title": "Safety of Lamp Controlgear — Electronic Controlgear for LED Modules (LED Drivers)",
+  "titleHi": "लैंप कंट्रोलगियर की सुरक्षा — एलईडी ड्राइवर",
+  "category": "Electrical & Electronics",
+  "sector": "Electronics & IT Goods (CRS)",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Electronics and Information Technology Goods (Compulsory Registration) Order (MeitY)",
+  "year": 2012,
+  "conformityAssessmentScheme": "CRS (Compulsory Registration Scheme - R-XXXXXXXX)",
+  "hsCodes": [
+    "8504.40.90"
+  ],
+  "scope": "Covers safety requirements for electronic controlgear for DC supplies up to 250 V or AC supplies up to 1000 V for constant voltage or constant current LED modules.",
+  "scopeHi": "यह एलईडी बल्ब और स्ट्रीट लाइट्स के लिए एलईडी ड्राइवरों के बीआईएस पंजीकरण को अनिवार्य करता है।",
+  "keyTests": [
+    {
+      "name": "Surge Protection Immunity Test",
+      "description": "High-voltage surge testing.",
+      "parameterLimit": "Withstand min 2.5 kV (indoor) or 4 kV (outdoor)"
+    },
+    {
+      "name": "Total Harmonic Distortion (THD)",
+      "description": "Harmonics drawn from mains.",
+      "parameterLimit": "THD ≤ 10% to 25%"
+    }
+  ],
+  "markingRequirements": "BIS CRS Standard Mark with R-XXXXXXXX registration number.",
+  "consumerTips": [
+    "Check for R-XXXXXXXX registration mark on LED power supplies to prevent surge fire hazards."
+  ],
+  "industryGuidelines": [
+    "Evaluated at BIS recognized test laboratory under MeitY scheme."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 14.1",
+      "title": "Fault Conditions",
+      "content": "Controlgear shall remain safe during short circuit or open circuit conditions.",
+      "contentHi": "कंट्रोलगियर शॉर्ट-सर्किट या लोड कटने पर सुरक्षित रहना चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

@@ -1,0 +1,51 @@
+{
+  "id": "IS-14543-2024",
+  "isNumber": "IS 14543:2024",
+  "title": "Packaged Drinking Water (Other than Packaged Natural Mineral Water) — Specification",
+  "titleHi": "पैकेज्ड पेयजल (प्राकृतिक खनिज जल के अलावा) — विशिष्‍टि",
+  "category": "Food & Water Safety",
+  "sector": "Food Safety & Public Health",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Food Safety and Standards (Packaging) Regulations & Mandatory BIS Certification",
+  "year": 2024,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark & In-house Laboratory)",
+  "hsCodes": [
+    "2201.90.90"
+  ],
+  "scope": "Prescribes the requirements and methods of sampling and testing for packaged drinking water filled in hermetically sealed food-grade containers of various capacities (pouches, bottles, jars, cans).",
+  "scopeHi": "यह मानक सीलबंद बोतलों और जार में बेचे जाने वाले पैकेज्ड पीने के पानी के भौतिक, रासायनिक और माइक्रोबायोलॉजिकल सुरक्षा मानकों को निर्धारित करता है।",
+  "keyTests": [
+    {
+      "name": "Microbiological Sterility Testing",
+      "description": "Tests for Total Coliforms, E. coli, Pseudomonas aeruginosa, Yeast & Mould.",
+      "parameterLimit": "Zero (Absent) per 250 ml sample for all pathogen classes"
+    },
+    {
+      "name": "Total Dissolved Solids (TDS)",
+      "description": "Measures dissolved mineral content post-filtration and mineralization.",
+      "parameterLimit": "75 mg/l to 500 mg/l"
+    },
+    {
+      "name": "Pesticide Residues (Individual & Total)",
+      "description": "GC-MS testing for organochlorine, organophosphorus pesticides.",
+      "parameterLimit": "Individual pesticide < 0.0001 mg/l (0.1 ppb); Total < 0.0005 mg/l (0.5 ppb)"
+    }
+  ],
+  "markingRequirements": "Container must clearly display the ISI Mark, CM/L License Number, PACKAGED DRINKING WATER in bold caps, FSSAI License Number, Date of packaging, Best Before Date, Batch/Lot number, and Net Quantity.",
+  "consumerTips": [
+    "Always check for the holographic/tamper-evident seal and valid ISI mark before buying water bottles.",
+    "Check that the label states Packaged Drinking Water with an active FSSAI and BIS CM/L license number."
+  ],
+  "industryGuidelines": [
+    "Every bottling facility must have an in-house NABL-aligned laboratory with a qualified microbiologist and chemist."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 3.2",
+      "title": "Permissible Processing Treatments",
+      "content": "Water shall be derived from potable surface/ground source and treated by filtration, demineralization/reverse osmosis, and disinfected via ozonation or UV irradiation.",
+      "contentHi": "पानी को आरओ, ओजोनेशन और यूवी विकिरण जैसी स्वीकृत वैज्ञानिक प्रक्रियाओं से रोगाणुमुक्त और शुद्ध किया जाना चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

@@ -1,0 +1,54 @@
+{
+  "id": "IS-9873-Part-1-2019",
+  "isNumber": "IS 9873 (Part 1):2019",
+  "title": "Safety of Toys — Part 1: Safety Aspects Related to Mechanical and Physical Properties",
+  "titleHi": "खिलौनों की सुरक्षा — भाग 1: यांत्रिक और भौतिक गुणों से संबंधित सुरक्षा पहलू",
+  "category": "Toys & Children Products",
+  "sector": "Consumer Safety",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Toys (Quality Control) Order, 2020 (Ministry of Commerce & Industry)",
+  "year": 2019,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory Factory Audit & ISI Mark)",
+  "hsCodes": [
+    "9503.00.10",
+    "9503.00.20",
+    "9503.00.30",
+    "9503.00.90"
+  ],
+  "scope": "Applies to all toys intended for use by children under 14 years of age. Specifies criteria for physical features including sharp edges, points, small parts (choking hazard for under 36 months), cords, and impact resistance.",
+  "scopeHi": "यह मानक 14 वर्ष से कम उम्र के बच्चों के लिए बने सभी खिलौनों पर लागू होता है और नुकीले किनारों, छोटे हिस्सों (दम घुटने का खतरा) और मजबूती से संबंधित सुरक्षा मानदंड तय करता है।",
+  "keyTests": [
+    {
+      "name": "Small Parts Cylinder Choking Test",
+      "description": "Components must not fit entirely inside standard test cylinder (31.7 mm dia).",
+      "parameterLimit": "No detachable small parts for toys intended for children under 3 years"
+    },
+    {
+      "name": "Sharp Edge & Sharp Point Test",
+      "description": "Assesses accessible edges using mandrels.",
+      "parameterLimit": "Zero hazardous sharp edges or sharp points"
+    },
+    {
+      "name": "Drop and Impact Test",
+      "description": "Toys dropped 5 times from 850 mm onto concrete slab.",
+      "parameterLimit": "Must not crack, shatter into sharp splinters, or release small parts"
+    }
+  ],
+  "markingRequirements": "Toys and packaging must display the ISI mark, CM/L number, manufacturer identity, age grading, warning symbols, and maximum battery specifications.",
+  "consumerTips": [
+    "Every toy sold in Indian retail or online must have the ISI mark; importing or selling non-ISI toys is illegal in India.",
+    "Check age recommendation labels carefully, especially for toys containing button batteries or small magnets."
+  ],
+  "industryGuidelines": [
+    "Chemical compliance under IS 9873 (Part 3) for heavy metal migration is mandatory alongside Part 1."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 4.4",
+      "title": "Small Parts for Children Under 36 Months",
+      "content": "Toys intended for children under 36 months of age, and their removable components, shall not fit entirely inside the small parts cylinder.",
+      "contentHi": "36 महीने से कम उम्र के बच्चों के खिलौने टेस्ट सिलेंडर में पूरी तरह नहीं समाने चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

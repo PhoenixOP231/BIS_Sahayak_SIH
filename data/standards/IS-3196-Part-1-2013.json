@@ -1,0 +1,47 @@
+{
+  "id": "IS-3196-Part-1-2013",
+  "isNumber": "IS 3196 (Part 1):2013",
+  "title": "Welded Low Carbon Steel Cylinders for Low Pressure Liquefiable Gases — Part 1: Cylinders for LPG",
+  "titleHi": "कम दबाव वाले द्रवीकृत गैसों के लिए वेल्डेड कम कार्बन स्टील सिलेंडर — भाग 1: एलपीजी सिलेंडर",
+  "category": "Cylinders & Pressure Vessels",
+  "sector": "Heavy Metallurgy & Energy",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Gas Cylinders Rules, 2016 (PESO) & Mandatory BIS Order",
+  "year": 2013,
+  "conformityAssessmentScheme": "Scheme-I (PESO & ISI Joint Statutory Licensing)",
+  "hsCodes": [
+    "7311.00.10",
+    "7311.00.90"
+  ],
+  "scope": "Specifies requirements for design, materials, manufacturing process, heat treatment, testing and inspection of refillable welded low carbon steel cylinders of capacity up to 150 liters water capacity for liquefied petroleum gases (LPG).",
+  "scopeHi": "यह मानक एलपीजी गैस (घरेलू 14.2 किग्रा और व्यावसायिक 19 किग्रा) के लिए 150 लीटर तक जल क्षमता वाले वेल्डेड लो-कार्बन स्टील सिलेंडरों के निर्माण और सुरक्षा परीक्षण को निर्धारित करता है।",
+  "keyTests": [
+    {
+      "name": "Hydrostatic Stretch Test",
+      "description": "Measures permanent volumetric expansion under test pressure.",
+      "parameterLimit": "Permanent expansion must not exceed 10% of total expansion at 2.5 MPa (25 bar)"
+    },
+    {
+      "name": "Hydrostatic Burst Pressure Test",
+      "description": "Determines minimum pressure required to rupture the cylinder shell.",
+      "parameterLimit": "Must not burst below 4.5 MPa (45 bar) and failure must occur longitudinally without fragmentation"
+    }
+  ],
+  "markingRequirements": "Permanent stamping on the stay plate/collar: IS 3196-1, ISI mark, CM/L number, PESO approval mark, Tare weight (kg), Water capacity (L), Test pressure (MPa), Serial number, manufacturer symbol, and Quarter/Year of next statutory re-test.",
+  "consumerTips": [
+    "Check the three stay plates on your LPG cylinder for the clear ISI mark and PESO certification stamp.",
+    "Inspect the statutory test expiry date painted on the inner ring (e.g., A-28 means First Quarter of 2028). Never accept an expired cylinder."
+  ],
+  "industryGuidelines": [
+    "Micro-alloyed low carbon cylinder steel must strictly conform to IS 6240."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 7.1",
+      "title": "Shell Thickness and Design Stress",
+      "content": "The minimum wall thickness of the cylindrical shell shall be calculated such that calculated stress at test pressure does not exceed 80% of minimum guaranteed yield strength.",
+      "contentHi": "सिलेंडर की न्यूनतम दीवार की मोटाई इस प्रकार रखी जाएगी कि परीक्षण दबाव पर प्रतिबल मूल धातु की उपज शक्ति के 80% से अधिक न हो।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

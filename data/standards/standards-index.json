@@ -1,0 +1,1030 @@
+[
+  {
+    "id": "IS-10500-2012",
+    "isNumber": "IS 10500:2012",
+    "title": "Drinking Water — Specification",
+    "titleHi": "पीने का पानी — विशिष्‍टि",
+    "category": "Food & Water Safety",
+    "sector": "Public Health & Municipal Engineering",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Uniform Water Quality Standards across Municipal & Jal Jeevan Mission utilities",
+    "year": 2012,
+    "conformityAssessmentScheme": "National Benchmark Standard",
+    "hsCodes": [
+      "2201.10.10"
+    ],
+    "scope": "Prescribes the acceptable and permissible requirements and limits for essential characteristics and desirable parameters of drinking water supplied through municipal piped networks and rural water supply schemes.",
+    "scopeHi": "यह मानक नगर पालिकाओं और जल जीवन मिशन द्वारा आपूर्ति किए जाने वाले नल के पीने के पानी की गुणवत्ता और शुद्धता के मापदंड तय करता है।",
+    "keyTests": [
+      {
+        "name": "pH Value",
+        "description": "Acidity/alkalinity measurement.",
+        "parameterLimit": "Acceptable: 6.5 to 8.5"
+      },
+      {
+        "name": "Total Dissolved Solids (TDS)",
+        "description": "Soluble minerals.",
+        "parameterLimit": "Acceptable: 500 mg/l max (Permissible: 2000 mg/l)"
+      },
+      {
+        "name": "Fluoride and Nitrate",
+        "description": "Ion chromatography test.",
+        "parameterLimit": "Fluoride: 1.0 mg/l max; Nitrate: 45 mg/l max"
+      }
+    ],
+    "markingRequirements": "Used for laboratory compliance certification reports and municipal water audits.",
+    "consumerTips": [
+      "If your tap water TDS is below 300 mg/L with normal pH, simple UV/UF filtration is adequate without heavy RO water waste."
+    ],
+    "industryGuidelines": [
+      "Baseline standard for water treatment plants across Jal Jeevan Mission."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 4.1",
+        "title": "Bacteriological Quality",
+        "content": "Water shall not contain E. coli or thermotolerant coliform bacteria in any 100 ml sample.",
+        "contentHi": "किसी भी 100 मिलीलीटर नमूने में ई. कोलाई बैक्टीरिया नहीं होना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-12254-2021",
+    "isNumber": "IS 12254:2021",
+    "title": "Polyvinyl Chloride (PVC) Industrial Boots — Specification",
+    "titleHi": "पॉलीविनाइल क्लोराइड (पीवीसी) औद्योगिक बूट — विशिष्‍टि",
+    "category": "Personal Protective Equipment",
+    "sector": "Industrial Safety & Chemical Processing",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Footwear (Quality Control) Order, 2020",
+    "year": 2021,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+    "hsCodes": [
+      "6401.92.00"
+    ],
+    "scope": "Covers requirements for waterproof molded PVC industrial boots intended for protection against water, acids, alkalis, oil, and mud in mines and chemical plants.",
+    "scopeHi": "यह खदानों और रासायनिक संयंत्रों में उपयोग किए जाने वाले वाटरप्रूफ और केमिकल-रेसिस्टेंट पीवीसी औद्योगिक जूतों के मानक तय करता है।",
+    "keyTests": [
+      {
+        "name": "Flexing Resistance",
+        "description": "Ross flexing machine 150,000 cycles.",
+        "parameterLimit": "Zero crack growth > 4 mm"
+      },
+      {
+        "name": "Chemical Resistance",
+        "description": "Acid & Alkali immersion 48 hrs.",
+        "parameterLimit": "Tensile strength retention ≥ 80%"
+      }
+    ],
+    "markingRequirements": "Molded on upper calf: IS 12254, ISI mark, CM/L number, Boot size.",
+    "consumerTips": [
+      "Ensure industrial gumboots have the authentic ISI stamp on the upper rim."
+    ],
+    "industryGuidelines": [
+      "No banned phthalate plasticizers or low-grade scrap permitted."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 4.2",
+        "title": "Waterproof Integrity",
+        "content": "Tested for water-tightness under 15 kPa air pressure while immersed.",
+        "contentHi": "पानी में डुबोने पर कोई बुलबुला नहीं निकलना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-1293-2019",
+    "isNumber": "IS 1293:2019",
+    "title": "Plugs and Socket-Outlets of Rated Voltage up to 250 V and Current up to 16 A — Specification",
+    "titleHi": "250 V तक के वोल्टेज और 16 A तक के करंट के लिए प्लग और सॉकेट — विशिष्‍टि",
+    "category": "Electrical & Electronics",
+    "sector": "Electrotechnical",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Plugs and Socket-Outlets (Quality Control) Order, 2020",
+    "year": 2019,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+    "hsCodes": [
+      "8536.69.10",
+      "8536.69.90"
+    ],
+    "scope": "Covers plugs and fixed or portable socket-outlets for AC only, rated from 2.5 A up to 16 A / 250 V for household and commercial electrical installations.",
+    "scopeHi": "यह घरों और कार्यालयों में प्रयुक्त होने वाले 6A और 16A 3-पिन प्लग और सॉकेट के आयाम, इन्सुलेशन और सुरक्षा शटर मानकों को नियंत्रित करता है।",
+    "keyTests": [
+      {
+        "name": "Safety Shutter Engagement Test",
+        "description": "Ensures foreign objects cannot enter live contacts.",
+        "parameterLimit": "1 mm probe must not touch live parts under 20 N force"
+      },
+      {
+        "name": "Temperature Rise Test",
+        "description": "Tested at 1.25 times rated current for 1 hour.",
+        "parameterLimit": "Terminal temp rise ≤ 45 K"
+      }
+    ],
+    "markingRequirements": "Indelibly stamped: IS 1293, ISI logo, CM/L number, Rated Voltage (250V), Rated Current (6A or 16A), Terminal markings (L, N, E).",
+    "consumerTips": [
+      "Never use ungrounded 2-pin plugs on metal-cased appliances; use ISI 3-pin plugs."
+    ],
+    "industryGuidelines": [
+      "Brass terminals must pass mercurous nitrate stress corrosion test."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 9.1",
+        "title": "Live Part Contact Protection",
+        "content": "Sockets shall prevent access to live parts when a plug is withdrawn.",
+        "contentHi": "प्लग निकालने पर सॉकेट के शटर स्वतः बंद होने चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-14543-2024",
+    "isNumber": "IS 14543:2024",
+    "title": "Packaged Drinking Water (Other than Packaged Natural Mineral Water) — Specification",
+    "titleHi": "पैकेज्ड पेयजल (प्राकृतिक खनिज जल के अलावा) — विशिष्‍टि",
+    "category": "Food & Water Safety",
+    "sector": "Food Safety & Public Health",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Food Safety and Standards (Packaging) Regulations & Mandatory BIS Certification",
+    "year": 2024,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark & In-house Laboratory)",
+    "hsCodes": [
+      "2201.90.90"
+    ],
+    "scope": "Prescribes the requirements and methods of sampling and testing for packaged drinking water filled in hermetically sealed food-grade containers of various capacities (pouches, bottles, jars, cans).",
+    "scopeHi": "यह मानक सीलबंद बोतलों और जार में बेचे जाने वाले पैकेज्ड पीने के पानी के भौतिक, रासायनिक और माइक्रोबायोलॉजिकल सुरक्षा मानकों को निर्धारित करता है।",
+    "keyTests": [
+      {
+        "name": "Microbiological Sterility Testing",
+        "description": "Tests for Total Coliforms, E. coli, Pseudomonas aeruginosa, Yeast & Mould.",
+        "parameterLimit": "Zero (Absent) per 250 ml sample for all pathogen classes"
+      },
+      {
+        "name": "Total Dissolved Solids (TDS)",
+        "description": "Measures dissolved mineral content post-filtration and mineralization.",
+        "parameterLimit": "75 mg/l to 500 mg/l"
+      },
+      {
+        "name": "Pesticide Residues (Individual & Total)",
+        "description": "GC-MS testing for organochlorine, organophosphorus pesticides.",
+        "parameterLimit": "Individual pesticide < 0.0001 mg/l (0.1 ppb); Total < 0.0005 mg/l (0.5 ppb)"
+      }
+    ],
+    "markingRequirements": "Container must clearly display the ISI Mark, CM/L License Number, PACKAGED DRINKING WATER in bold caps, FSSAI License Number, Date of packaging, Best Before Date, Batch/Lot number, and Net Quantity.",
+    "consumerTips": [
+      "Always check for the holographic/tamper-evident seal and valid ISI mark before buying water bottles.",
+      "Check that the label states Packaged Drinking Water with an active FSSAI and BIS CM/L license number."
+    ],
+    "industryGuidelines": [
+      "Every bottling facility must have an in-house NABL-aligned laboratory with a qualified microbiologist and chemist."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 3.2",
+        "title": "Permissible Processing Treatments",
+        "content": "Water shall be derived from potable surface/ground source and treated by filtration, demineralization/reverse osmosis, and disinfected via ozonation or UV irradiation.",
+        "contentHi": "पानी को आरओ, ओजोनेशन और यूवी विकिरण जैसी स्वीकृत वैज्ञानिक प्रक्रियाओं से रोगाणुमुक्त और शुद्ध किया जाना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15298-Part-2-2016",
+    "isNumber": "IS 15298 (Part 2):2016",
+    "title": "Personal Protective Equipment — Part 2: Safety Footwear",
+    "titleHi": "व्यक्तिगत सुरक्षा उपकरण — भाग 2: सुरक्षा जूते",
+    "category": "Personal Protective Equipment",
+    "sector": "Industrial Safety & Footwear",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Footwear made from Leather and other materials (Quality Control) Order, 2020",
+    "year": 2016,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark)",
+    "hsCodes": [
+      "6403.40.00",
+      "6402.99.10"
+    ],
+    "scope": "Specifies basic and additional requirements for safety footwear used for commercial and industrial workplaces, equipped with safety toecaps.",
+    "scopeHi": "यह औद्योगिक कार्यस्थलों में उपयोग किए जाने वाले सुरक्षा जूतों में स्टील टो-कैप, सोल फिसलन और पंचर प्रतिरोध के मानकों को तय करता है।",
+    "keyTests": [
+      {
+        "name": "Toecap Impact Resistance",
+        "description": "200 Joules impact energy drop.",
+        "parameterLimit": "Clearance beneath toecap ≥ 14 mm"
+      },
+      {
+        "name": "Penetration Resistance of Sole",
+        "description": "1100 N puncture force.",
+        "parameterLimit": "Spike must not penetrate insole barrier"
+      }
+    ],
+    "markingRequirements": "IS 15298 (Part 2), ISI mark, CM/L number, Shoe size, Category (S1, S2, S3, S1P).",
+    "consumerTips": [
+      "S1P or S3 safety shoes include both 200J steel toe cap and steel anti-nail penetration midsole."
+    ],
+    "industryGuidelines": [
+      "Steel toecaps must comply with corrosion resistance testing."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.3.2",
+        "title": "Impact Resistance",
+        "content": "Footwear tested at impact energy of 200 J shall retain clearance beneath toecap ≥ 14 mm.",
+        "contentHi": "200 जूल प्रभाव ऊर्जा पर परीक्षण में टो-कैप के नीचे निकासी 14 मिमी से कम नहीं होनी चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15477-2019",
+    "isNumber": "IS 15477:2019",
+    "title": "Adhesives for Use with Ceramic, Mosaic and Stone Tiles — Specification",
+    "titleHi": "सिरेमिक, मोज़ेक और पत्थर की टाइलों के लिए चिपकने वाले पदार्थ — विशिष्‍टि",
+    "category": "Construction & Infrastructure",
+    "sector": "Building Materials & Adhesives",
+    "status": "Voluntary",
+    "year": 2019,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+    "hsCodes": [
+      "3506.91.90"
+    ],
+    "scope": "Covers polymer-modified cementitious adhesives for fixing ceramic, vitrified, mosaic, and natural stone tiles on interior and exterior walls and floors.",
+    "scopeHi": "यह फर्श और दीवारों पर टाइल्स व पत्थरों को चिपकाने के लिए सीमेंट और पॉलिमर आधारित टाइल एडहेसिव के चिपकाने के सामर्थ्य को नियंत्रित करता है।",
+    "keyTests": [
+      {
+        "name": "Tensile Adhesion Strength",
+        "description": "Pull-off adhesion on vitrified tiles.",
+        "parameterLimit": "Type 2: ≥ 1.0 N/mm²; Type 4: ≥ 1.5 N/mm²"
+      },
+      {
+        "name": "Slip Resistance",
+        "description": "Vertical cladding slippage.",
+        "parameterLimit": "Slip ≤ 0.5 mm"
+      }
+    ],
+    "markingRequirements": "Bag markings: IS 15477, Adhesive Type (e.g. Type 2), Net weight, Batch number.",
+    "consumerTips": [
+      "For large vitrified tiles or wall cladding, regular cement slurry fails; use Type 2 or Type 3 ISI tile adhesive."
+    ],
+    "industryGuidelines": [
+      "Polymer redispersible powder content must meet flexibility class S1/S2."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.1",
+        "title": "Classification",
+        "content": "Adhesives classified Type 1 to Type 5 based on bond strength.",
+        "contentHi": "टाइल एडहेसिव को ताकत के अनुसार टाइप 1 से 5 तक वर्गीकृत किया गया है।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15644-2006",
+    "isNumber": "IS 15644:2006",
+    "title": "Safety of Electric Toys",
+    "titleHi": "विद्युत खिलौनों की सुरक्षा",
+    "category": "Toys & Children Products",
+    "sector": "Consumer Safety & Electrotechnical",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Toys (Quality Control) Order, 2020",
+    "year": 2006,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+    "hsCodes": [
+      "9503.00.30"
+    ],
+    "scope": "Covers the safety requirements for electric toys operating from batteries, transformers, or solar cells with rated supply voltage not exceeding 24 V DC/AC.",
+    "scopeHi": "यह 24V से कम वोल्टेज पर बैटरी या अडैप्टर से चलने वाले इलेक्ट्रॉनिक और रिमोट कंट्रोल खिलौनों की सुरक्षा आवश्यकताओं को कवर करता है।",
+    "keyTests": [
+      {
+        "name": "Operating Voltage Limit Test",
+        "description": "Verifies toy cannot be connected to supplies higher than 24V extra-low voltage.",
+        "parameterLimit": "Nominal voltage ≤ 24 V"
+      },
+      {
+        "name": "Thermal Heating & Battery Compartment Test",
+        "description": "Toy operated under locked rotor/short-circuit conditions.",
+        "parameterLimit": "Battery surface temp rise < 45K; Casing < 25K"
+      }
+    ],
+    "markingRequirements": "ISI mark, CM/L number, battery type/polarity indication, rated voltage.",
+    "consumerTips": [
+      "Never mix old and new batteries in electric toys.",
+      "Check that battery compartments require a tool to open."
+    ],
+    "industryGuidelines": [
+      "Must comply concurrently with IS 9873 Parts 1, 2, 3 and IS 15644."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 7.1",
+        "title": "Supply Voltage Constraints",
+        "content": "Electric toys shall not be powered by voltages exceeding 24 V DC or AC RMS.",
+        "contentHi": "इलेक्ट्रिक खिलौनों को 24 V DC या AC से अधिक वोल्टेज पर नहीं चलाया जाएगा।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15652-2006",
+    "isNumber": "IS 15652:2006",
+    "title": "Insulating Mats for Electrical Purposes — Specification",
+    "titleHi": "विद्युत उद्देश्यों के लिए इंसुलेटिंग मैट — विशिष्‍टि",
+    "category": "Electrical & Electronics",
+    "sector": "Electrotechnical & Workplace Safety",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Electrical Safety Equipment Quality Control Order",
+    "year": 2006,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark)",
+    "hsCodes": [
+      "3918.10.00"
+    ],
+    "scope": "Covers elastomer/polymer insulating floor mats used near high voltage electrical switchboards for protection against electric shock up to 33 kV.",
+    "scopeHi": "यह सबस्टेशनों और हाई-वोल्टेज बिजली के पैनलों के पास काम करने वाले कर्मचारियों को बिजली के झटके से बचाने वाली इंसुलेटिंग मैट के मानक तय करता है।",
+    "keyTests": [
+      {
+        "name": "Dielectric Strength & Proof Voltage",
+        "description": "Proof voltage for 1 minute.",
+        "parameterLimit": "Class A (3.3kV): 10kV; Class B (11kV): 22kV; Class C (33kV): 36kV"
+      },
+      {
+        "name": "Leakage Current Test",
+        "description": "Current under maximum voltage.",
+        "parameterLimit": "Leakage < 10 µA/m²"
+      }
+    ],
+    "markingRequirements": "IS 15652, ISI mark, CM/L number, Voltage Class (A/B/C), Working Voltage.",
+    "consumerTips": [
+      "Obsolete rubber mats under IS 5424 are banned; use synthetic elastomer mats with IS 15652."
+    ],
+    "industryGuidelines": [
+      "100% dielectric proof testing at factory before dispatch."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.1",
+        "title": "Voltage Classification",
+        "content": "Mats classified into Class A (3.3kV), Class B (11kV), Class C (33kV).",
+        "contentHi": "मैट्स को क्लास A, B और C में वर्गीकृत किया गया है।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15700-2018",
+    "isNumber": "IS 15700:2018",
+    "title": "Quality Management Systems — Requirements for Service Quality by Public Service Organizations (Sevottam)",
+    "titleHi": "गुणवत्ता प्रबंधन प्रणाली — सार्वजनिक सेवा संगठनों द्वारा सेवा गुणवत्ता की आवश्यकताएं (सेवोत्तम)",
+    "category": "Management Systems & Services",
+    "sector": "Public Administration & Citizen Services",
+    "status": "Voluntary",
+    "year": 2018,
+    "conformityAssessmentScheme": "Management Systems Certification Scheme (MSCS)",
+    "hsCodes": [
+      "9983.11.00"
+    ],
+    "scope": "Specifies requirements for a quality management system where a public service organization needs to demonstrate citizen-centric service delivery.",
+    "scopeHi": "यह सरकारी विभागों और सार्वजनिक संगठनों में पारदर्शी नागरिक चार्टर और लोक शिकायत निवारण प्रणाली (सेवोत्तम मॉडल) के मानक तय करता है।",
+    "keyTests": [
+      {
+        "name": "Citizen Charter Implementation Audit",
+        "description": "Verifies defined service delivery timeframes.",
+        "parameterLimit": "100% published charter commitments with KPIs"
+      },
+      {
+        "name": "Public Grievance Redressal Audit",
+        "description": "Grievance receipt and escalation timelines.",
+        "parameterLimit": "Timebound resolution within 30 days"
+      }
+    ],
+    "markingRequirements": "BIS Sevottam Certificate display on departmental portals.",
+    "consumerTips": [
+      "Sevottam charters bind government offices to deliver citizen services within defined days."
+    ],
+    "industryGuidelines": [
+      "Applies to government departments and public utilities."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.2",
+        "title": "Citizen Charter",
+        "content": "Public organization shall publish a Citizen Charter detailing service standards and grievance channels.",
+        "contentHi": "सार्वजनिक सेवा संगठन सेवा मानकों और शिकायत निवारण का नागरिक चार्टर प्रकाशित करेगा।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15885-Part-2-Sec-13-2012",
+    "isNumber": "IS 15885 (Part 2/Sec 13):2012",
+    "title": "Safety of Lamp Controlgear — Electronic Controlgear for LED Modules (LED Drivers)",
+    "titleHi": "लैंप कंट्रोलगियर की सुरक्षा — एलईडी ड्राइवर",
+    "category": "Electrical & Electronics",
+    "sector": "Electronics & IT Goods (CRS)",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Electronics and Information Technology Goods (Compulsory Registration) Order (MeitY)",
+    "year": 2012,
+    "conformityAssessmentScheme": "CRS (Compulsory Registration Scheme - R-XXXXXXXX)",
+    "hsCodes": [
+      "8504.40.90"
+    ],
+    "scope": "Covers safety requirements for electronic controlgear for DC supplies up to 250 V or AC supplies up to 1000 V for constant voltage or constant current LED modules.",
+    "scopeHi": "यह एलईडी बल्ब और स्ट्रीट लाइट्स के लिए एलईडी ड्राइवरों के बीआईएस पंजीकरण को अनिवार्य करता है।",
+    "keyTests": [
+      {
+        "name": "Surge Protection Immunity Test",
+        "description": "High-voltage surge testing.",
+        "parameterLimit": "Withstand min 2.5 kV (indoor) or 4 kV (outdoor)"
+      },
+      {
+        "name": "Total Harmonic Distortion (THD)",
+        "description": "Harmonics drawn from mains.",
+        "parameterLimit": "THD ≤ 10% to 25%"
+      }
+    ],
+    "markingRequirements": "BIS CRS Standard Mark with R-XXXXXXXX registration number.",
+    "consumerTips": [
+      "Check for R-XXXXXXXX registration mark on LED power supplies to prevent surge fire hazards."
+    ],
+    "industryGuidelines": [
+      "Evaluated at BIS recognized test laboratory under MeitY scheme."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 14.1",
+        "title": "Fault Conditions",
+        "content": "Controlgear shall remain safe during short circuit or open circuit conditions.",
+        "contentHi": "कंट्रोलगियर शॉर्ट-सर्किट या लोड कटने पर सुरक्षित रहना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-16018-2021",
+    "isNumber": "IS 16018:2021",
+    "title": "Helmets for Riders of Two-Wheeled Motor Vehicles — Specification",
+    "titleHi": "दोपहिया मोटर वाहन सवारों के लिए हेलमेट — विशिष्‍टि",
+    "category": "Automotive & Road Safety",
+    "sector": "Transport & Public Safety",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Helmet for Two-Wheeler Riders (Quality Control) Order, 2020 (MoRTH)",
+    "year": 2021,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark)",
+    "hsCodes": [
+      "6506.10.00"
+    ],
+    "scope": "Prescribes requirements for protective helmets for everyday use by drivers and passengers of two-wheeled motor vehicles to safeguard against head injuries.",
+    "scopeHi": "यह दोपहिया वाहन चालकों के लिए सुरक्षा हेलमेट के प्रभाव अवशोषण, वजन सीमा और स्ट्रैप मजबूती के मानकों को अनिवार्य करता है।",
+    "keyTests": [
+      {
+        "name": "Impact Attenuation Test",
+        "description": "Helmet dropped onto steel anvils at 7.5 m/s.",
+        "parameterLimit": "Peak head acceleration ≤ 275 g"
+      },
+      {
+        "name": "Retention System Dynamic Test",
+        "description": "Drop-weight loading on chin strap.",
+        "parameterLimit": "Dynamic extension ≤ 35 mm; Residual ≤ 25 mm"
+      }
+    ],
+    "markingRequirements": "Sticker on shell & lining: IS 16018 ISI mark, CM/L number, Helmet size, Weight in grams (max 1.2 kg), Month/Year.",
+    "consumerTips": [
+      "Wearing a non-ISI helmet is illegal in India under the Motor Vehicles Act.",
+      "BIS caps helmet weight at 1.2 kg to prevent neck injury."
+    ],
+    "industryGuidelines": [
+      "Expanded Polystyrene (EPS) density optimized for multi-impact progressive crush absorption."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.1",
+        "title": "Mass of Helmets",
+        "content": "Maximum mass of complete helmet shall not exceed 1.20 kg (1200 grams).",
+        "contentHi": "हेलमेट का कुल वजन 1.20 किलोग्राम (1200 ग्राम) से अधिक नहीं होना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-16240-2023",
+    "isNumber": "IS 16240:2023",
+    "title": "Reverse Osmosis (RO) Based Point-of-Use Water Treatment Systems — Specification",
+    "titleHi": "रिवर्स ऑस्मोसिस (आरओ) आधारित वाटर प्यूरीफायर सिस्टम — विशिष्‍टि",
+    "category": "Food & Water Safety",
+    "sector": "Consumer Goods & Environmental Tech",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Water Purification Systems (Quality Control) Order, 2023 (MoEFCC)",
+    "year": 2023,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+    "hsCodes": [
+      "8421.21.90"
+    ],
+    "scope": "Prescribes requirements for residential point-of-use RO water purifiers, mandating minimum water recovery rates, TDS reduction efficiency, and total microbiological safety.",
+    "scopeHi": "यह घरेलू आरओ वाटर प्यूरिफायर में पानी की बर्बादी रोकने (न्यूनतम 40%-60% रिकवरी) और रोगाणु शुद्धिकरण के मानकों को अनिवार्य करता है।",
+    "keyTests": [
+      {
+        "name": "Water Recovery Efficiency Test",
+        "description": "Ratio of permeate pure water to feed.",
+        "parameterLimit": "Minimum 40% recovery"
+      },
+      {
+        "name": "TDS Reduction Percentage",
+        "description": "Efficiency across hard water feed.",
+        "parameterLimit": "Minimum 85% TDS reduction"
+      }
+    ],
+    "markingRequirements": "ISI mark with CM/L number, declared water recovery percentage, input TDS range.",
+    "consumerTips": [
+      "Look for IS 16240 ISI mark to ensure your RO purifier does not excessively waste water."
+    ],
+    "industryGuidelines": [
+      "RO reject water discharge must be labeled with recommended recycling uses."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 6.1",
+        "title": "Water Recovery Ratio",
+        "content": "RO systems shall achieve minimum product water recovery ≥ 40%.",
+        "contentHi": "आरओ प्रणालियों को कम से कम 40% जल रिकवरी दक्षता हासिल करनी होगी।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-1786-2008",
+    "isNumber": "IS 1786:2008",
+    "title": "High Strength Deformed Steel Bars and Wires for Concrete Reinforcement — Specification (TMT Rebars)",
+    "titleHi": "कंक्रीट सुदृढ़ीकरण के लिए उच्च शक्ति वाले विकृत स्टील बार और तार (टीएमटी सरिया)",
+    "category": "Construction & Infrastructure",
+    "sector": "Civil Engineering & Metallurgy",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Steel and Steel Products (Quality Control) Order, 2020 (Ministry of Steel)",
+    "year": 2008,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+    "hsCodes": [
+      "7214.20.90",
+      "7213.10.90"
+    ],
+    "scope": "Covers the requirements of deformed steel bars and wires for use as reinforcement in concrete in grades Fe 415, Fe 415D, Fe 500, Fe 500D, Fe 550, Fe 550D produced via Thermo-Mechanical Treatment (TMT).",
+    "scopeHi": "यह मकान और पुल निर्माण में प्रयुक्त होने वाले टीएमटी सरिया (Fe 415D, Fe 500D, Fe 550D) की तन्यता, मजबूती और रासायनिक संरचना को नियंत्रित करता है।",
+    "keyTests": [
+      {
+        "name": "0.2% Proof Stress / Yield Stress",
+        "description": "Universal Testing Machine (UTM) tensile test.",
+        "parameterLimit": "Fe 500D: Min 500.0 N/mm²; Fe 550D: Min 550.0 N/mm²"
+      },
+      {
+        "name": "Tensile Strength to Yield Strength Ratio (TS/YS)",
+        "description": "Earthquake resistance metric.",
+        "parameterLimit": "Fe 500D: TS/YS ≥ 1.10; Fe 550D: TS/YS ≥ 1.08"
+      },
+      {
+        "name": "Percentage Elongation at Fracture",
+        "description": "Ductility under seismic stress.",
+        "parameterLimit": "Fe 500D: Min 16.0%; Fe 550D: Min 14.5%"
+      },
+      {
+        "name": "Bend and Re-bend Test",
+        "description": "Bar bent through 135° over mandrel, aged in boiling water (100°C for 30 min), then bent back through 157.5°.",
+        "parameterLimit": "No transverse crack or rupture visible on outer curved surface"
+      }
+    ],
+    "markingRequirements": "Every TMT bar must have brand name, Grade (e.g., Fe 500D), Size (e.g., 16mm), and ISI Mark rolled/embossed at regular intervals not exceeding 1.5m.",
+    "consumerTips": [
+      "For home construction in seismic zones, always insist on Fe 500D or Fe 550D grade TMT bars with D (Ductile)."
+    ],
+    "industryGuidelines": [
+      "Strict restriction on re-rolling scrap without primary ladle refining and TMT cooling control."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 8.1",
+        "title": "Mechanical Properties",
+        "content": "Tensile properties of deformed bars shall conform to Table 3. Total elongation at maximum force (Agst) shall not be less than 5% for D grades.",
+        "contentHi": "D ग्रेड के लिए अधिकतम बल पर बढ़ाव 5% से कम नहीं होना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-2347-2017",
+    "isNumber": "IS 2347:2017",
+    "title": "Domestic Pressure Cookers — Specification",
+    "titleHi": "घरेलू प्रेशर कुकर — विशिष्‍टि",
+    "category": "Kitchen & Home Appliances",
+    "sector": "Mechanical Engineering",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Domestic Pressure Cooker (Quality Control) Order, 2020 (DPIIT)",
+    "year": 2017,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+    "hsCodes": [
+      "7615.10.11",
+      "7323.93.00"
+    ],
+    "scope": "Specifies requirements for domestic pressure cookers made of aluminum alloy or stainless steel with capacities from 1L to 15L, operating pressures 0.5 to 1.1 bar.",
+    "scopeHi": "यह मानक 1 लीटर से 15 लीटर क्षमता वाले एल्युमिनियम मिश्र धातु या स्टेनलेस स्टील से बने घरेलू प्रेशर कुकरों के लिए सुरक्षा और गुणवत्ता आवश्यकताओं को निर्दिष्ट करता है।",
+    "keyTests": [
+      {
+        "name": "Operating Pressure Test",
+        "description": "Verifies cooker maintains nominal operating pressure without steam leakage.",
+        "parameterLimit": "Within ±10% of declared operating pressure (typically 1.0 kg/cm²)"
+      },
+      {
+        "name": "Proof Pressure Test",
+        "description": "Body and lid subjected to internal hydrostatic pressure.",
+        "parameterLimit": "Must withstand 2.5 times operating pressure without permanent distortion."
+      },
+      {
+        "name": "Bursting Pressure Test",
+        "description": "Container withstands extreme pressure before rupture.",
+        "parameterLimit": "Shall not burst at less than 4.5 times normal working pressure."
+      },
+      {
+        "name": "Safety Valve Operating Test",
+        "description": "Safety fuse release under excess pressure.",
+        "parameterLimit": "Releases pressure between 1.5 to 2.2 times operating pressure."
+      },
+      {
+        "name": "Gasket Release Mechanism",
+        "description": "Controlled release of excess steam downwards away from user.",
+        "parameterLimit": "Operates if vent tube and safety valve are blocked."
+      }
+    ],
+    "markingRequirements": "Each pressure cooker must bear the ISI Standard Mark along with License Number (CM/L-XXXXXXXXXX), manufacturer name, capacity in liters, working pressure, and material grade.",
+    "consumerTips": [
+      "Always verify the 7 or 8-digit CM/L license number below the ISI logo using the BIS Care App.",
+      "Check that safety valve is metallic fusible alloy certified and gasket is food-grade silicone.",
+      "Never buy pressure cookers without the ISI Mark - it is legally mandatory in India."
+    ],
+    "industryGuidelines": [
+      "Factory audit required for Scheme-I licensing including raw material chemical testing (IS 21/IS 6911).",
+      "Routine batch testing for every 500 units: hydrostatic proof pressure, safety valve release pressure."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 4.1",
+        "title": "Material Specifications",
+        "content": "Bodies and lids shall be manufactured from wrought aluminium alloy (IS 21) or austenitic stainless steel AISI 304 (IS 6911). Handles must be heat-resistant phenolic moulding (IS 1300).",
+        "contentHi": "ढांचा और ढक्कन IS 21 एल्युमिनियम या IS 6911 स्टेनलेस स्टील 304 से बने होंगे।"
+      },
+      {
+        "clauseNumber": "Clause 7.2",
+        "title": "Safety Devices & Pressure Relief",
+        "content": "Every cooker shall be equipped with at least two independent safety relief mechanisms: a weighted pressure regulator/vent tube and a secondary safety valve.",
+        "contentHi": "कुकर में रेगुलेटर वेंट ट्यूब और बैकअप सेफ्टी वाल्व सहित दो स्वतंत्र सुरक्षा उपकरण होने अनिवार्य हैं।"
+      },
+      {
+        "clauseNumber": "Clause 9.3",
+        "title": "Hydrostatic Proof and Burst Pressure",
+        "content": "Body with closed lid shall withstand minimum hydraulic pressure of 250 kPa (2.5 bar) without distortion. Rupture shall not occur below 450 kPa.",
+        "contentHi": "कुकर बिना किसी विरूपण के न्यूनतम 250 kPa (2.5 बार) का दबाव सहन करने योग्य होना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-269-2015",
+    "isNumber": "IS 269:2015",
+    "title": "Ordinary Portland Cement (33, 43 and 53 Grade) — Specification",
+    "titleHi": "साधारण पोर्टलैंड सीमेंट (33, 43 और 53 ग्रेड) — विशिष्‍टि",
+    "category": "Construction & Infrastructure",
+    "sector": "Civil Engineering & Building Materials",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Cement (Quality Control) Order, 2003 (DPIIT)",
+    "year": 2015,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+    "hsCodes": [
+      "2523.29.10",
+      "2523.29.30",
+      "2523.29.40"
+    ],
+    "scope": "Covers the manufacture, chemical and physical requirements of ordinary Portland cement in 33 Grade, 43 Grade, and 53 Grade.",
+    "scopeHi": "यह मानक 33, 43 और 53 ग्रेड के साधारण पोर्टलैंड सीमेंट (ओपीसी) के रासायनिक और संपीड़न सामर्थ्य मानकों को नियंत्रित करता है।",
+    "keyTests": [
+      {
+        "name": "Compressive Strength (28 Days)",
+        "description": "Testing 70.6 mm mortar cubes.",
+        "parameterLimit": "Grade 53: Min 53.0 MPa at 28 days; Grade 43: Min 43.0 MPa"
+      },
+      {
+        "name": "Initial and Final Setting Time",
+        "description": "Vicat needle apparatus.",
+        "parameterLimit": "Initial setting time ≥ 30 min; Final setting time ≤ 600 min"
+      }
+    ],
+    "markingRequirements": "IS 269, ISI Mark, CM/L number, Grade of cement (e.g. OPC 53), Net weight (50 kg), Week/Month/Year of manufacture.",
+    "consumerTips": [
+      "Never use cement bags older than 90 days from packaging date without re-testing strength."
+    ],
+    "industryGuidelines": [
+      "Insoluble residue ≤ 5.0% and total sulfur content (as SO3) ≤ 3.5%."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 6.2",
+        "title": "Compressive Strength",
+        "content": "Compressive strength of mortar cubes shall not be less than 53 MPa at 28 days for 53 Grade OPC.",
+        "contentHi": "53 ग्रेड ओपीसी के लिए 28 दिनों में शक्ति 53 MPa से कम नहीं होनी चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-302-Part-1-2008",
+    "isNumber": "IS 302 (Part 1):2008",
+    "title": "Safety of Household and Similar Electrical Appliances — General Requirements",
+    "titleHi": "घरेलू और समान विद्युत उपकरणों की सुरक्षा — सामान्य आवश्यकताएं",
+    "category": "Electrical & Electronics",
+    "sector": "Electrotechnical",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Electrical Appliances (Quality Control) Order, 2023",
+    "year": 2008,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark) / CRS",
+    "hsCodes": [
+      "8516.40.00",
+      "8516.79.20",
+      "8509.40.10"
+    ],
+    "scope": "Deals with safety of electrical appliances for household purposes, rated voltage not more than 250V single-phase (electric irons, immersion heaters, mixer grinders, toasters, geysers).",
+    "scopeHi": "यह मानक घरेलू उपयोग के विद्युत उपकरणों (इलेक्ट्रिक आयरन, वॉटर हीटर, मिक्सी) की सुरक्षा से संबंधित है।",
+    "keyTests": [
+      {
+        "name": "High Voltage Electric Strength Test",
+        "description": "Tests insulation barrier breakdown between live parts and enclosure.",
+        "parameterLimit": "Withstand 1250V AC (Class I) or 3750V AC (Class II) for 1 minute"
+      },
+      {
+        "name": "Leakage Current & Earth Continuity",
+        "description": "Verifies protection against electric shock during normal operation.",
+        "parameterLimit": "Earth resistance < 0.1 Ω; Leakage current < 0.75 mA for Class I portable appliances"
+      },
+      {
+        "name": "Thermal Heating & Abnormal Operation",
+        "description": "Operated at 1.15 times rated power under locked rotor conditions.",
+        "parameterLimit": "Enclosure temp rise must not exceed safe limit (60K for handles)"
+      }
+    ],
+    "markingRequirements": "Mandatory marking of Rated Voltage (V), Rated Power (W/kW), Model name, Manufacturer name or Trademark, and ISI Standard Mark with CM/L license number.",
+    "consumerTips": [
+      "Check for 3-pin earthed plugs on high wattage heating appliances (irons, geysers, room heaters).",
+      "Ensure electric immersion rods have the ISI mark; uncertified rods cause severe shock hazards."
+    ],
+    "industryGuidelines": [
+      "100% routine testing for High Voltage dielectric breakdown and Earth bond continuity on assembly lines."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 8.1",
+        "title": "Protection Against Electric Shock",
+        "content": "Appliances shall be constructed so that adequate protection exists against accidental contact with live parts.",
+        "contentHi": "उपकरणों में सक्रिय विद्युत भागों के आकस्मिक संपर्क से पूर्ण सुरक्षा होनी चाहिए।"
+      },
+      {
+        "clauseNumber": "Clause 13.2",
+        "title": "Leakage Current at Operating Temperature",
+        "content": "Leakage current shall not exceed 0.75 mA for portable Class I appliances and 0.25 mA for Class II appliances.",
+        "contentHi": "क्लास I पोर्टेबल उपकरणों के लिए लीकेज करंट 0.75 mA से अधिक नहीं होना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-3196-Part-1-2013",
+    "isNumber": "IS 3196 (Part 1):2013",
+    "title": "Welded Low Carbon Steel Cylinders for Low Pressure Liquefiable Gases — Part 1: Cylinders for LPG",
+    "titleHi": "कम दबाव वाले द्रवीकृत गैसों के लिए वेल्डेड कम कार्बन स्टील सिलेंडर — भाग 1: एलपीजी सिलेंडर",
+    "category": "Cylinders & Pressure Vessels",
+    "sector": "Heavy Metallurgy & Energy",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Gas Cylinders Rules, 2016 (PESO) & Mandatory BIS Order",
+    "year": 2013,
+    "conformityAssessmentScheme": "Scheme-I (PESO & ISI Joint Statutory Licensing)",
+    "hsCodes": [
+      "7311.00.10",
+      "7311.00.90"
+    ],
+    "scope": "Specifies requirements for design, materials, manufacturing process, heat treatment, testing and inspection of refillable welded low carbon steel cylinders of capacity up to 150 liters water capacity for liquefied petroleum gases (LPG).",
+    "scopeHi": "यह मानक एलपीजी गैस (घरेलू 14.2 किग्रा और व्यावसायिक 19 किग्रा) के लिए 150 लीटर तक जल क्षमता वाले वेल्डेड लो-कार्बन स्टील सिलेंडरों के निर्माण और सुरक्षा परीक्षण को निर्धारित करता है।",
+    "keyTests": [
+      {
+        "name": "Hydrostatic Stretch Test",
+        "description": "Measures permanent volumetric expansion under test pressure.",
+        "parameterLimit": "Permanent expansion must not exceed 10% of total expansion at 2.5 MPa (25 bar)"
+      },
+      {
+        "name": "Hydrostatic Burst Pressure Test",
+        "description": "Determines minimum pressure required to rupture the cylinder shell.",
+        "parameterLimit": "Must not burst below 4.5 MPa (45 bar) and failure must occur longitudinally without fragmentation"
+      }
+    ],
+    "markingRequirements": "Permanent stamping on the stay plate/collar: IS 3196-1, ISI mark, CM/L number, PESO approval mark, Tare weight (kg), Water capacity (L), Test pressure (MPa), Serial number, manufacturer symbol, and Quarter/Year of next statutory re-test.",
+    "consumerTips": [
+      "Check the three stay plates on your LPG cylinder for the clear ISI mark and PESO certification stamp.",
+      "Inspect the statutory test expiry date painted on the inner ring (e.g., A-28 means First Quarter of 2028). Never accept an expired cylinder."
+    ],
+    "industryGuidelines": [
+      "Micro-alloyed low carbon cylinder steel must strictly conform to IS 6240."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 7.1",
+        "title": "Shell Thickness and Design Stress",
+        "content": "The minimum wall thickness of the cylindrical shell shall be calculated such that calculated stress at test pressure does not exceed 80% of minimum guaranteed yield strength.",
+        "contentHi": "सिलेंडर की न्यूनतम दीवार की मोटाई इस प्रकार रखी जाएगी कि परीक्षण दबाव पर प्रतिबल मूल धातु की उपज शक्ति के 80% से अधिक न हो।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-4985-2021",
+    "isNumber": "IS 4985:2021",
+    "title": "Unplasticized PVC Pipes for Potable Water Supplies — Specification",
+    "titleHi": "पीने के पानी की आपूर्ति के लिए अनप्लास्टिसाइज़्ड पीवीसी पाइप — विशिष्‍टि",
+    "category": "Pipes & Fittings",
+    "sector": "Civil & Chemical Engineering",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Plumbing and Water Fitting Products (Quality Control) Order",
+    "year": 2021,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+    "hsCodes": [
+      "3917.23.00"
+    ],
+    "scope": "Prescribes requirements for unplasticized polyvinyl chloride (uPVC) pipes for potable water supplies in domestic, agricultural, and municipal plumbing.",
+    "scopeHi": "यह घरों, खेतों और नगर पालिका में पीने के पानी के वितरण के लिए uPVC पाइपों के दबाव और सुरक्षा मानकों को तय करता है।",
+    "keyTests": [
+      {
+        "name": "Hydrostatic Pressure Test",
+        "description": "Sustained pressure test at 20°C and 60°C.",
+        "parameterLimit": "No burst or leak at 4.2 times rated pressure for 1 hour"
+      },
+      {
+        "name": "Lead & Toxic Metal Extraction",
+        "description": "Leaching test for heavy metal stabilizers.",
+        "parameterLimit": "Lead extraction < 0.05 mg/l on third extraction"
+      }
+    ],
+    "markingRequirements": "Continuous linear marking: IS 4985, ISI mark, CM/L license number, Pipe class, Outer diameter, manufacturer name.",
+    "consumerTips": [
+      "Ensure pipes for drinking water are lead-free uPVC certified under IS 4985."
+    ],
+    "industryGuidelines": [
+      "Virgin PVC resin K-value must be between 65 and 68."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 7.1",
+        "title": "Hydrostatic Burst",
+        "content": "Pipes shall withstand short-term hydrostatic pressure without bursting.",
+        "contentHi": "पाइपों को बिना फटे हाइड्रोस्टेटिक दबाव का सामना करना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-694-2010",
+    "isNumber": "IS 694:2010",
+    "title": "PVC Insulated Cables for Working Voltages up to and including 1100 V — Specification",
+    "titleHi": "1100 V तक के कार्यशील वोल्टेज के लिए पीवीसी इन्सुलेटेड केबल — विशिष्‍टि",
+    "category": "Electrical & Electronics",
+    "sector": "Electrotechnical / Wiring",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Cables and Conductors (Quality Control) Order, 2024",
+    "year": 2010,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+    "hsCodes": [
+      "8544.49.20",
+      "8544.49.99"
+    ],
+    "scope": "Covers the requirements for single-core and multi-core PVC insulated and sheathed/unsheathed electrical cables with copper or aluminium conductors for working voltages up to 1100 V AC, widely used in domestic building wiring and industrial panels.",
+    "scopeHi": "यह मानक 1100 V AC तक के वोल्टेज के लिए तांबे या एल्यूमीनियम कंडक्टर वाले पीवीसी इंसुलेटेड तारों और केबलों की आवश्यकताओं को कवर करता है।",
+    "keyTests": [
+      {
+        "name": "Conductor Resistance Test",
+        "description": "Measures electrical DC resistance per km at 20°C using Kelvin Double Bridge.",
+        "parameterLimit": "Max resistance e.g. 12.1 Ω/km for 1.5 sq mm class 2 copper conductor"
+      },
+      {
+        "name": "Flame Retardance Test (Oxygen & Temperature Index)",
+        "description": "Measures burning behavior and self-extinguishing properties.",
+        "parameterLimit": "Oxygen index > 29% for FR/FRLS cables; Temperature index > 250°C"
+      }
+    ],
+    "markingRequirements": "Cables must have sequential meter marking, IS 694 mark, ISI Logo, CM/L license number, rated voltage (1100V), cable size, and manufacturer trade name.",
+    "consumerTips": [
+      "Never compromise on domestic electrical wiring; counterfeit cables with sub-standard copper cause fires.",
+      "Look for continuous laser or ink jet printing along the wire with IS 694, conductor size, and ISI mark."
+    ],
+    "industryGuidelines": [
+      "Electrolytic grade bright annealed high-conductivity copper (minimum 99.97% purity conforming to IS 8130) is mandatory."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 6.1",
+        "title": "Conductor Properties and Resistance",
+        "content": "Conductors shall consist of annealed high conductivity copper or EC grade aluminium wires conforming to IS 8130.",
+        "contentHi": "कंडक्टर IS 8130 के अनुसार उच्च चालकता वाले तांबे या एल्युमिनियम तारों से बने होंगे।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-7318-Part-1-2020",
+    "isNumber": "IS 7318 (Part 1):2020",
+    "title": "Approval Testing of Welders for Fusion Welding — Part 1: Steels",
+    "titleHi": "फ्यूजन वेल्डिंग के लिए वेल्डरों का अनुमोदन परीक्षण — भाग 1: स्टील्स",
+    "category": "Industrial & Manufacturing",
+    "sector": "Mechanical & Structural Fabrication",
+    "status": "Voluntary",
+    "year": 2020,
+    "conformityAssessmentScheme": "Personnel & Process Certification",
+    "hsCodes": [
+      "8468.90.00"
+    ],
+    "scope": "Prescribes requirements for welder qualification and approval testing in fusion welding of carbon and alloy steels across all standard welding positions (1G to 6G).",
+    "scopeHi": "यह संरचनात्मक और पाइप वेल्डिंग में वेल्डरों के कौशल और वेल्ड जोड़ों के परीक्षण (एक्स-रे और बेंड टेस्ट) के मानक तय करता है।",
+    "keyTests": [
+      {
+        "name": "Visual Examination of Weld Seam",
+        "description": "Inspection for undercut and porosity.",
+        "parameterLimit": "Zero crack, zero lack of fusion, undercut ≤ 0.5 mm"
+      },
+      {
+        "name": "Radiographic Examination (NDT)",
+        "description": "Volumetric inspection of butt welds.",
+        "parameterLimit": "Acceptance level B under ISO 5817"
+      }
+    ],
+    "markingRequirements": "Welder Qualification Record (WQR) certificate indicating IS 7318-1.",
+    "consumerTips": [
+      "For critical building/bridge fabrication, ensure welders hold active IS 7318 certification."
+    ],
+    "industryGuidelines": [
+      "Welder qualification validity is typically 2 years subject to periodic verification."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 6.2",
+        "title": "Test Conditions",
+        "content": "Test piece welded according to qualified Welding Procedure Specification.",
+        "contentHi": "परीक्षण पीस को योग्य वेल्डिंग प्रक्रिया विनिर्देश के अनुसार वेल्ड किया जाएगा।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-9873-Part-1-2019",
+    "isNumber": "IS 9873 (Part 1):2019",
+    "title": "Safety of Toys — Part 1: Safety Aspects Related to Mechanical and Physical Properties",
+    "titleHi": "खिलौनों की सुरक्षा — भाग 1: यांत्रिक और भौतिक गुणों से संबंधित सुरक्षा पहलू",
+    "category": "Toys & Children Products",
+    "sector": "Consumer Safety",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Toys (Quality Control) Order, 2020 (Ministry of Commerce & Industry)",
+    "year": 2019,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory Factory Audit & ISI Mark)",
+    "hsCodes": [
+      "9503.00.10",
+      "9503.00.20",
+      "9503.00.30",
+      "9503.00.90"
+    ],
+    "scope": "Applies to all toys intended for use by children under 14 years of age. Specifies criteria for physical features including sharp edges, points, small parts (choking hazard for under 36 months), cords, and impact resistance.",
+    "scopeHi": "यह मानक 14 वर्ष से कम उम्र के बच्चों के लिए बने सभी खिलौनों पर लागू होता है और नुकीले किनारों, छोटे हिस्सों (दम घुटने का खतरा) और मजबूती से संबंधित सुरक्षा मानदंड तय करता है।",
+    "keyTests": [
+      {
+        "name": "Small Parts Cylinder Choking Test",
+        "description": "Components must not fit entirely inside standard test cylinder (31.7 mm dia).",
+        "parameterLimit": "No detachable small parts for toys intended for children under 3 years"
+      },
+      {
+        "name": "Sharp Edge & Sharp Point Test",
+        "description": "Assesses accessible edges using mandrels.",
+        "parameterLimit": "Zero hazardous sharp edges or sharp points"
+      },
+      {
+        "name": "Drop and Impact Test",
+        "description": "Toys dropped 5 times from 850 mm onto concrete slab.",
+        "parameterLimit": "Must not crack, shatter into sharp splinters, or release small parts"
+      }
+    ],
+    "markingRequirements": "Toys and packaging must display the ISI mark, CM/L number, manufacturer identity, age grading, warning symbols, and maximum battery specifications.",
+    "consumerTips": [
+      "Every toy sold in Indian retail or online must have the ISI mark; importing or selling non-ISI toys is illegal in India.",
+      "Check age recommendation labels carefully, especially for toys containing button batteries or small magnets."
+    ],
+    "industryGuidelines": [
+      "Chemical compliance under IS 9873 (Part 3) for heavy metal migration is mandatory alongside Part 1."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 4.4",
+        "title": "Small Parts for Children Under 36 Months",
+        "content": "Toys intended for children under 36 months of age, and their removable components, shall not fit entirely inside the small parts cylinder.",
+        "contentHi": "36 महीने से कम उम्र के बच्चों के खिलौने टेस्ट सिलेंडर में पूरी तरह नहीं समाने चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  }
+]

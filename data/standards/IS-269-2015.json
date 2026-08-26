@@ -1,0 +1,47 @@
+{
+  "id": "IS-269-2015",
+  "isNumber": "IS 269:2015",
+  "title": "Ordinary Portland Cement (33, 43 and 53 Grade) — Specification",
+  "titleHi": "साधारण पोर्टलैंड सीमेंट (33, 43 और 53 ग्रेड) — विशिष्‍टि",
+  "category": "Construction & Infrastructure",
+  "sector": "Civil Engineering & Building Materials",
+  "status": "Mandatory (QCO)",
+  "qcoOrder": "Cement (Quality Control) Order, 2003 (DPIIT)",
+  "year": 2015,
+  "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+  "hsCodes": [
+    "2523.29.10",
+    "2523.29.30",
+    "2523.29.40"
+  ],
+  "scope": "Covers the manufacture, chemical and physical requirements of ordinary Portland cement in 33 Grade, 43 Grade, and 53 Grade.",
+  "scopeHi": "यह मानक 33, 43 और 53 ग्रेड के साधारण पोर्टलैंड सीमेंट (ओपीसी) के रासायनिक और संपीड़न सामर्थ्य मानकों को नियंत्रित करता है।",
+  "keyTests": [
+    {
+      "name": "Compressive Strength (28 Days)",
+      "description": "Testing 70.6 mm mortar cubes.",
+      "parameterLimit": "Grade 53: Min 53.0 MPa at 28 days; Grade 43: Min 43.0 MPa"
+    },
+    {
+      "name": "Initial and Final Setting Time",
+      "description": "Vicat needle apparatus.",
+      "parameterLimit": "Initial setting time ≥ 30 min; Final setting time ≤ 600 min"
+    }
+  ],
+  "markingRequirements": "IS 269, ISI Mark, CM/L number, Grade of cement (e.g. OPC 53), Net weight (50 kg), Week/Month/Year of manufacture.",
+  "consumerTips": [
+    "Never use cement bags older than 90 days from packaging date without re-testing strength."
+  ],
+  "industryGuidelines": [
+    "Insoluble residue ≤ 5.0% and total sulfur content (as SO3) ≤ 3.5%."
+  ],
+  "clauses": [
+    {
+      "clauseNumber": "Clause 6.2",
+      "title": "Compressive Strength",
+      "content": "Compressive strength of mortar cubes shall not be less than 53 MPa at 28 days for 53 Grade OPC.",
+      "contentHi": "53 ग्रेड ओपीसी के लिए 28 दिनों में शक्ति 53 MPa से कम नहीं होनी चाहिए।"
+    }
+  ],
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+}

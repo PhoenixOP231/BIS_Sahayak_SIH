@@ -1,0 +1,322 @@
+[
+  {
+    "id": "IS-3196-Part-1-2013",
+    "isNumber": "IS 3196 (Part 1):2013",
+    "title": "Welded Low Carbon Steel Cylinders for Low Pressure Liquefiable Gases — Part 1: Cylinders for LPG",
+    "titleHi": "कम दबाव वाले द्रवीकृत गैसों के लिए वेल्डेड कम कार्बन स्टील सिलेंडर — भाग 1: एलपीजी सिलेंडर",
+    "category": "Cylinders & Pressure Vessels",
+    "sector": "Heavy Metallurgy & Energy",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Gas Cylinders Rules, 2016 (PESO) & Mandatory BIS Order",
+    "year": 2013,
+    "conformityAssessmentScheme": "Scheme-I (PESO & ISI Joint Statutory Licensing)",
+    "hsCodes": [
+      "7311.00.10",
+      "7311.00.90"
+    ],
+    "scope": "Specifies requirements for design, materials, manufacturing process, heat treatment, testing and inspection of refillable welded low carbon steel cylinders of capacity up to 150 liters water capacity for liquefied petroleum gases (LPG).",
+    "scopeHi": "यह मानक एलपीजी गैस (घरेलू 14.2 किग्रा और व्यावसायिक 19 किग्रा) के लिए 150 लीटर तक जल क्षमता वाले वेल्डेड लो-कार्बन स्टील सिलेंडरों के निर्माण और सुरक्षा परीक्षण को निर्धारित करता है।",
+    "keyTests": [
+      {
+        "name": "Hydrostatic Stretch Test",
+        "description": "Measures permanent volumetric expansion under test pressure.",
+        "parameterLimit": "Permanent expansion must not exceed 10% of total expansion at 2.5 MPa (25 bar)"
+      },
+      {
+        "name": "Hydrostatic Burst Pressure Test",
+        "description": "Determines minimum pressure required to rupture the cylinder shell.",
+        "parameterLimit": "Must not burst below 4.5 MPa (45 bar) and failure must occur longitudinally without fragmentation"
+      }
+    ],
+    "markingRequirements": "Permanent stamping on the stay plate/collar: IS 3196-1, ISI mark, CM/L number, PESO approval mark, Tare weight (kg), Water capacity (L), Test pressure (MPa), Serial number, manufacturer symbol, and Quarter/Year of next statutory re-test.",
+    "consumerTips": [
+      "Check the three stay plates on your LPG cylinder for the clear ISI mark and PESO certification stamp.",
+      "Inspect the statutory test expiry date painted on the inner ring (e.g., A-28 means First Quarter of 2028). Never accept an expired cylinder."
+    ],
+    "industryGuidelines": [
+      "Micro-alloyed low carbon cylinder steel must strictly conform to IS 6240."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 7.1",
+        "title": "Shell Thickness and Design Stress",
+        "content": "The minimum wall thickness of the cylindrical shell shall be calculated such that calculated stress at test pressure does not exceed 80% of minimum guaranteed yield strength.",
+        "contentHi": "सिलेंडर की न्यूनतम दीवार की मोटाई इस प्रकार रखी जाएगी कि परीक्षण दबाव पर प्रतिबल मूल धातु की उपज शक्ति के 80% से अधिक न हो।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-694-2010",
+    "isNumber": "IS 694:2010",
+    "title": "PVC Insulated Cables for Working Voltages up to and including 1100 V — Specification",
+    "titleHi": "1100 V तक के कार्यशील वोल्टेज के लिए पीवीसी इन्सुलेटेड केबल — विशिष्‍टि",
+    "category": "Electrical & Electronics",
+    "sector": "Electrotechnical / Wiring",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Cables and Conductors (Quality Control) Order, 2024",
+    "year": 2010,
+    "conformityAssessmentScheme": "Scheme-I (ISI Mark Certification)",
+    "hsCodes": [
+      "8544.49.20",
+      "8544.49.99"
+    ],
+    "scope": "Covers the requirements for single-core and multi-core PVC insulated and sheathed/unsheathed electrical cables with copper or aluminium conductors for working voltages up to 1100 V AC, widely used in domestic building wiring and industrial panels.",
+    "scopeHi": "यह मानक 1100 V AC तक के वोल्टेज के लिए तांबे या एल्यूमीनियम कंडक्टर वाले पीवीसी इंसुलेटेड तारों और केबलों की आवश्यकताओं को कवर करता है।",
+    "keyTests": [
+      {
+        "name": "Conductor Resistance Test",
+        "description": "Measures electrical DC resistance per km at 20°C using Kelvin Double Bridge.",
+        "parameterLimit": "Max resistance e.g. 12.1 Ω/km for 1.5 sq mm class 2 copper conductor"
+      },
+      {
+        "name": "Flame Retardance Test (Oxygen & Temperature Index)",
+        "description": "Measures burning behavior and self-extinguishing properties.",
+        "parameterLimit": "Oxygen index > 29% for FR/FRLS cables; Temperature index > 250°C"
+      }
+    ],
+    "markingRequirements": "Cables must have sequential meter marking, IS 694 mark, ISI Logo, CM/L license number, rated voltage (1100V), cable size, and manufacturer trade name.",
+    "consumerTips": [
+      "Never compromise on domestic electrical wiring; counterfeit cables with sub-standard copper cause fires.",
+      "Look for continuous laser or ink jet printing along the wire with IS 694, conductor size, and ISI mark."
+    ],
+    "industryGuidelines": [
+      "Electrolytic grade bright annealed high-conductivity copper (minimum 99.97% purity conforming to IS 8130) is mandatory."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 6.1",
+        "title": "Conductor Properties and Resistance",
+        "content": "Conductors shall consist of annealed high conductivity copper or EC grade aluminium wires conforming to IS 8130.",
+        "contentHi": "कंडक्टर IS 8130 के अनुसार उच्च चालकता वाले तांबे या एल्युमिनियम तारों से बने होंगे।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-16018-2021",
+    "isNumber": "IS 16018:2021",
+    "title": "Helmets for Riders of Two-Wheeled Motor Vehicles — Specification",
+    "titleHi": "दोपहिया मोटर वाहन सवारों के लिए हेलमेट — विशिष्‍टि",
+    "category": "Automotive & Road Safety",
+    "sector": "Transport & Public Safety",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Helmet for Two-Wheeler Riders (Quality Control) Order, 2020 (MoRTH)",
+    "year": 2021,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark)",
+    "hsCodes": [
+      "6506.10.00"
+    ],
+    "scope": "Prescribes requirements for protective helmets for everyday use by drivers and passengers of two-wheeled motor vehicles to safeguard against head injuries.",
+    "scopeHi": "यह दोपहिया वाहन चालकों के लिए सुरक्षा हेलमेट के प्रभाव अवशोषण, वजन सीमा और स्ट्रैप मजबूती के मानकों को अनिवार्य करता है।",
+    "keyTests": [
+      {
+        "name": "Impact Attenuation Test",
+        "description": "Helmet dropped onto steel anvils at 7.5 m/s.",
+        "parameterLimit": "Peak head acceleration ≤ 275 g"
+      },
+      {
+        "name": "Retention System Dynamic Test",
+        "description": "Drop-weight loading on chin strap.",
+        "parameterLimit": "Dynamic extension ≤ 35 mm; Residual ≤ 25 mm"
+      }
+    ],
+    "markingRequirements": "Sticker on shell & lining: IS 16018 ISI mark, CM/L number, Helmet size, Weight in grams (max 1.2 kg), Month/Year.",
+    "consumerTips": [
+      "Wearing a non-ISI helmet is illegal in India under the Motor Vehicles Act.",
+      "BIS caps helmet weight at 1.2 kg to prevent neck injury."
+    ],
+    "industryGuidelines": [
+      "Expanded Polystyrene (EPS) density optimized for multi-impact progressive crush absorption."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.1",
+        "title": "Mass of Helmets",
+        "content": "Maximum mass of complete helmet shall not exceed 1.20 kg (1200 grams).",
+        "contentHi": "हेलमेट का कुल वजन 1.20 किलोग्राम (1200 ग्राम) से अधिक नहीं होना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15298-Part-2-2016",
+    "isNumber": "IS 15298 (Part 2):2016",
+    "title": "Personal Protective Equipment — Part 2: Safety Footwear",
+    "titleHi": "व्यक्तिगत सुरक्षा उपकरण — भाग 2: सुरक्षा जूते",
+    "category": "Personal Protective Equipment",
+    "sector": "Industrial Safety & Footwear",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Footwear made from Leather and other materials (Quality Control) Order, 2020",
+    "year": 2016,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark)",
+    "hsCodes": [
+      "6403.40.00",
+      "6402.99.10"
+    ],
+    "scope": "Specifies basic and additional requirements for safety footwear used for commercial and industrial workplaces, equipped with safety toecaps.",
+    "scopeHi": "यह औद्योगिक कार्यस्थलों में उपयोग किए जाने वाले सुरक्षा जूतों में स्टील टो-कैप, सोल फिसलन और पंचर प्रतिरोध के मानकों को तय करता है।",
+    "keyTests": [
+      {
+        "name": "Toecap Impact Resistance",
+        "description": "200 Joules impact energy drop.",
+        "parameterLimit": "Clearance beneath toecap ≥ 14 mm"
+      },
+      {
+        "name": "Penetration Resistance of Sole",
+        "description": "1100 N puncture force.",
+        "parameterLimit": "Spike must not penetrate insole barrier"
+      }
+    ],
+    "markingRequirements": "IS 15298 (Part 2), ISI mark, CM/L number, Shoe size, Category (S1, S2, S3, S1P).",
+    "consumerTips": [
+      "S1P or S3 safety shoes include both 200J steel toe cap and steel anti-nail penetration midsole."
+    ],
+    "industryGuidelines": [
+      "Steel toecaps must comply with corrosion resistance testing."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.3.2",
+        "title": "Impact Resistance",
+        "content": "Footwear tested at impact energy of 200 J shall retain clearance beneath toecap ≥ 14 mm.",
+        "contentHi": "200 जूल प्रभाव ऊर्जा पर परीक्षण में टो-कैप के नीचे निकासी 14 मिमी से कम नहीं होनी चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-12254-2021",
+    "isNumber": "IS 12254:2021",
+    "title": "Polyvinyl Chloride (PVC) Industrial Boots — Specification",
+    "titleHi": "पॉलीविनाइल क्लोराइड (पीवीसी) औद्योगिक बूट — विशिष्‍टि",
+    "category": "Personal Protective Equipment",
+    "sector": "Industrial Safety & Chemical Processing",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Footwear (Quality Control) Order, 2020",
+    "year": 2021,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark Certification)",
+    "hsCodes": [
+      "6401.92.00"
+    ],
+    "scope": "Covers requirements for waterproof molded PVC industrial boots intended for protection against water, acids, alkalis, oil, and mud in mines and chemical plants.",
+    "scopeHi": "यह खदानों और रासायनिक संयंत्रों में उपयोग किए जाने वाले वाटरप्रूफ और केमिकल-रेसिस्टेंट पीवीसी औद्योगिक जूतों के मानक तय करता है।",
+    "keyTests": [
+      {
+        "name": "Flexing Resistance",
+        "description": "Ross flexing machine 150,000 cycles.",
+        "parameterLimit": "Zero crack growth > 4 mm"
+      },
+      {
+        "name": "Chemical Resistance",
+        "description": "Acid & Alkali immersion 48 hrs.",
+        "parameterLimit": "Tensile strength retention ≥ 80%"
+      }
+    ],
+    "markingRequirements": "Molded on upper calf: IS 12254, ISI mark, CM/L number, Boot size.",
+    "consumerTips": [
+      "Ensure industrial gumboots have the authentic ISI stamp on the upper rim."
+    ],
+    "industryGuidelines": [
+      "No banned phthalate plasticizers or low-grade scrap permitted."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 4.2",
+        "title": "Waterproof Integrity",
+        "content": "Tested for water-tightness under 15 kPa air pressure while immersed.",
+        "contentHi": "पानी में डुबोने पर कोई बुलबुला नहीं निकलना चाहिए।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15652-2006",
+    "isNumber": "IS 15652:2006",
+    "title": "Insulating Mats for Electrical Purposes — Specification",
+    "titleHi": "विद्युत उद्देश्यों के लिए इंसुलेटिंग मैट — विशिष्‍टि",
+    "category": "Electrical & Electronics",
+    "sector": "Electrotechnical & Workplace Safety",
+    "status": "Mandatory (QCO)",
+    "qcoOrder": "Electrical Safety Equipment Quality Control Order",
+    "year": 2006,
+    "conformityAssessmentScheme": "Scheme-I (Mandatory ISI Mark)",
+    "hsCodes": [
+      "3918.10.00"
+    ],
+    "scope": "Covers elastomer/polymer insulating floor mats used near high voltage electrical switchboards for protection against electric shock up to 33 kV.",
+    "scopeHi": "यह सबस्टेशनों और हाई-वोल्टेज बिजली के पैनलों के पास काम करने वाले कर्मचारियों को बिजली के झटके से बचाने वाली इंसुलेटिंग मैट के मानक तय करता है।",
+    "keyTests": [
+      {
+        "name": "Dielectric Strength & Proof Voltage",
+        "description": "Proof voltage for 1 minute.",
+        "parameterLimit": "Class A (3.3kV): 10kV; Class B (11kV): 22kV; Class C (33kV): 36kV"
+      },
+      {
+        "name": "Leakage Current Test",
+        "description": "Current under maximum voltage.",
+        "parameterLimit": "Leakage < 10 µA/m²"
+      }
+    ],
+    "markingRequirements": "IS 15652, ISI mark, CM/L number, Voltage Class (A/B/C), Working Voltage.",
+    "consumerTips": [
+      "Obsolete rubber mats under IS 5424 are banned; use synthetic elastomer mats with IS 15652."
+    ],
+    "industryGuidelines": [
+      "100% dielectric proof testing at factory before dispatch."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.1",
+        "title": "Voltage Classification",
+        "content": "Mats classified into Class A (3.3kV), Class B (11kV), Class C (33kV).",
+        "contentHi": "मैट्स को क्लास A, B और C में वर्गीकृत किया गया है।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  },
+  {
+    "id": "IS-15700-2018",
+    "isNumber": "IS 15700:2018",
+    "title": "Quality Management Systems — Requirements for Service Quality by Public Service Organizations (Sevottam)",
+    "titleHi": "गुणवत्ता प्रबंधन प्रणाली — सार्वजनिक सेवा संगठनों द्वारा सेवा गुणवत्ता की आवश्यकताएं (सेवोत्तम)",
+    "category": "Management Systems & Services",
+    "sector": "Public Administration & Citizen Services",
+    "status": "Voluntary",
+    "year": 2018,
+    "conformityAssessmentScheme": "Management Systems Certification Scheme (MSCS)",
+    "hsCodes": [
+      "9983.11.00"
+    ],
+    "scope": "Specifies requirements for a quality management system where a public service organization needs to demonstrate citizen-centric service delivery.",
+    "scopeHi": "यह सरकारी विभागों और सार्वजनिक संगठनों में पारदर्शी नागरिक चार्टर और लोक शिकायत निवारण प्रणाली (सेवोत्तम मॉडल) के मानक तय करता है।",
+    "keyTests": [
+      {
+        "name": "Citizen Charter Implementation Audit",
+        "description": "Verifies defined service delivery timeframes.",
+        "parameterLimit": "100% published charter commitments with KPIs"
+      },
+      {
+        "name": "Public Grievance Redressal Audit",
+        "description": "Grievance receipt and escalation timelines.",
+        "parameterLimit": "Timebound resolution within 30 days"
+      }
+    ],
+    "markingRequirements": "BIS Sevottam Certificate display on departmental portals.",
+    "consumerTips": [
+      "Sevottam charters bind government offices to deliver citizen services within defined days."
+    ],
+    "industryGuidelines": [
+      "Applies to government departments and public utilities."
+    ],
+    "clauses": [
+      {
+        "clauseNumber": "Clause 5.2",
+        "title": "Citizen Charter",
+        "content": "Public organization shall publish a Citizen Charter detailing service standards and grievance channels.",
+        "contentHi": "सार्वजनिक सेवा संगठन सेवा मानकों और शिकायत निवारण का नागरिक चार्टर प्रकाशित करेगा।"
+      }
+    ],
+    "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  }
+]
