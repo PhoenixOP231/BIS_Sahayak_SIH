@@ -17,10 +17,15 @@ describe('RAG Chat Assistant & Citation Generation', () => {
     expect(response.citations.some(c => c.isNumber.includes('IS 14543') || c.isNumber.includes('IS 10500'))).toBe(true);
   });
 
-  it('should provide technical parameters in industry mode for TMT bars', async () => {
-    const response = await generateRAGAnswer('TMT bar yield stress and elongation IS 1786 Fe 500D', [], 'industry', 'en');
-    expect(response.answer).toContain('IS 1786');
-    expect(response.mode).toBe('industry');
-    expect(response.citations.length).toBeGreaterThan(0);
+  it('should handle natural conversational greetings gracefully', async () => {
+    const response = await generateRAGAnswer('Hello, who are you and how can you help me?', [], 'consumer', 'en');
+    expect(response.answer).toBeDefined();
+    expect(response.answer.toLowerCase()).toContain('bis sahayak');
+  });
+
+  it('should handle complaint and fake product guidance', async () => {
+    const response = await generateRAGAnswer('How do I report a fake ISI mark on a product?', [], 'consumer', 'en');
+    expect(response.answer).toBeDefined();
+    expect(response.answer).toContain('BIS Care');
   });
 });
