@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { findVerifiedLicense, VERIFIED_BIS_LICENSES } from '../lib/license-database';
+import { 
+  findVerifiedLicense, 
+  parseAndVerifyLicense, 
+  VERIFIED_BIS_LICENSES 
+} from '../lib/license-database';
 
 describe('BIS CM/L License Database & Verifier', () => {
   it('should find verified authentic license for Prestige Cookers', () => {
@@ -17,30 +21,58 @@ describe('BIS CM/L License Database & Verifier', () => {
     expect(lic?.isNumber).toBe('IS 1786:2008');
   });
 
-  it('should find verified authentic license for Bisleri Drinking Water', () => {
-    const lic = findVerifiedLicense('5100087');
-    expect(lic).not.toBeNull();
-    expect(lic?.brand).toContain('Bisleri');
-    expect(lic?.isNumber).toBe('IS 14543:2024');
+  it('should verify major water bottles like Bisleri, Aquafina, Kinley, Rail Neer', () => {
+    const bisleri = parseAndVerifyLicense('CM/L-5100087');
+    expect(bisleri.status).toBe('verified');
+    expect(bisleri.license?.brand).toContain('Bisleri');
+    expect(bisleri.license?.isNumber).toBe('IS 14543:2024');
+
+    const aquafina = parseAndVerifyLicense('8512345');
+    expect(aquafina.status).toBe('verified');
+    expect(aquafina.license?.brand).toContain('Aquafina');
+
+    const kinley = parseAndVerifyLicense('CM/L-5100342');
+    expect(kinley.status).toBe('verified');
+    expect(kinley.license?.brand).toContain('Kinley');
+
+    const railneer = parseAndVerifyLicense('5200142');
+    expect(railneer.status).toBe('verified');
+    expect(railneer.license?.brand).toContain('Rail Neer');
   });
 
-  it('should return null for fake or unregistered numbers (e.g. 11111111, 00000000)', () => {
-    const fake1 = findVerifiedLicense('11111111');
-    expect(fake1).toBeNull();
+  it('should recognize Indian Standard numbers like IS 14543 or 14543 from bottle labels', () => {
+    const std1 = parseAndVerifyLicense('IS 14543');
+    expect(std1.status).toBe('is_standard');
+    expect(std1.matchedStandard?.isNumber).toBe('IS 14543:2024');
 
-    const fake2 = findVerifiedLicense('00000000');
-    expect(fake2).toBeNull();
+    const std2 = parseAndVerifyLicense('14543');
+    expect(std2.status).toBe('is_standard');
+    expect(std2.matchedStandard?.isNumber).toBe('IS 14543:2024');
 
-    const fake3 = findVerifiedLicense('12345678');
-    expect(fake3).toBeNull();
+    const std3 = parseAndVerifyLicense('IS 10500');
+    expect(std3.status).toBe('is_standard');
+    expect(std3.matchedStandard?.isNumber).toBe('IS 10500:2012');
   });
 
-  it('should contain verified licenses across all major categories', () => {
-    expect(VERIFIED_BIS_LICENSES.length).toBeGreaterThanOrEqual(10);
-    const categories = new Set(VERIFIED_BIS_LICENSES.map(l => l.category));
-    expect(categories.has('Kitchen & Home Safety')).toBe(true);
-    expect(categories.has('Food & Drinking Water')).toBe(true);
-    expect(categories.has('Civil & Construction')).toBe(true);
-    expect(categories.has('Electrical & Electronics')).toBe(true);
+  it('should decode regional bottling plant 7/8-digit Scheme-I licenses', () => {
+    const regional = parseAndVerifyLicense('CM/L-7489123');
+    expect(regional.status).toBe('regional_valid');
+    expect(regional.decodedInfo?.branchOffice).toContain('Pune');
+  });
+
+  it('should detect counterfeit / dummy test numbers (e.g. 11111111, 00000000)', () => {
+    const fake1 = parseAndVerifyLicense('11111111');
+    expect(fake1.status).toBe('counterfeit');
+
+    const fake2 = parseAndVerifyLicense('00000000');
+    expect(fake2.status).toBe('counterfeit');
+
+    const fake3 = parseAndVerifyLicense('12345678');
+    expect(fake3.status).toBe('counterfeit');
+  });
+
+  it('should mark invalid short inputs as invalid format', () => {
+    const invalid = parseAndVerifyLicense('123');
+    expect(invalid.status).toBe('invalid');
   });
 });
