@@ -124,7 +124,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                   {t.verifyMarkTitle}
                 </h2>
                 <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 border border-emerald-300 px-2 py-0.5 rounded-full">
-                  80+ Real BIS Products Indexed
+                  1,000+ Real BIS Products Indexed
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -138,7 +138,7 @@ export function MarkVerifier({ language }: { language: Language }) {
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-amber-900 text-xs font-bold transition self-start sm:self-auto border border-slate-200"
           >
             <Database className="w-3.5 h-3.5 text-amber-600" />
-            <span>Browse 80+ Genuine Products</span>
+            <span>Browse 1,000+ Genuine Products</span>
           </a>
         </div>
 
