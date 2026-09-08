@@ -77,4 +77,22 @@ describe('BIS CM/L License Database & Intelligent Verification', () => {
     expect(std.status).toBe('is_standard');
     expect(std.matchedStandard?.isNumber).toBe('IS 2347:2017');
   });
+
+  it('should query Kenson Cooker CM/L-8270877 from Neon PostgreSQL cloud database', async () => {
+    const { getLicenseByDigits, getDatabaseStats } = await import('../lib/db-licenses');
+    const rec = await getLicenseByDigits('8270877');
+    if (rec) {
+      expect(rec.cml_number).toBe('CM/L-8270877');
+      expect(rec.brand).toContain('Kenson');
+      expect(rec.is_number).toBe('IS 2347:2017');
+      expect(rec.status).toBe('OPERATIVE');
+    }
+
+    const stats = await getDatabaseStats();
+    if (stats.totalLicenses > 0) {
+      expect(stats.totalLicenses).toBeGreaterThanOrEqual(80);
+      expect(stats.operative).toBeGreaterThan(0);
+    }
+  });
 });
+

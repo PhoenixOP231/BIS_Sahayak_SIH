@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "seed": "tsx scripts/seed-standards.ts"
+    "seed": "tsx scripts/seed-standards.ts",
+    "sync:bis": "tsx scripts/sync-bis-database.ts"
   },
   "dependencies": {
     "@google/genai": "^2.19.0",

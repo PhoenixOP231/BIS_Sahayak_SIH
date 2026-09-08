@@ -50,9 +50,23 @@ export function MarkVerifier({ language }: { language: Language }) {
   const [statusFilter, setStatusFilter] = useState('all');
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  const runVerification = (input: string) => {
-    const result = parseAndVerifyLicense(input);
-    setVerificationResult(result);
+  const runVerification = async (input: string) => {
+    // 1. Instant local verification for sub-millisecond feedback
+    const localResult = parseAndVerifyLicense(input);
+    setVerificationResult(localResult);
+
+    // 2. Query Neon PostgreSQL Cloud Database (/api/verify) for live daily synced records
+    try {
+      const res = await fetch(`/api/verify?q=${encodeURIComponent(input)}`);
+      if (res.ok) {
+        const cloudResult = await res.json();
+        if (cloudResult && cloudResult.status) {
+          setVerificationResult(cloudResult);
+        }
+      }
+    } catch {
+      // Retains localResult seamlessly if offline
+    }
   };
 
   const handleVerify = (e: React.FormEvent) => {
@@ -257,13 +271,19 @@ export function MarkVerifier({ language }: { language: Language }) {
                       <CheckCircle2 className="w-7 h-7" />
                     </div>
                     <div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex flex-wrap items-center gap-2">
                         <span className="text-xs font-extrabold uppercase tracking-wider bg-emerald-600 text-white px-2.5 py-0.5 rounded-full">
                           Authentic BIS License
                         </span>
                         <span className="text-xs font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full">
                           Status: {verificationResult.license.status}
                         </span>
+                        {(verificationResult as any)?.source === 'neon_postgresql_cloud' && (
+                          <span className="text-xs font-semibold text-teal-800 bg-teal-100/90 border border-teal-300 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
+                            <span>Cloud DB (Daily Synced)</span>
+                          </span>
+                        )}
                       </div>
                       <h3 className="font-extrabold text-xl sm:text-2xl text-slate-900 font-display mt-1">
                         {verificationResult.license.brand}
