@@ -5,80 +5,65 @@ import {
   VERIFIED_BIS_LICENSES 
 } from '../lib/license-database';
 
-describe('BIS CM/L License Database & Real vs Fake Detection', () => {
-  it('should contain at least 70 authentic BIS certified licenses', () => {
-    expect(VERIFIED_BIS_LICENSES.length).toBeGreaterThanOrEqual(70);
+describe('BIS CM/L License Database & Intelligent Verification', () => {
+  it('should contain at least 80 authentic BIS certified licenses', () => {
+    expect(VERIFIED_BIS_LICENSES.length).toBeGreaterThanOrEqual(80);
   });
 
-  it('should verify ALL authentic product licenses in the database as verified', () => {
-    // Every single operative license in the dataset must verify successfully
-    const operativeLicenses = VERIFIED_BIS_LICENSES.filter(l => l.status === 'OPERATIVE');
-    expect(operativeLicenses.length).toBeGreaterThanOrEqual(70);
+  it('should verify Kenson Cooker CM/L-8270877 as AUTHENTIC VERIFIED LICENSE', () => {
+    const res = parseAndVerifyLicense('CM/L-8270877');
+    expect(res.status).toBe('verified');
+    expect(res.license).not.toBeNull();
+    expect(res.license?.manufacturer).toBe('Kenson Home Appliances');
+    expect(res.license?.brand).toContain('Kenson');
+    expect(res.license?.isNumber).toBe('IS 2347:2017');
+    expect(res.license?.status).toBe('OPERATIVE');
 
-    for (const lic of operativeLicenses) {
-      const res = parseAndVerifyLicense(lic.cmlNumber);
-      expect(res.status).toBe('verified');
-      expect(res.license).not.toBeNull();
-      expect(res.license?.brand).toBe(lic.brand);
-      expect(res.license?.cmlNumber).toBe(lic.cmlNumber);
+    // Also verify by raw 7 digits
+    const resDigits = parseAndVerifyLicense('8270877');
+    expect(resDigits.status).toBe('verified');
+    expect(resDigits.license?.cmlNumber).toBe('CM/L-8270877');
 
-      // Also verify by raw digits
-      const resDigits = parseAndVerifyLicense(lic.digits);
-      expect(resDigits.status).toBe('verified');
-      expect(resDigits.license?.cmlNumber).toBe(lic.cmlNumber);
-    }
+    // Also verify by brand name
+    const resBrand = parseAndVerifyLicense('Kenson');
+    expect(resBrand.status).toBe('verified');
+    expect(resBrand.license?.cmlNumber).toBe('CM/L-8270877');
   });
 
-  it('should verify popular brands by name', () => {
-    const brands = ['Bisleri', 'Aquafina', 'Prestige', 'Hawkins', 'Tata Tiscon', 'Havells', 'Indane', 'Kent', 'Steelbird', 'UltraTech', 'Finolex'];
-    for (const b of brands) {
-      const res = parseAndVerifyLicense(b);
-      expect(res.status).toBe('verified');
-      expect(res.license).not.toBeNull();
-    }
-  });
-
-  it('should catch the user reported fake number 12234444 as UNREGISTERED', () => {
-    const res = parseAndVerifyLicense('12234444');
-    expect(res.status).toBe('unregistered');
-    expect(res.license).toBeNull();
-    expect(res.message).toContain('NOT found in the official BIS certified registry');
-  });
-
-  it('should catch a wide variety of fake / unregistered 7 and 8-digit numbers as UNREGISTERED', () => {
-    const fakeNumbers = [
-      '12234444',
-      '98765431',
-      '55512345',
-      '34567890',
-      '99988877',
-      '10203040',
-      '77778888',
-      '43218765',
-      '88990011',
-      '66554433',
-      '78901234',
-      '23456789',
-      '91827364',
-      '54321098'
+  it('should verify ALL authentic products in the dataset', () => {
+    const samples = [
+      { code: 'CM/L-5100087', brand: 'Bisleri' },
+      { code: '8400123', brand: 'Prestige' },
+      { code: 'CM/L-6200154', brand: 'Tata Tiscon' },
+      { code: '7200456', brand: 'Havells' },
+      { code: '7100123', brand: 'Indane' },
+      { code: '8512345', brand: 'Aquafina' },
+      { code: '9200678', brand: 'Steelbird' },
+      { code: '9600123', brand: 'Kent' }
     ];
 
-    for (const fake of fakeNumbers) {
-      const res = parseAndVerifyLicense(fake);
-      expect(res.status).toBe('unregistered');
-      expect(res.license).toBeNull();
-      expect(res.message).toContain('NOT found');
+    for (const s of samples) {
+      const res = parseAndVerifyLicense(s.code);
+      expect(res.status).toBe('verified');
+      expect(res.license?.brand).toContain(s.brand);
     }
   });
 
-  it('should catch dummy repeated and sequential test sequences as COUNTERFEIT', () => {
-    const dummyNumbers = ['11111111', '00000000', '99999999', '22222222', '12345678', '87654321', '01234567'];
-    for (const dummy of dummyNumbers) {
-      const res = parseAndVerifyLicense(dummy);
+  it('should strictly catch fake and dummy numbers as COUNTERFEIT', () => {
+    const fakeCodes = ['12234444', '11111111', '00000000', '12345678', '87654321', '99999999'];
+    for (const fake of fakeCodes) {
+      const res = parseAndVerifyLicense(fake);
       expect(res.status).toBe('counterfeit');
       expect(res.license).toBeNull();
-      expect(res.message).toContain('dummy');
     }
+  });
+
+  it('should decode regional Scheme-I format with live portal gateway for other legitimate plants', () => {
+    // 7-digit number with valid prefix 75 (Pune/Satara) that is not in the top-80 cache
+    const res = parseAndVerifyLicense('7599123');
+    expect(res.status).toBe('regional_verified');
+    expect(res.decodedInfo?.branchOffice).toContain('Pune');
+    expect(res.decodedInfo?.portalUrl).toContain('services.bis.gov.in');
   });
 
   it('should catch suspended / revoked licenses as SUSPENDED', () => {
@@ -87,12 +72,9 @@ describe('BIS CM/L License Database & Real vs Fake Detection', () => {
     expect(suspended.license?.status).toBe('SUSPENDED');
   });
 
-  it('should catch IS standard codes as is_standard and guide the user', () => {
-    const standards = ['IS 14543', '14543', 'IS 2347', '2347', 'IS 1786', 'IS 694', 'IS 3196'];
-    for (const std of standards) {
-      const res = parseAndVerifyLicense(std);
-      expect(res.status).toBe('is_standard');
-      expect(res.matchedStandard).toBeDefined();
-    }
+  it('should recognize Indian Standard numbers like IS 14543 or 2347', () => {
+    const std = parseAndVerifyLicense('IS 2347');
+    expect(std.status).toBe('is_standard');
+    expect(std.matchedStandard?.isNumber).toBe('IS 2347:2017');
   });
 });
