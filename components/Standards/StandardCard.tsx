@@ -28,7 +28,7 @@ export function StandardCard({ standard, language, onQuickView }: StandardCardPr
           <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
             isMandatory ? 'bg-rose-100 text-rose-800' : 'bg-slate-100 text-slate-700'
           }`}>
-            {standard.status}
+            {language === 'hi' && standard.status.includes('Mandatory') ? 'अनिवार्य (QCO)' : language === 'hi' && standard.status === 'Voluntary' ? 'स्वैच्छिक मानक' : standard.status}
           </span>
         </div>
 

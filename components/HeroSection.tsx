@@ -45,15 +45,15 @@ export function HeroSection({ mode, language, onSelectPrompt }: HeroSectionProps
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 pt-2 text-xs font-semibold text-slate-700">
             <div className="flex items-center gap-1.5 bg-white/80 border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs">
               <Shield className="w-4 h-4 text-amber-600" />
-              <span>20+ Authentic Indian Standards</span>
+              <span>{language === 'hi' ? '20+ प्रामाणिक भारतीय मानक' : '20+ Authentic Indian Standards'}</span>
             </div>
             <div className="flex items-center gap-1.5 bg-white/80 border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs">
               <Scale className="w-4 h-4 text-rose-600" />
-              <span>Mandatory QCO Directives</span>
+              <span>{language === 'hi' ? 'अनिवार्य QCO निर्देश' : 'Mandatory QCO Directives'}</span>
             </div>
             <div className="flex items-center gap-1.5 bg-white/80 border border-slate-200 px-3 py-1.5 rounded-xl shadow-2xs">
               <FileCode2 className="w-4 h-4 text-emerald-600" />
-              <span>pgvector RAG + Multi-turn AI</span>
+              <span>{language === 'hi' ? 'pgvector RAG + बहु-संवादी एआई' : 'pgvector RAG + Multi-turn AI'}</span>
             </div>
           </div>
 

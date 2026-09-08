@@ -185,16 +185,16 @@ export function MarkVerifier({ language }: { language: Language }) {
   }, [directorySearch, categoryFilter, statusFilter]);
 
   const categories = [
-    { id: 'all', label: 'All Certified Products', icon: Database },
-    { id: 'Food & Drinking Water', label: 'Water & RO (IS 14543/10500)', icon: Droplets },
-    { id: 'Kitchen & Home Safety', label: 'Cookers & Kitchen (IS 2347/302)', icon: ShoppingBag },
-    { id: 'Construction Materials', label: 'TMT Steel & Cement (IS 1786/1489)', icon: Wrench },
-    { id: 'Electrical & Electronics', label: 'Cables & Switches (IS 694/3854)', icon: Zap },
-    { id: 'Industrial & Gas Safety', label: 'LPG Valves & Regulators (IS 8737/9798)', icon: Flame },
-    { id: 'Automotive & Road Safety', label: 'Helmets & Two-Wheeler (IS 4151)', icon: HardHat },
-    { id: 'Consumer & Child Safety', label: 'Toys & Safety Goods (IS 9873)', icon: Layers },
-    { id: 'Infrastructure & Piping', label: 'HDPE & Steel Pipes (IS 4984/1239)', icon: Wrench },
-    { id: 'Personal Safety', label: 'Safety Footwear & PPE (IS 15298)', icon: HardHat }
+    { id: 'all', label: language === 'hi' ? 'सभी प्रमाणित उत्पाद (1,000+)' : 'All Certified Products', icon: Database },
+    { id: 'Food & Drinking Water', label: language === 'hi' ? 'पेयजल एवं आरओ (IS 14543/10500)' : 'Water & RO (IS 14543/10500)', icon: Droplets },
+    { id: 'Kitchen & Home Safety', label: language === 'hi' ? 'कुकर एवं रसोई सुरक्षा (IS 2347/302)' : 'Cookers & Kitchen (IS 2347/302)', icon: ShoppingBag },
+    { id: 'Construction Materials', label: language === 'hi' ? 'टीएमटी सरिया एवं सीमेंट (IS 1786/1489)' : 'TMT Steel & Cement (IS 1786/1489)', icon: Wrench },
+    { id: 'Electrical & Electronics', label: language === 'hi' ? 'केबल एवं स्विच (IS 694/3854)' : 'Cables & Switches (IS 694/3854)', icon: Zap },
+    { id: 'Industrial & Gas Safety', label: language === 'hi' ? 'एलपीजी वाल्व एवं रेगुलेटर (IS 8737/9798)' : 'LPG Valves & Regulators (IS 8737/9798)', icon: Flame },
+    { id: 'Automotive & Road Safety', label: language === 'hi' ? 'हेलमेट एवं सड़क सुरक्षा (IS 4151)' : 'Helmets & Two-Wheeler (IS 4151)', icon: HardHat },
+    { id: 'Consumer & Child Safety', label: language === 'hi' ? 'खिलौने एवं उपभोक्ता सुरक्षा (IS 9873)' : 'Toys & Safety Goods (IS 9873)', icon: Layers },
+    { id: 'Infrastructure & Piping', label: language === 'hi' ? 'एचडीपीई एवं स्टील पाइप (IS 4984/1239)' : 'HDPE & Steel Pipes (IS 4984/1239)', icon: Wrench },
+    { id: 'Personal Safety', label: language === 'hi' ? 'सुरक्षा जूते एवं पीपीई (IS 15298)' : 'Safety Footwear & PPE (IS 15298)', icon: HardHat }
   ];
 
   return (
@@ -214,11 +214,11 @@ export function MarkVerifier({ language }: { language: Language }) {
                   {t.verifyMarkTitle}
                 </h2>
                 <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 border border-emerald-300 px-2 py-0.5 rounded-full">
-                  1,000+ Real BIS Products Indexed
+                  {t.indexedBadge}
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
-                Instant pre-indexed license verification, regional Scheme-I decoding, and live Government of India BIS Gateway
+                {t.verifierSubtitle}
               </p>
             </div>
           </div>
@@ -228,7 +228,7 @@ export function MarkVerifier({ language }: { language: Language }) {
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-amber-900 text-xs font-bold transition self-start sm:self-auto border border-slate-200"
           >
             <Database className="w-3.5 h-3.5 text-amber-600" />
-            <span>Browse 1,000+ Genuine Products</span>
+            <span>{t.browseProductsBtn}</span>
           </a>
         </div>
 
@@ -239,11 +239,19 @@ export function MarkVerifier({ language }: { language: Language }) {
           </div>
           <div className="text-xs text-cyan-950 space-y-1">
             <div className="font-bold flex items-center gap-1.5">
-              <span>Checking Water Bottles, Pressure Cookers, or Appliances?</span>
+              <span>{t.tipBannerTitle}</span>
               <span className="bg-cyan-200 text-cyan-900 px-2 py-0.5 rounded-full text-[10px] font-bold">IS 14543 / IS 2347</span>
             </div>
             <p className="text-cyan-900/90 leading-relaxed">
-              Search by <strong>CM/L License Number</strong> (e.g. <span className="font-mono font-bold">CM/L-8270877</span> for Kenson Cooker, <span className="font-mono font-bold">5100087</span> for Bisleri), <strong>Brand Name</strong> (e.g. <span className="font-semibold">Kenson, Bisleri, Prestige, Aquafina, Tata Tiscon, Indane, Havells, Kent RO</span>), or <strong>IS Standard</strong> (e.g. <span className="font-mono font-bold">IS 14543</span>)!
+              {language === 'hi' ? (
+                <>
+                  <strong>{t.cmlLabel}</strong> (उदा. {t.tipBannerKenson} <span className="font-mono font-bold">CM/L-8270877</span>, {t.tipBannerBisleri} <span className="font-mono font-bold">5100087</span>), <strong>{t.brandNameLabel}</strong> (उदा. <span className="font-semibold">Kenson, Bisleri, Prestige, Aquafina, Tata Tiscon, Indane, Havells, Kent RO</span>), या <strong>{t.isStandardLabel}</strong> (उदा. <span className="font-mono font-bold">IS 14543</span>) द्वारा खोजें!
+                </>
+              ) : (
+                <>
+                  Search by <strong>CM/L License Number</strong> (e.g. <span className="font-mono font-bold">CM/L-8270877</span> for Kenson Cooker, <span className="font-mono font-bold">5100087</span> for Bisleri), <strong>Brand Name</strong> (e.g. <span className="font-semibold">Kenson, Bisleri, Prestige, Aquafina, Tata Tiscon, Indane, Havells, Kent RO</span>), or <strong>IS Standard</strong> (e.g. <span className="font-mono font-bold">IS 14543</span>)!
+                </>
+              )}
             </p>
           </div>
         </div>
@@ -251,12 +259,12 @@ export function MarkVerifier({ language }: { language: Language }) {
         <form onSubmit={handleVerify} className="space-y-4">
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
-              Enter CM/L License Number, Brand Name, or Standard Code:
+              {t.inputLabel}
             </label>
             <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="text"
-                placeholder="e.g. CM/L-8270877 (Kenson), CM/L-5100087 (Bisleri), 'Prestige', or 'IS 2347'"
+                placeholder={t.inputPlaceholder}
                 className="flex-1 px-4 py-3.5 bg-slate-50 focus:bg-white text-base sm:text-sm text-slate-900 border border-slate-200 focus:border-amber-500 rounded-xl outline-hidden font-mono uppercase transition"
                 value={cmlInput}
                 onChange={(e) => setCmlInput(e.target.value)}
@@ -269,12 +277,12 @@ export function MarkVerifier({ language }: { language: Language }) {
                 {isVerifying ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin" />
-                    <span>Scanning BIS Registry...</span>
+                    <span>{t.scanningBtn}</span>
                   </>
                 ) : (
                   <>
                     <Search className="w-4 h-4" />
-                    <span>Verify Product</span>
+                    <span>{t.verifyBtn}</span>
                   </>
                 )}
               </button>
@@ -285,7 +293,7 @@ export function MarkVerifier({ language }: { language: Language }) {
           <div className="pt-2">
             <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-2 flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-amber-600" />
-              <span>1-Click Real Product Samples &amp; Fake Test Chips:</span>
+              <span>{t.quickChipsHeader}</span>
             </span>
             <div className="flex flex-wrap gap-2">
               <button
@@ -294,7 +302,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-400 font-bold px-3.5 py-2 rounded-xl transition cursor-pointer shadow-2xs select-none active:scale-95 disabled:opacity-50"
               >
-                🍳 Kenson Cooker (CM/L-8270877)
+                🍳 {t.chipKenson} (CM/L-8270877)
               </button>
               <button
                 type="button"
@@ -302,7 +310,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border border-cyan-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
-                💧 Bisleri (CM/L-5100087)
+                💧 {t.chipBisleri} (CM/L-5100087)
               </button>
               <button
                 type="button"
@@ -310,7 +318,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
-                🍳 Prestige Cooker (CM/L-8400123)
+                🍳 {t.chipPrestige} (CM/L-8400123)
               </button>
               <button
                 type="button"
@@ -318,7 +326,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border border-cyan-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
-                💧 Aquafina (CM/L-8512345)
+                💧 {t.chipAquafina} (CM/L-8512345)
               </button>
               <button
                 type="button"
@@ -326,7 +334,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
-                🏗️ Tata Tiscon Steel (CM/L-6200154)
+                🏗️ {t.chipTataTiscon} (CM/L-6200154)
               </button>
               <button
                 type="button"
@@ -334,7 +342,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
-                ⚡ Havells Wire (CM/L-7200456)
+                ⚡ {t.chipHavells} (CM/L-7200456)
               </button>
               <button
                 type="button"
@@ -342,7 +350,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
-                🔥 Indane Gas (CM/L-7100123)
+                🔥 {t.chipIndane} (CM/L-7100123)
               </button>
               <button
                 type="button"
@@ -350,7 +358,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
-                ⚠️ Suspended License (CM/L-5199999)
+                ⚠️ {t.chipSuspended} (CM/L-5199999)
               </button>
               <button
                 type="button"
@@ -358,7 +366,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-400 font-bold px-3.5 py-2 rounded-xl transition cursor-pointer shadow-xs select-none active:scale-95 disabled:opacity-50"
               >
-                ❌ 12234444 (Test Fake Code)
+                ❌ 12234444 ({t.chipFakeCode})
               </button>
               <button
                 type="button"
@@ -366,7 +374,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 disabled={isVerifying}
                 className="text-xs bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
-                🚨 11111111 (Dummy Stamp)
+                🚨 11111111 ({t.chipDummyStamp})
               </button>
             </div>
           </div>
@@ -407,18 +415,18 @@ export function MarkVerifier({ language }: { language: Language }) {
                 <div className="space-y-2 w-full">
                   <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100/90 border border-amber-300 text-[11px] font-mono font-semibold tracking-wider text-amber-950">
                     <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping" />
-                    <span className="uppercase">BIS Scheme-I Hologram &amp; Ledger Audit</span>
+                    <span className="uppercase">{t.scannerAuditPill}</span>
                   </div>
 
                   <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 font-display tracking-tight">
-                    {verifyStep === 0 && "Connecting to National Manakonline Gateway..."}
-                    {verifyStep === 1 && "Inspecting CM/L Checksum & Holographic Watermark..."}
-                    {verifyStep === 2 && "Cross-referencing Regional Directorate & Neon Cloud DB..."}
-                    {verifyStep === 3 && "Cryptographic Validation Successful!"}
+                    {verifyStep === 0 && t.scannerStep0}
+                    {verifyStep === 1 && t.scannerStep1}
+                    {verifyStep === 2 && t.scannerStep2}
+                    {verifyStep === 3 && t.scannerStep3}
                   </h3>
 
                   <p className="text-xs text-slate-500 font-mono">
-                    TARGET: <span className="text-amber-800 font-bold">{scanningTarget || cmlInput || 'PRODUCT QUERY'}</span>
+                    {t.targetLabel} <span className="text-amber-800 font-bold">{scanningTarget || cmlInput || (language === 'hi' ? 'उत्पाद खोज' : 'PRODUCT QUERY')}</span>
                   </p>
                 </div>
 
@@ -431,8 +439,8 @@ export function MarkVerifier({ language }: { language: Language }) {
                     />
                   </div>
                   <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 px-1">
-                    <span>SECURITY HASH: SHA-256</span>
-                    <span className="text-emerald-700 font-bold">{verifyProgress}% AUDITED</span>
+                    <span>{t.secHash}</span>
+                    <span className="text-emerald-700 font-bold">{verifyProgress}% {t.auditedLabel}</span>
                   </div>
                 </div>
 
@@ -440,15 +448,15 @@ export function MarkVerifier({ language }: { language: Language }) {
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 w-full text-[10px] font-mono pt-1">
                   <div className="p-2.5 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center gap-1.5 text-slate-700 justify-center font-medium">
                     <Radio className="w-3.5 h-3.5 text-cyan-600 animate-pulse" />
-                    <span>BIS Gateway: OK</span>
+                    <span>{t.telemetryBisGateway}</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center gap-1.5 text-slate-700 justify-center font-medium">
                     <Cpu className="w-3.5 h-3.5 text-amber-600" />
-                    <span>Neon Cloud: Synced</span>
+                    <span>{t.telemetryNeonCloud}</span>
                   </div>
                   <div className="col-span-2 sm:col-span-1 p-2.5 rounded-xl bg-white border border-emerald-200 shadow-2xs flex items-center gap-1.5 text-emerald-800 justify-center font-semibold bg-emerald-50/50">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Integrity: Secured</span>
+                    <span>{t.telemetryIntegrity}</span>
                   </div>
                 </div>
 
@@ -473,15 +481,15 @@ export function MarkVerifier({ language }: { language: Language }) {
                     <div>
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="text-xs font-extrabold uppercase tracking-wider bg-emerald-600 text-white px-2.5 py-0.5 rounded-full">
-                          Authentic BIS License
+                          {t.authenticLicenseBadge}
                         </span>
                         <span className="text-xs font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full">
-                          Status: {verificationResult.license.status}
+                          {t.statusPrefix} {verificationResult.license.status === 'OPERATIVE' ? t.statusOperative : verificationResult.license.status === 'SUSPENDED' ? t.statusSuspendedVal : verificationResult.license.status}
                         </span>
                         {(verificationResult as any)?.source === 'neon_postgresql_cloud' && (
                           <span className="text-xs font-semibold text-teal-800 bg-teal-100/90 border border-teal-300 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
-                            <span>Cloud DB (Daily Synced)</span>
+                            <span>{t.cloudDbSyncedBadge}</span>
                           </span>
                         )}
                       </div>
@@ -506,7 +514,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                   <div className="p-3.5 rounded-2xl bg-white border border-emerald-100 space-y-1 shadow-2xs">
                     <div className="flex items-center gap-1.5 text-slate-500 font-medium">
                       <Award className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>Standard Specification</span>
+                      <span>{t.specTitle}</span>
                     </div>
                     <p className="font-bold text-slate-900">{verificationResult.license.isNumber}</p>
                     <p className="text-[11px] text-slate-500 leading-tight">{verificationResult.license.standardTitle}</p>
@@ -515,18 +523,18 @@ export function MarkVerifier({ language }: { language: Language }) {
                   <div className="p-3.5 rounded-2xl bg-white border border-emerald-100 space-y-1 shadow-2xs">
                     <div className="flex items-center gap-1.5 text-slate-500 font-medium">
                       <MapPin className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>Certified Plant Location</span>
+                      <span>{t.plantLocationTitle}</span>
                     </div>
                     <p className="font-bold text-slate-900">{verificationResult.license.factoryLocation}</p>
-                    <p className="text-[11px] text-slate-500 font-medium">{verificationResult.license.state}, India</p>
+                    <p className="text-[11px] text-slate-500 font-medium">{verificationResult.license.state}, {t.indiaSuffix}</p>
                   </div>
 
                   <div className="p-3.5 rounded-2xl bg-white border border-emerald-100 space-y-1 shadow-2xs">
                     <div className="flex items-center gap-1.5 text-slate-500 font-medium">
                       <Calendar className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>License Validity Period</span>
+                      <span>{t.validityPeriodTitle}</span>
                     </div>
-                    <p className="font-bold text-emerald-700">Valid until {verificationResult.license.validUntil}</p>
+                    <p className="font-bold text-emerald-700">{t.validUntilPrefix} {verificationResult.license.validUntil}</p>
                     <p className="text-[11px] text-slate-500">{verificationResult.license.branchOffice || verificationResult.license.scheme}</p>
                   </div>
                 </div>
@@ -534,13 +542,13 @@ export function MarkVerifier({ language }: { language: Language }) {
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
                   <span className="text-emerald-900 font-medium flex items-center gap-1.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Cross-referenced with BIS Scheme-I Certified Manufacturer Registry.</span>
+                    <span>{t.crossRefRegistryNotice}</span>
                   </span>
                   <Link
                     href={`/standards/${verificationResult.license.standardId || resolveStandardId(verificationResult.license.isNumber)}`}
                     className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-900 hover:underline"
                   >
-                    <span>View {verificationResult.license.isNumber.split(':')[0]} Technical Limits</span>
+                    <span>{t.viewLimitsAction.replace('{isNumber}', verificationResult.license.isNumber.split(':')[0])}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -559,7 +567,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-extrabold uppercase tracking-wider bg-teal-600 text-white px-2.5 py-0.5 rounded-full">
-                          Valid Scheme-I License Format
+                          {t.regionalBadge}
                         </span>
                         <span className="text-xs font-bold text-teal-800 bg-teal-100 border border-teal-300 px-2 py-0.5 rounded-full font-mono">
                           {verificationResult.inputNumber}
@@ -569,7 +577,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                         {verificationResult.decodedInfo.branchOffice}
                       </h3>
                       <p className="text-xs text-slate-600 font-medium">
-                        {verificationResult.decodedInfo.region} • Regional Certified Manufacturing Plant
+                        {verificationResult.decodedInfo.region} • {t.regionalPlantSubtitle}
                       </p>
                     </div>
                   </div>
@@ -586,20 +594,20 @@ export function MarkVerifier({ language }: { language: Language }) {
                   <div className="p-4 rounded-2xl bg-white border border-teal-100 space-y-1.5 shadow-2xs">
                     <h4 className="font-bold text-slate-900 flex items-center gap-1.5">
                       <Building2 className="w-4 h-4 text-teal-600" />
-                      <span>Regulatory Format Verification</span>
+                      <span>{t.regulatoryFormatTitle}</span>
                     </h4>
                     <p className="text-slate-600 leading-relaxed">
-                      This CM/L number complies with the official Bureau of Indian Standards (BIS) Scheme-I product certification scheme under mandatory Central Quality Control Orders (QCO).
+                      {t.regulatoryFormatDesc}
                     </p>
                   </div>
 
                   <div className="p-4 rounded-2xl bg-white border border-teal-100 space-y-1.5 shadow-2xs">
                     <h4 className="font-bold text-slate-900 flex items-center gap-1.5">
                       <Globe className="w-4 h-4 text-teal-600" />
-                      <span>Live Government Portal Inspection</span>
+                      <span>{t.livePortalTitle}</span>
                     </h4>
                     <p className="text-slate-600 leading-relaxed">
-                      For plants not in our instant offline cache, connect directly to the Government of India&apos;s central database to inspect real-time batch test logs and factory ownership records.
+                      {t.livePortalDesc}
                     </p>
                   </div>
                 </div>
@@ -611,7 +619,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                     rel="noreferrer"
                     className="inline-flex items-center gap-1.5 font-bold text-teal-700 hover:text-teal-900 hover:underline"
                   >
-                    <span>Check on National BIS Manakonline Portal</span>
+                    <span>{t.checkManakonlineBtn}</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
 
@@ -622,7 +630,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                     className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl transition flex items-center gap-1.5 shadow-md shadow-teal-600/20"
                   >
                     <Smartphone className="w-3.5 h-3.5" />
-                    <span>Verify on BIS Care App</span>
+                    <span>{t.verifyBisCareBtn}</span>
                   </a>
                 </div>
               </div>
@@ -638,7 +646,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-extrabold uppercase tracking-wider bg-amber-600 text-white px-2.5 py-0.5 rounded-full">
-                        License Suspended / Revoked
+                        {t.suspendedLicenseBadge}
                       </span>
                       <span className="text-xs font-mono font-bold text-amber-900 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-full">
                         {verificationResult.license.cmlNumber}
@@ -648,14 +656,14 @@ export function MarkVerifier({ language }: { language: Language }) {
                       {verificationResult.license.brand}
                     </h3>
                     <p className="text-xs text-amber-900 font-medium mt-1 leading-relaxed">
-                      {verificationResult.message || 'This manufacturer license was suspended or cancelled by the Bureau of Indian Standards.'}
+                      {verificationResult.message || t.suspendedDefaultMsg}
                     </p>
                   </div>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-white border border-amber-200 text-xs text-slate-600 space-y-2">
-                  <h4 className="font-bold text-slate-900">Consumer Advisory:</h4>
-                  <p>Selling products with a suspended BIS license is illegal under Section 29 of the BIS Act, 2016. If you find this product being sold in stores, you can report it directly on the <strong>BIS Care Mobile App</strong>.</p>
+                  <h4 className="font-bold text-slate-900">{t.consumerAdvisoryHeading}</h4>
+                  <p>{t.consumerAdvisoryBody}</p>
                 </div>
               </div>
             )}
@@ -670,14 +678,14 @@ export function MarkVerifier({ language }: { language: Language }) {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-black uppercase tracking-wider bg-rose-700 text-white px-3 py-1 rounded-full">
-                        🚨 KNOWN FAKE / DUMMY SEQUENCE
+                        {t.fakeBadge}
                       </span>
                       <span className="text-xs font-mono font-bold text-rose-900 bg-rose-100 border border-rose-300 px-2.5 py-0.5 rounded-full">
                         {verificationResult.inputNumber}
                       </span>
                     </div>
                     <h3 className="font-black text-xl sm:text-2xl text-rose-950 font-display mt-2">
-                      Counterfeit Stamp Detected
+                      {t.fakeDetectedTitle}
                     </h3>
                     <p className="text-xs text-rose-900 font-semibold mt-1 leading-relaxed">
                       {verificationResult.message}
@@ -686,10 +694,8 @@ export function MarkVerifier({ language }: { language: Language }) {
                 </div>
 
                 <div className="p-4 rounded-2xl bg-white border border-rose-200 text-xs text-slate-700 space-y-2">
-                  <h4 className="font-bold text-rose-950">Criminal Penalty Warning:</h4>
-                  <p>
-                    Dummy repeated numbers like <span className="font-mono font-bold">11111111</span>, <span className="font-mono font-bold">12234444</span>, or <span className="font-mono font-bold">12345678</span> are commonly printed by fraudulent counterfeiters. Products carrying such stamps violate Section 29 of the BIS Act and carry severe hazards of contamination, domestic fire, and explosion.
-                  </p>
+                  <h4 className="font-bold text-rose-950">{t.criminalPenaltyTitle}</h4>
+                  <p>{t.criminalPenaltyBody}</p>
                 </div>
               </div>
             )}
@@ -704,14 +710,14 @@ export function MarkVerifier({ language }: { language: Language }) {
                   <div className="space-y-1.5">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-bold uppercase tracking-wider bg-amber-200 text-amber-950 px-2.5 py-0.5 rounded-full border border-amber-300">
-                        Standard Number Detected
+                        {t.standardDetectedBadge}
                       </span>
                     </div>
                     <h3 className="font-extrabold text-xl text-slate-900 font-display">
-                      {verificationResult.matchedStandard.isNumber} — {verificationResult.matchedStandard.title}
+                      {verificationResult.matchedStandard.isNumber} — {(verificationResult.matchedStandard as any).titleHi || verificationResult.matchedStandard.title}
                     </h3>
                     <p className="text-xs text-slate-600 leading-relaxed">
-                      You entered the <strong>Indian Standard specification code</strong> ({verificationResult.matchedStandard.isNumber}) that is printed on top of the ISI mark on your product.
+                      {t.standardDetectedDesc.replace('{isNum}', verificationResult.matchedStandard.isNumber)}
                     </p>
                   </div>
                 </div>
@@ -719,33 +725,33 @@ export function MarkVerifier({ language }: { language: Language }) {
                 <div className="p-4 rounded-2xl bg-white border border-amber-200/80 space-y-3">
                   <h4 className="font-bold text-xs text-amber-950 uppercase tracking-wider flex items-center gap-1.5">
                     <HelpCircle className="w-4 h-4 text-amber-600" />
-                    <span>How to find the 7/8-digit CM/L Number on your product:</span>
+                    <span>{t.howToFindCmlTitle}</span>
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                     <div className="p-3 rounded-xl bg-amber-50/60 border border-amber-100">
-                      <span className="font-bold text-amber-900 block mb-1">1. Top Line</span>
-                      <p className="text-slate-600 text-[11px]">{verificationResult.matchedStandard.isNumber} (Quality Standard)</p>
+                      <span className="font-bold text-amber-900 block mb-1">{t.stepTopLineLabel}</span>
+                      <p className="text-slate-600 text-[11px]">{t.stepTopLineDesc.replace('{isNum}', verificationResult.matchedStandard.isNumber)}</p>
                     </div>
                     <div className="p-3 rounded-xl bg-amber-50/60 border border-amber-100">
-                      <span className="font-bold text-amber-900 block mb-1">2. Center Monogram</span>
-                      <p className="text-slate-600 text-[11px]">Official ISI framed logo</p>
+                      <span className="font-bold text-amber-900 block mb-1">{t.stepCenterMonoLabel}</span>
+                      <p className="text-slate-600 text-[11px]">{t.stepCenterMonoDesc}</p>
                     </div>
                     <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
-                      <span className="font-bold text-emerald-900 block mb-1">3. Bottom Line (CM/L)</span>
-                      <p className="text-emerald-800 text-[11px] font-mono font-bold">CM/L-XXXXXXX (Type this number)</p>
+                      <span className="font-bold text-emerald-900 block mb-1">{t.stepBottomLineLabel}</span>
+                      <p className="text-emerald-800 text-[11px] font-mono font-bold">{t.stepBottomLineDesc}</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs pt-2">
                   <span className="text-slate-600">
-                    Want to inspect testing limits and mandatory chemical/microbiological tolerances?
+                    {t.inspectLimitsPrompt}
                   </span>
                   <Link
                     href={`/standards/${verificationResult.matchedStandard.id}`}
                     className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl transition flex items-center gap-1.5 shadow-xs"
                   >
-                    <span>Inspect {verificationResult.matchedStandard.isNumber} Clauses</span>
+                    <span>{t.inspectClausesBtn.replace('{isNum}', verificationResult.matchedStandard.isNumber)}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -757,13 +763,13 @@ export function MarkVerifier({ language }: { language: Language }) {
               <div className="rounded-3xl border border-slate-300 bg-slate-50 p-6 sm:p-8 space-y-4">
                 <div className="flex items-center gap-3 text-slate-800 font-bold">
                   <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
-                  <span>Invalid License Query</span>
+                  <span>{t.invalidQueryTitle}</span>
                 </div>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  {verificationResult.message || 'CM/L license number must contain exactly 7 or 8 digits.'}
+                  {verificationResult.message || t.invalidQueryDefaultMsg}
                 </p>
                 <div className="text-xs text-slate-500 bg-white p-3 rounded-xl border border-slate-200">
-                  💡 <strong>Tip:</strong> Search for any brand name below (e.g. <em>Kenson, Bisleri, Prestige, Aquafina, Tata Tiscon, Indane, Havells, Kent RO</em>) or click on any product card in the directory below!
+                  {t.invalidQueryTip}
                 </div>
               </div>
             )}
@@ -780,10 +786,10 @@ export function MarkVerifier({ language }: { language: Language }) {
           <div>
             <h3 className="font-bold text-lg text-slate-900 font-display flex items-center gap-2">
               <FileCheck2 className="w-5 h-5 text-amber-600" />
-              <span>4-Step Authenticity Checklist (How to Spot Fakes)</span>
+              <span>{t.checklistHeading}</span>
             </h3>
             <p className="text-xs text-slate-500">
-              How to inspect authentic ISI marking against counterfeit products in the market:
+              {t.checklistSubheading}
             </p>
           </div>
 
@@ -799,10 +805,10 @@ export function MarkVerifier({ language }: { language: Language }) {
             </div>
             <div>
               <h4 className="font-bold text-xs text-amber-950 mb-1">
-                Top: IS Standard Number
+                {t.check1Heading}
               </h4>
               <p className="text-xs text-slate-600 leading-snug">
-                Look for the IS standard number written on top of the ISI mark (e.g. <span className="font-mono font-bold text-slate-800">IS 2347</span> for Cookers, <span className="font-mono font-bold text-slate-800">IS 14543</span> for Water).
+                {t.check1Body}
               </p>
             </div>
           </div>
@@ -813,10 +819,10 @@ export function MarkVerifier({ language }: { language: Language }) {
             </div>
             <div>
               <h4 className="font-bold text-xs text-amber-950 mb-1">
-                Centre: Authentic ISI Logo
+                {t.check2Heading}
               </h4>
               <p className="text-xs text-slate-600 leading-snug">
-                Look for the official geometric monogram with interlocking <span className="font-bold text-slate-800">I-S-I</span> characters inside a rectangular border.
+                {t.check2Body}
               </p>
             </div>
           </div>
@@ -827,10 +833,10 @@ export function MarkVerifier({ language }: { language: Language }) {
             </div>
             <div>
               <h4 className="font-bold text-xs text-amber-950 mb-1">
-                Bottom: 7/8 Digit CM/L Number
+                {t.check3Heading}
               </h4>
               <p className="text-xs text-slate-600 leading-snug">
-                Must be printed beneath the logo (e.g. <span className="font-mono font-bold text-slate-800">CM/L-8270877</span>). If this number is missing or a fake dummy sequence, the product is counterfeit!
+                {t.check3Body}
               </p>
             </div>
           </div>
@@ -841,10 +847,10 @@ export function MarkVerifier({ language }: { language: Language }) {
             </div>
             <div>
               <h4 className="font-bold text-xs text-emerald-950 mb-1">
-                Instant In-App Verification
+                {t.check4Heading}
               </h4>
               <p className="text-xs text-slate-600 leading-snug">
-                Verify instantly on this portal or download the official BIS Care Mobile App to verify Hallmarks &amp; file complaints.
+                {t.check4Body}
               </p>
             </div>
           </div>
@@ -861,17 +867,17 @@ export function MarkVerifier({ language }: { language: Language }) {
                 <Database className="w-4 h-4" />
               </div>
               <h3 className="font-extrabold text-xl text-slate-900 font-display">
-                Certified BIS Products &amp; License Registry
+                {t.directoryHeading}
               </h3>
             </div>
             <p className="text-xs text-slate-500 mt-1">
-              Browse authentic certified products in the indexed registry. Click &quot;Verify Code&quot; to test any product instantly!
+              {t.directorySubheading}
             </p>
           </div>
 
           {/* Quick Stats Pill */}
           <div className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-slate-100 px-3.5 py-1.5 rounded-xl border border-slate-200 self-start sm:self-auto">
-            <span>Showing {filteredProducts.length} Products</span>
+            <span>{t.showingCount.replace('{count}', filteredProducts.length.toString())}</span>
           </div>
         </div>
 
@@ -882,7 +888,7 @@ export function MarkVerifier({ language }: { language: Language }) {
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search products by brand (e.g. Kenson, Prestige, Bisleri), state, IS standard, or CM/L code..."
+                placeholder={t.directorySearchPlaceholder}
                 value={directorySearch}
                 onChange={(e) => setDirectorySearch(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 sm:py-2.5 bg-slate-50 focus:bg-white text-base sm:text-xs text-slate-900 border border-slate-200 focus:border-amber-500 rounded-xl outline-hidden transition"
@@ -895,9 +901,9 @@ export function MarkVerifier({ language }: { language: Language }) {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="w-full sm:w-auto px-3.5 py-2.5 bg-slate-50 text-xs font-semibold text-slate-700 border border-slate-200 rounded-xl outline-hidden cursor-pointer min-h-[44px]"
               >
-                <option value="all">All Statuses</option>
-                <option value="OPERATIVE">Operative Only</option>
-                <option value="SUSPENDED">Suspended Only</option>
+                <option value="all">{t.statusAll}</option>
+                <option value="OPERATIVE">{t.statusOperativeOnly}</option>
+                <option value="SUSPENDED">{t.statusSuspendedOnly}</option>
               </select>
             </div>
           </div>
@@ -994,7 +1000,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                     <button
                       type="button"
                       onClick={() => copyToClipboard(prod.cmlNumber)}
-                      title="Copy CM/L Code"
+                      title={t.copyCmlTooltip}
                       className="p-1 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
                     >
                       {copiedCode === prod.cmlNumber ? (
@@ -1012,7 +1018,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                         : 'bg-rose-100 text-rose-800'
                     }`}
                   >
-                    {prod.status}
+                    {prod.status === 'OPERATIVE' ? t.statusOperative : t.statusSuspendedVal}
                   </span>
                 </div>
 
@@ -1027,11 +1033,11 @@ export function MarkVerifier({ language }: { language: Language }) {
 
                 <div className="pt-1 text-[11px] text-slate-600 space-y-1">
                   <div className="flex items-center gap-1 text-slate-700 font-semibold">
-                    <Award className="w-3 h-3 text-amber-600 shrink-0" />
+                    <Award className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                     <span>{prod.isNumber}</span>
                   </div>
                   <div className="flex items-center gap-1 text-slate-500">
-                    <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                    <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                     <span className="truncate">{prod.factoryLocation}, {prod.state}</span>
                   </div>
                 </div>
@@ -1039,7 +1045,7 @@ export function MarkVerifier({ language }: { language: Language }) {
 
               <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                 <span className="text-[10px] text-slate-400 font-medium">
-                  Valid: {prod.validUntil.split(' ')[0]}
+                  {t.validPrefix} {prod.validUntil.split(' ')[0]}
                 </span>
 
                 <button
@@ -1047,8 +1053,8 @@ export function MarkVerifier({ language }: { language: Language }) {
                   onClick={() => handleQuickTest(prod.cmlNumber)}
                   className="px-3 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold transition flex items-center gap-1 cursor-pointer"
                 >
-                  <span>Verify Code</span>
-                  <ArrowRight className="w-3 h-3" />
+                  <span>{t.verifyCodeBtn}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
@@ -1062,7 +1068,7 @@ export function MarkVerifier({ language }: { language: Language }) {
               onClick={() => setVisibleCount(prev => prev + 36)}
               className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition shadow-sm cursor-pointer"
             >
-              Load More Certified Products ({filteredProducts.length - visibleCount} more)
+              {t.loadMoreBtn.replace('{count}', (filteredProducts.length - visibleCount).toString())}
             </button>
           </div>
         )}
@@ -1070,10 +1076,10 @@ export function MarkVerifier({ language }: { language: Language }) {
         {filteredProducts.length === 0 && (
           <div className="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200 p-6 space-y-3">
             <p className="text-xs font-bold text-slate-700">
-              No products in the local registry match &quot;{directorySearch}&quot;.
+              {t.noProductsMatch.replace('{query}', directorySearch)}
             </p>
             <p className="text-[11px] text-slate-500 max-w-md mx-auto">
-              If your product has this CM/L code printed on it, you can test it directly in the Verifier above to check its BIS Scheme-I regional branch jurisdiction and live Manakonline connection!
+              {t.noProductsSubtext}
             </p>
             <div className="flex items-center justify-center gap-2 pt-2">
               <button
@@ -1081,14 +1087,14 @@ export function MarkVerifier({ language }: { language: Language }) {
                 onClick={() => setDirectorySearch('')}
                 className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition cursor-pointer"
               >
-                Clear Search Filter
+                {t.clearSearchBtn}
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest(directorySearch)}
                 className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition cursor-pointer"
               >
-                Test &quot;{directorySearch}&quot; in Verifier
+                {t.testInVerifierBtn.replace('{query}', directorySearch)}
               </button>
             </div>
           </div>
@@ -1103,9 +1109,9 @@ export function MarkVerifier({ language }: { language: Language }) {
             <Smartphone className="w-6 h-6" />
           </div>
           <div>
-            <h4 className="font-extrabold text-base">Verify Live on the Official BIS Care Mobile App</h4>
+            <h4 className="font-extrabold text-base">{t.appBannerTitle}</h4>
             <p className="text-xs text-slate-300 mt-0.5 max-w-xl">
-              Scan QR codes, verify Gold Hallmarks (HUID), check real-time factory validity &amp; register consumer grievances directly with the Government of India.
+              {t.appBannerDesc}
             </p>
           </div>
         </div>
@@ -1115,7 +1121,7 @@ export function MarkVerifier({ language }: { language: Language }) {
           rel="noreferrer"
           className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0 shadow-md shadow-emerald-500/20"
         >
-          <span>Download App</span>
+          <span>{t.downloadAppBtn}</span>
           <ExternalLink className="w-3.5 h-3.5" />
         </a>
       </div>

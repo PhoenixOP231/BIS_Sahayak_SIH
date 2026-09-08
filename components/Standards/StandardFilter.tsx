@@ -69,7 +69,7 @@ export function StandardFilter({
         {/* Status Dropdown */}
         <div className="w-full sm:w-48">
           <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
-            Status / QCO
+            {language === 'hi' ? 'स्थिति / QCO' : 'Status / QCO'}
           </label>
           <select
             value={selectedStatus}
@@ -77,8 +77,8 @@ export function StandardFilter({
             className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 font-medium focus:border-amber-500 outline-hidden transition cursor-pointer"
           >
             <option value="all">{t.allStatuses}</option>
-            <option value="Mandatory">Mandatory (QCO)</option>
-            <option value="Voluntary">Voluntary</option>
+            <option value="Mandatory">{t.qcoMandatory}</option>
+            <option value="Voluntary">{t.voluntary}</option>
           </select>
         </div>
 
@@ -90,7 +90,7 @@ export function StandardFilter({
             title="Reset all filters"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset</span>
+            <span>{language === 'hi' ? 'रीसेट' : 'Reset'}</span>
           </button>
         </div>
 
