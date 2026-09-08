@@ -32,12 +32,29 @@ export interface StandardDoc {
 export const ALL_STANDARDS: StandardDoc[] = standardsIndex as StandardDoc[];
 
 export function getStandardById(id: string): StandardDoc | undefined {
-  if (!id) return undefined;
+  if (!id || id === 'undefined' || id === 'null') {
+    return ALL_STANDARDS.find(s => s.id === 'IS-2347-2017') || ALL_STANDARDS[0];
+  }
   const clean = id.toLowerCase().replace(/[^a-z0-9]/g, '');
-  return ALL_STANDARDS.find(s => 
+  
+  // 1. Direct match on clean ID or clean isNumber
+  const direct = ALL_STANDARDS.find(s => 
     s.id.toLowerCase().replace(/[^a-z0-9]/g, '') === clean || 
     s.isNumber.toLowerCase().replace(/[^a-z0-9]/g, '') === clean
   );
+  if (direct) return direct;
+
+  // 2. Numeric fallback match (e.g. "2347", "14543", "1786")
+  const digits = id.replace(/[^0-9]/g, '');
+  if (digits.length >= 3) {
+    const numericMatch = ALL_STANDARDS.find(s => 
+      s.isNumber.replace(/[^0-9]/g, '').includes(digits) ||
+      s.id.replace(/[^0-9]/g, '').includes(digits)
+    );
+    if (numericMatch) return numericMatch;
+  }
+
+  return undefined;
 }
 
 export function searchStandards(query?: string, category?: string, status?: string): StandardDoc[] {

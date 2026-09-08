@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getLicenseByDigits, getDatabaseStats } from '@/lib/db-licenses';
-import { parseAndVerifyLicense, isDummyOrCounterfeitNumber } from '@/lib/license-database';
+import { 
+  parseAndVerifyLicense, 
+  isDummyOrCounterfeitNumber,
+  resolveStandardId,
+  resolveStandardTitle
+} from '@/lib/license-database';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -50,11 +55,14 @@ export async function GET(req: NextRequest) {
             brand: dbRecord.brand,
             manufacturer: dbRecord.manufacturer,
             isNumber: dbRecord.is_number,
+            standardTitle: resolveStandardTitle(dbRecord.is_number),
             category: dbRecord.category,
             factoryLocation: dbRecord.factory_address,
             state: dbRecord.state,
             status: dbRecord.status,
             validUntil: dbRecord.valid_until || 'Operative',
+            scheme: 'Scheme-I (ISI Mark Certification)',
+            standardId: resolveStandardId(dbRecord.is_number),
             branchOffice: dbRecord.branch_office
           },
           inputNumber: dbRecord.cml_number,

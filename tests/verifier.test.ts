@@ -94,5 +94,24 @@ describe('BIS CM/L License Database & Intelligent Verification', () => {
       expect(stats.operative).toBeGreaterThan(900);
     }
   });
+
+  it('should resolve standardId correctly and prevent undefined 404 links', async () => {
+    const { resolveStandardId } = await import('../lib/license-database');
+    const { getStandardById } = await import('../lib/standards-data');
+
+    expect(resolveStandardId('IS 2347:2017')).toBe('IS-2347-2017');
+    expect(resolveStandardId('IS 14543:2024')).toBe('IS-14543-2024');
+    expect(resolveStandardId(undefined)).toBe('IS-2347-2017');
+
+    const stdCooker = getStandardById('IS-2347-2017');
+    expect(stdCooker).toBeDefined();
+    expect(stdCooker?.title).toContain('Cookers');
+
+    // Fallback for undefined queries
+    const stdUndefined = getStandardById('undefined');
+    expect(stdUndefined).toBeDefined();
+    expect(stdUndefined?.id).toBe('IS-2347-2017');
+  });
 });
+
 

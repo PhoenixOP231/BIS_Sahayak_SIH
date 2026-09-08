@@ -58,6 +58,32 @@ export const INDIAN_STANDARDS_LOOKUP: Record<string, { isNumber: string; title: 
   '15477': { isNumber: 'IS 15477:2019', title: 'Adhesives for Ceramic and Stone Tiles', category: 'Civil & Construction', id: 'IS-15477-2019' }
 };
 
+export function resolveStandardId(isNumber?: string): string {
+  if (!isNumber) return 'IS-2347-2017';
+  const clean = isNumber.toUpperCase().trim();
+  for (const [key, val] of Object.entries(INDIAN_STANDARDS_LOOKUP)) {
+    if (clean.includes(key)) {
+      return val.id;
+    }
+  }
+  const digits = clean.replace(/[^0-9]/g, '');
+  if (digits) {
+    return `IS-${digits}`;
+  }
+  return 'IS-2347-2017';
+}
+
+export function resolveStandardTitle(isNumber?: string, fallbackTitle?: string): string {
+  if (!isNumber) return 'Domestic Pressure Cookers — Specification';
+  const clean = isNumber.toUpperCase().trim();
+  for (const [key, val] of Object.entries(INDIAN_STANDARDS_LOOKUP)) {
+    if (clean.includes(key)) {
+      return val.title;
+    }
+  }
+  return fallbackTitle || `${isNumber} Specification`;
+}
+
 // Check if a number is a known dummy, test or counterfeit sequence
 export function isDummyOrCounterfeitNumber(digits: string): boolean {
   // All identical digits like 1111111, 11111111, 00000000, 99999999

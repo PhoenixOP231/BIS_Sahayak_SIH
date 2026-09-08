@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { getStandardById } from '@/lib/standards-data';
+import { getStandardById, ALL_STANDARDS } from '@/lib/standards-data';
 import { Language, UI_TEXT } from '@/lib/translations';
 import { ArrowLeft, Shield, AlertTriangle, CheckCircle, Activity, FileText, Share2, Layers, Award } from 'lucide-react';
 import { toast } from 'sonner';
@@ -16,7 +16,8 @@ interface PageProps {
 
 export default function StandardDetailPage({ params }: PageProps) {
   const { id } = use(params);
-  const standard = getStandardById(id);
+  const resolved = getStandardById(id);
+  const standard = resolved || ALL_STANDARDS.find(s => s.id === 'IS-2347-2017') || ALL_STANDARDS[0];
 
   const [mode, setMode] = useState<'consumer' | 'industry'>('consumer');
   const [language, setLanguage] = useState<Language>('en');

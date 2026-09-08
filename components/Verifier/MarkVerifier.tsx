@@ -40,7 +40,8 @@ import { UI_TEXT, Language } from '@/lib/translations';
 import { 
   parseAndVerifyLicense, 
   VerificationResult,
-  searchVerifiedLicenses
+  searchVerifiedLicenses,
+  resolveStandardId
 } from '@/lib/license-database';
 import { ISIMarkLogo } from './ISIMarkLogo';
 
@@ -516,7 +517,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                     <span>Cross-referenced with BIS Scheme-I Certified Manufacturer Registry.</span>
                   </span>
                   <Link
-                    href={`/standards/${verificationResult.license.standardId}`}
+                    href={`/standards/${verificationResult.license.standardId || resolveStandardId(verificationResult.license.isNumber)}`}
                     className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-900 hover:underline"
                   >
                     <span>View {verificationResult.license.isNumber.split(':')[0]} Technical Limits</span>
