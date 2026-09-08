@@ -61,6 +61,22 @@ export function MarkVerifier({ language }: { language: Language }) {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
+  // Results & Analyzing Animation Anchor Ref for Mobile Auto-scroll
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  const scrollToResults = () => {
+    // Dismiss mobile virtual keyboard if open
+    if (typeof document !== 'undefined' && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+    // Smoothly scroll mobile viewport directly to the results / analyzing animation
+    setTimeout(() => {
+      if (resultsRef.current) {
+        resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 120);
+  };
+
   // Directory Search & Filter State
   const [directorySearch, setDirectorySearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -99,6 +115,9 @@ export function MarkVerifier({ language }: { language: Language }) {
     setVerifyProgress(18);
     setVerifyStep(0);
     setVerificationResult(null);
+
+    // Scroll mobile screen smoothly to results animation bar
+    scrollToResults();
 
     // Timed progression for authentic government security inspection feeling
     const t1 = setTimeout(() => {
@@ -149,7 +168,6 @@ export function MarkVerifier({ language }: { language: Language }) {
   const handleQuickTest = (licenseNum: string) => {
     setCmlInput(licenseNum);
     runVerification(licenseNum);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const copyToClipboard = (text: string) => {
@@ -354,10 +372,12 @@ export function MarkVerifier({ language }: { language: Language }) {
           </div>
         </form>
 
-        {/* HIGH-TECH VERIFICATION SCANNER BUFFER (WHITE THEME) */}
-        {isVerifying && (
-          <div className="mt-8 pt-8 border-t border-slate-200 animate-fadeIn">
-            <div className="rounded-3xl border-2 border-amber-200/90 bg-gradient-to-b from-white via-amber-50/20 to-slate-50/60 p-6 sm:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden">
+        {/* RESULTS & SCANNER ANCHOR CONTAINER FOR MOBILE AUTO-SCROLL */}
+        <div ref={resultsRef} id="verification-results-section" className="scroll-mt-24">
+          {/* HIGH-TECH VERIFICATION SCANNER BUFFER (WHITE THEME) */}
+          {isVerifying && (
+            <div className="mt-8 pt-8 border-t border-slate-200 animate-fadeIn">
+              <div className="rounded-3xl border-2 border-amber-200/90 bg-gradient-to-b from-white via-amber-50/20 to-slate-50/60 p-6 sm:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden">
               {/* Subtle Ambient Grid & Glows */}
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f050_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f050_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
               <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-200/30 rounded-full blur-3xl pointer-events-none" />
@@ -750,6 +770,7 @@ export function MarkVerifier({ language }: { language: Language }) {
 
           </div>
         )}
+        </div>
 
       </div>
 
