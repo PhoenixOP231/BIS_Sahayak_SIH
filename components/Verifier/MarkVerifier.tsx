@@ -11,7 +11,6 @@ import {
   Smartphone, 
   ExternalLink, 
   FileCheck2, 
-  Building2, 
   MapPin, 
   Calendar, 
   Award,
@@ -28,7 +27,9 @@ import {
   Zap,
   HardHat,
   ShoppingBag,
-  Wrench
+  Wrench,
+  AlertOctagon,
+  ShieldAlert
 } from 'lucide-react';
 import { UI_TEXT, Language } from '@/lib/translations';
 import { 
@@ -118,7 +119,7 @@ export function MarkVerifier({ language }: { language: Language }) {
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-amber-900 text-xs font-bold transition self-start sm:self-auto border border-slate-200"
           >
             <Database className="w-3.5 h-3.5 text-amber-600" />
-            <span>Browse All Product Codes</span>
+            <span>Browse All Genuine Codes</span>
           </a>
         </div>
 
@@ -212,13 +213,6 @@ export function MarkVerifier({ language }: { language: Language }) {
               </button>
               <button
                 type="button"
-                onClick={() => handleQuickTest('CM/L-9600123')}
-                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
-              >
-                🚰 Kent RO (CM/L-9600123)
-              </button>
-              <button
-                type="button"
                 onClick={() => handleQuickTest('CM/L-5199999')}
                 className="text-xs bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
               >
@@ -226,10 +220,17 @@ export function MarkVerifier({ language }: { language: Language }) {
               </button>
               <button
                 type="button"
+                onClick={() => handleQuickTest('12234444')}
+                className="text-xs bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-400 font-bold px-3 py-1.5 rounded-lg transition cursor-pointer shadow-xs"
+              >
+                ❌ 12234444 (Test Fake Code)
+              </button>
+              <button
+                type="button"
                 onClick={() => handleQuickTest('11111111')}
                 className="text-xs bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
               >
-                🚨 11111111 (Fake Stamp Alert)
+                🚨 11111111 (Dummy Stamp)
               </button>
             </div>
           </div>
@@ -352,80 +353,128 @@ export function MarkVerifier({ language }: { language: Language }) {
               </div>
             )}
 
-            {/* STATE 3: VALID REGIONAL SCHEME-I LICENSE */}
-            {verificationResult.status === 'regional_valid' && verificationResult.decodedInfo && (
-              <div className="rounded-3xl border-2 border-teal-500/80 bg-gradient-to-b from-teal-50/90 via-teal-50/40 to-white p-6 sm:p-8 shadow-lg shadow-teal-500/10 space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-teal-200/80">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center shadow-md shadow-teal-600/20 shrink-0">
-                      <CheckCircle2 className="w-7 h-7" />
+            {/* STATE 3: UNREGISTERED / NOT IN BIS DATABASE (CATCHES FAKES!) */}
+            {verificationResult.status === 'unregistered' && (
+              <div className="rounded-3xl border-2 border-rose-500 bg-gradient-to-b from-rose-50/95 via-rose-50/40 to-white p-6 sm:p-8 shadow-xl shadow-rose-500/15 space-y-6">
+                
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-rose-200/90">
+                  <div className="flex items-start gap-4">
+                    <div className="w-14 h-14 rounded-2xl bg-rose-600 text-white flex items-center justify-center shadow-lg shadow-rose-600/30 shrink-0">
+                      <XCircle className="w-8 h-8" />
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-extrabold uppercase tracking-wider bg-teal-600 text-white px-2.5 py-0.5 rounded-full">
-                          Valid Scheme-I Format
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-xs font-black uppercase tracking-wider bg-rose-600 text-white px-3 py-1 rounded-full shadow-xs">
+                          NOT FOUND IN BIS REGISTRY
                         </span>
-                        <span className="text-xs font-bold text-teal-800 bg-teal-100 border border-teal-300 px-2 py-0.5 rounded-full">
+                        <span className="text-xs font-mono font-bold text-rose-900 bg-rose-100 border border-rose-300 px-2.5 py-0.5 rounded-full">
                           {verificationResult.inputNumber}
                         </span>
+                        <span className="text-xs font-bold text-rose-700 bg-white border border-rose-200 px-2 py-0.5 rounded-full">
+                          ⚠️ Potential Counterfeit / Uncertified
+                        </span>
                       </div>
-                      <h3 className="font-extrabold text-xl sm:text-2xl text-slate-900 font-display mt-1">
-                        {verificationResult.decodedInfo.branchOffice}
+
+                      <h3 className="font-black text-xl sm:text-2xl text-slate-950 font-display pt-1">
+                        Unregistered License: {verificationResult.inputNumber}
                       </h3>
-                      <p className="text-xs text-slate-600 font-medium">
-                        {verificationResult.decodedInfo.region} • BIS Scheme-I Certification
+                      <p className="text-xs text-rose-950 font-medium leading-relaxed max-w-2xl">
+                        {verificationResult.message}
                       </p>
                     </div>
                   </div>
-
-                  <div className="shrink-0 flex justify-center">
-                    <ISIMarkLogo 
-                      isNumber="IS 14543" 
-                      cmlNumber={verificationResult.inputNumber} 
-                    />
-                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div className="p-4 rounded-2xl bg-white border border-teal-100 space-y-1.5 shadow-2xs">
-                    <h4 className="font-bold text-slate-900 flex items-center gap-1.5">
-                      <Building2 className="w-4 h-4 text-teal-600" />
-                      <span>Jurisdiction & Applicable Standards</span>
-                    </h4>
-                    <p className="text-slate-600 leading-relaxed">
-                      This 7/8-digit CM/L number complies with the Bureau of Indian Standards (BIS) Scheme-I numbering format. All certified manufacturing plants operate under mandatory Central Quality Control Orders (QCO).
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                  <div className="p-4 rounded-2xl bg-white border border-rose-200 shadow-2xs space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-rose-700 font-bold">
+                      <ShieldAlert className="w-4 h-4 text-rose-600" />
+                      <span>Zero Quality Guarantee</span>
+                    </div>
+                    <p className="text-slate-600 leading-relaxed text-[11px]">
+                      This product has <strong>never passed</strong> mandatory BIS physical, chemical, or microbiological safety testing.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white border border-teal-100 space-y-1.5 shadow-2xs">
-                    <h4 className="font-bold text-slate-900 flex items-center gap-1.5">
-                      <Smartphone className="w-4 h-4 text-teal-600" />
-                      <span>Live Batch & Address Lookup</span>
-                    </h4>
-                    <p className="text-slate-600 leading-relaxed">
-                      To inspect this specific plant&apos;s real-time operative status, factory owner name, and laboratory test history, use the official <strong>BIS Care Mobile App</strong>.
+                  <div className="p-4 rounded-2xl bg-white border border-rose-200 shadow-2xs space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-rose-700 font-bold">
+                      <AlertOctagon className="w-4 h-4 text-rose-600" />
+                      <span>Illegal Under BIS Act 2016</span>
+                    </div>
+                    <p className="text-slate-600 leading-relaxed text-[11px]">
+                      Manufacturing or selling goods with an uncertified or fake ISI mark is a cognizable criminal offense under <strong>Section 29</strong>.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white border border-rose-200 shadow-2xs space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-rose-700 font-bold">
+                      <Smartphone className="w-4 h-4 text-rose-600" />
+                      <span>Report Consumer Grievance</span>
+                    </div>
+                    <p className="text-slate-600 leading-relaxed text-[11px]">
+                      Report this suspect product on the <strong>BIS Care Mobile App</strong> or call the National Consumer Helpline at <strong>1915</strong>.
                     </p>
                   </div>
                 </div>
 
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-                  <span className="text-teal-900 font-medium">
-                    ✓ Structurally valid CM/L license format under BIS Act 2016.
-                  </span>
+                  <a
+                    href="#all-products-directory"
+                    className="inline-flex items-center gap-1.5 font-bold text-slate-700 hover:text-slate-950 underline"
+                  >
+                    <span>Browse All 74 Genuine Registered Products Below</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+
                   <a
                     href="https://play.google.com/store/apps/details?id=com.bis.bisapp"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 font-bold text-teal-700 hover:text-teal-900 hover:underline"
+                    className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition flex items-center gap-1.5 shadow-md shadow-rose-600/20"
                   >
-                    <span>Check on BIS Care App</span>
+                    <span>Lodge Complaint on BIS Care</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
+                </div>
+
+              </div>
+            )}
+
+            {/* STATE 4: DUMMY / COUNTERFEIT WARNING */}
+            {verificationResult.status === 'counterfeit' && (
+              <div className="rounded-3xl border-2 border-rose-600 bg-gradient-to-b from-rose-100/90 via-rose-50/50 to-white p-6 sm:p-8 shadow-xl shadow-rose-600/20 space-y-6">
+                <div className="flex items-start gap-4 pb-6 border-b border-rose-300">
+                  <div className="w-14 h-14 rounded-2xl bg-rose-700 text-white flex items-center justify-center shadow-lg shadow-rose-700/30 shrink-0">
+                    <AlertOctagon className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-black uppercase tracking-wider bg-rose-700 text-white px-3 py-1 rounded-full">
+                        🚨 KNOWN FAKE / DUMMY SEQUENCE
+                      </span>
+                      <span className="text-xs font-mono font-bold text-rose-900 bg-rose-100 border border-rose-300 px-2.5 py-0.5 rounded-full">
+                        {verificationResult.inputNumber}
+                      </span>
+                    </div>
+                    <h3 className="font-black text-xl sm:text-2xl text-rose-950 font-display mt-2">
+                      Counterfeit Stamp Detected
+                    </h3>
+                    <p className="text-xs text-rose-900 font-semibold mt-1 leading-relaxed">
+                      {verificationResult.message}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white border border-rose-200 text-xs text-slate-700 space-y-2">
+                  <h4 className="font-bold text-rose-950">Criminal Penalty Warning:</h4>
+                  <p>
+                    Dummy repeated numbers like <span className="font-mono font-bold">11111111</span> or <span className="font-mono font-bold">12345678</span> are commonly printed by fraudulent counterfeiters. Products carrying such stamps carry severe hazards of contamination, domestic fire, and structural collapse.
+                  </p>
                 </div>
               </div>
             )}
 
-            {/* STATE 4: STANDARD NUMBER DETECTED */}
+            {/* STATE 5: STANDARD NUMBER DETECTED */}
             {verificationResult.status === 'is_standard' && verificationResult.matchedStandard && (
               <div className="rounded-3xl border-2 border-amber-400 bg-gradient-to-b from-amber-50/90 via-amber-50/40 to-white p-6 sm:p-8 shadow-lg shadow-amber-500/10 space-y-6">
                 <div className="flex items-start gap-3.5">
@@ -479,55 +528,6 @@ export function MarkVerifier({ language }: { language: Language }) {
                     <span>Inspect {verificationResult.matchedStandard.isNumber} Clauses</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
-                </div>
-              </div>
-            )}
-
-            {/* STATE 5: DUMMY / COUNTERFEIT WARNING */}
-            {verificationResult.status === 'counterfeit' && (
-              <div className="rounded-3xl border-2 border-rose-500 bg-gradient-to-b from-rose-50/90 via-rose-50/40 to-white p-6 sm:p-8 shadow-lg shadow-rose-500/10 space-y-6">
-                <div className="flex items-start gap-4 pb-6 border-b border-rose-200/80">
-                  <div className="w-12 h-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center shadow-md shadow-rose-600/20 shrink-0">
-                    <AlertTriangle className="w-7 h-7" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-extrabold uppercase tracking-wider bg-rose-600 text-white px-2.5 py-0.5 rounded-full">
-                        Counterfeit / Dummy Number
-                      </span>
-                      <span className="text-xs font-mono font-bold text-rose-900 bg-rose-100 border border-rose-300 px-2 py-0.5 rounded-full">
-                        {verificationResult.inputNumber}
-                      </span>
-                    </div>
-                    <h3 className="font-extrabold text-xl sm:text-2xl text-rose-950 font-display mt-1">
-                      Dummy or Fake License Detected
-                    </h3>
-                    <p className="text-xs text-rose-800 font-medium mt-1 leading-relaxed">
-                      {verificationResult.message}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div className="p-4 rounded-2xl bg-white border border-rose-200/70 space-y-1.5">
-                    <h4 className="font-bold text-rose-950 flex items-center gap-1.5">
-                      <XCircle className="w-4 h-4 text-rose-600" />
-                      <span>Health & Hazard Risks</span>
-                    </h4>
-                    <p className="text-slate-600 leading-relaxed">
-                      Counterfeit goods bypass mandatory burst pressure, fire retardance, and toxic element safety testing, leading to severe domestic fires, water contamination, and child hazards.
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white border border-rose-200/70 space-y-1.5">
-                    <h4 className="font-bold text-rose-950 flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4 text-rose-600" />
-                      <span>Legal Penalty under BIS Act 2016</span>
-                    </h4>
-                    <p className="text-slate-600 leading-relaxed">
-                      Printing a fake ISI mark is a cognizable criminal offense punishable with up to 2 years imprisonment and heavy fines under Section 29 of the Bureau of Indian Standards Act.
-                    </p>
-                  </div>
                 </div>
               </div>
             )}
@@ -609,7 +609,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 Bottom: 7/8 Digit CM/L Number
               </h4>
               <p className="text-xs text-slate-600 leading-snug">
-                Must be printed beneath the logo (e.g. <span className="font-mono font-bold text-slate-800">CM/L-5100087</span>). If this number is missing, the product is counterfeit!
+                Must be printed beneath the logo (e.g. <span className="font-mono font-bold text-slate-800">CM/L-5100087</span>). If this number is missing or unregistered, the product is counterfeit!
               </p>
             </div>
           </div>
@@ -786,10 +786,34 @@ export function MarkVerifier({ language }: { language: Language }) {
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-            <p className="text-xs text-slate-500 font-medium">
-              No certified products found matching &quot;{directorySearch}&quot;.
-            </p>
+          <div className="text-center py-12 bg-rose-50/50 rounded-2xl border border-dashed border-rose-200 p-6 space-y-3">
+            <div className="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+              <XCircle className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-rose-900">
+                No verified BIS products found matching &quot;{directorySearch}&quot;.
+              </p>
+              <p className="text-[11px] text-slate-500 mt-1 max-w-md mx-auto">
+                If a product in the market claims to have this license code or brand name, it is not present in the verified BIS database and may be uncertified or counterfeit.
+              </p>
+            </div>
+            <div className="flex items-center justify-center gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setDirectorySearch('')}
+                className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition cursor-pointer"
+              >
+                Clear Search Filter
+              </button>
+              <button
+                type="button"
+                onClick={() => handleQuickTest(directorySearch)}
+                className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition cursor-pointer"
+              >
+                Test &quot;{directorySearch}&quot; in Verifier
+              </button>
+            </div>
           </div>
         )}
 

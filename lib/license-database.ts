@@ -18,7 +18,7 @@ export interface VerifiedLicense {
 }
 
 export interface VerificationResult {
-  status: 'verified' | 'suspended' | 'regional_valid' | 'is_standard' | 'counterfeit' | 'invalid';
+  status: 'verified' | 'suspended' | 'unregistered' | 'counterfeit' | 'is_standard' | 'invalid';
   license: VerifiedLicense | null;
   inputNumber: string;
   matchedStandard?: {
@@ -26,12 +26,6 @@ export interface VerificationResult {
     title: string;
     category: string;
     id: string;
-  } | null;
-  decodedInfo?: {
-    branchOffice: string;
-    region: string;
-    standard: string;
-    validityGuide: string;
   } | null;
   message?: string;
 }
@@ -59,52 +53,29 @@ export const INDIAN_STANDARDS_LOOKUP: Record<string, { isNumber: string; title: 
   '15477': { isNumber: 'IS 15477:2019', title: 'Adhesives for Ceramic and Stone Tiles', category: 'Civil & Construction', id: 'IS-15477-2019' }
 };
 
-// Branch office decoder for 7/8-digit BIS Scheme-I license prefixes
-export function decodeBisBranchOffice(prefix2: string): { branchOffice: string; region: string } {
-  const code = parseInt(prefix2, 10);
-  if (code >= 51 && code <= 55) {
-    return { branchOffice: 'BIS Mumbai / Western Regional Office', region: 'Western Region (Maharashtra, Goa, Gujarat)' };
-  } else if ((code >= 56 && code <= 60) || (code >= 71 && code <= 73)) {
-    return { branchOffice: 'BIS Delhi / NCR Northern Regional Office', region: 'Northern Region (Delhi, Haryana, UP, Rajasthan)' };
-  } else if (code >= 61 && code <= 66) {
-    return { branchOffice: 'BIS Kolkata / Eastern Regional Office', region: 'Eastern Region (West Bengal, Bihar, Jharkhand, Odisha)' };
-  } else if (code >= 67 && code <= 70) {
-    return { branchOffice: 'BIS Ahmedabad / Gujarat Branch Office', region: 'Western Region (Gujarat, Daman & Diu)' };
-  } else if (code >= 74 && code <= 78) {
-    return { branchOffice: 'BIS Pune / Satara Branch Office', region: 'Western Region (Maharashtra)' };
-  } else if (code >= 81 && code <= 82) {
-    return { branchOffice: 'BIS Chennai / Tamil Nadu Branch Office', region: 'Southern Region (Tamil Nadu, Kerala, Pondicherry)' };
-  } else if (code >= 83 && code <= 84) {
-    return { branchOffice: 'BIS Bengaluru / Karnataka Branch Office', region: 'Southern Region (Karnataka)' };
-  } else if (code >= 85 && code <= 88) {
-    return { branchOffice: 'BIS Hyderabad / Andhra Pradesh Branch Office', region: 'Southern Region (Telangana, Andhra Pradesh)' };
-  } else if (code >= 91 && code <= 95) {
-    return { branchOffice: 'BIS Chandigarh / Punjab & HP Branch Office', region: 'Northern Region (Punjab, HP, J&K, Chandigarh)' };
-  }
-  return { branchOffice: 'Bureau of Indian Standards (BIS) Regional Branch Directorate', region: 'National Certification Directorate (Scheme-I)' };
-}
-
 export function isDummyOrCounterfeitNumber(digits: string): boolean {
-  // All same digits like 1111111, 11111111, 00000000, 99999999
+  // All identical digits like 1111111, 11111111, 00000000, 99999999
   if (/^(\d)\1+$/.test(digits)) return true;
-  // Sequential test digits
-  if (
-    digits === '1234567' || 
-    digits === '12345678' || 
-    digits === '87654321' || 
-    digits === '7654321' || 
-    digits === '0123456' || 
-    digits === '01234567' ||
-    digits === '0000000' ||
-    digits === '1111111'
-  ) return true;
-  return false;
+  // Obvious sequential or dummy test numbers
+  const dummyList = [
+    '1234567', '12345678', '87654321', '7654321',
+    '0123456', '01234567', '0000000', '1111111',
+    '2222222', '3333333', '4444444', '5555555',
+    '6666666', '7777777', '8888888', '9999999',
+    '1212121', '12121212', '9876543'
+  ];
+  return dummyList.includes(digits);
 }
 
 export function parseAndVerifyLicense(input: string): VerificationResult {
   const clean = input.trim().toUpperCase();
   if (!clean) {
-    return { status: 'invalid', license: null, inputNumber: '', message: 'Please enter a valid CM/L license number, brand name, or IS standard number.' };
+    return {
+      status: 'invalid',
+      license: null,
+      inputNumber: '',
+      message: 'Please enter a valid CM/L license number, brand name, or IS standard number.'
+    };
   }
 
   const rawDigits = clean.replace(/[^0-9]/g, '');
@@ -122,7 +93,7 @@ export function parseAndVerifyLicense(input: string): VerificationResult {
   }
 
   // 2. Check if user typed a Brand / Manufacturer Name (e.g. "Bisleri", "Prestige", "Aquafina", "Tata Tiscon", "Anchor", "Indane", "Steelbird", "Kent")
-  if (rawDigits.length < 5) {
+  if (rawDigits.length < 5 && clean.length >= 3) {
     const brandMatch = VERIFIED_BIS_LICENSES.find(lic => 
       lic.brand.toUpperCase().includes(clean) || 
       lic.manufacturer.toUpperCase().includes(clean)
@@ -136,7 +107,7 @@ export function parseAndVerifyLicense(input: string): VerificationResult {
     }
   }
 
-  // 3. Check if it's a 7 or 8-digit CM/L license number
+  // 3. Format validation: must be 7 or 8 digits
   if (rawDigits.length !== 7 && rawDigits.length !== 8) {
     return {
       status: 'invalid',
@@ -146,17 +117,17 @@ export function parseAndVerifyLicense(input: string): VerificationResult {
     };
   }
 
-  // 4. Check for obvious counterfeit / dummy test sequences
+  // 4. Check for known dummy / counterfeit test sequences
   if (isDummyOrCounterfeitNumber(rawDigits)) {
     return {
       status: 'counterfeit',
       license: null,
       inputNumber: `CM/L-${rawDigits}`,
-      message: `The license number CM/L-${rawDigits} is a dummy / test sequence. Substandard products and fake stamps carry serious safety and legal hazards under Section 29 of the BIS Act, 2016.`
+      message: `The license number CM/L-${rawDigits} is a known fake / dummy sequence. Substandard products and counterfeit stamps carry serious safety and legal hazards under Section 29 of the BIS Act, 2016.`
     };
   }
 
-  // 5. Look up in verified database
+  // 5. Look up in verified database of authentic BIS licenses
   const matched = VERIFIED_BIS_LICENSES.find(lic => lic.digits === rawDigits);
   if (matched) {
     if (matched.status === 'SUSPENDED') {
@@ -174,20 +145,13 @@ export function parseAndVerifyLicense(input: string): VerificationResult {
     };
   }
 
-  // 6. Valid 7/8-digit Scheme-I structural license (for regional manufacturing units)
-  const prefix2 = rawDigits.substring(0, 2);
-  const decoded = decodeBisBranchOffice(prefix2);
-
+  // 6. STRICT VERIFICATION: If the 7 or 8-digit number does NOT exist in the database,
+  // IT IS UNREGISTERED / POTENTIALLY COUNTERFEIT. Do NOT treat it as valid!
   return {
-    status: 'regional_valid',
+    status: 'unregistered',
     license: null,
     inputNumber: `CM/L-${rawDigits}`,
-    decodedInfo: {
-      branchOffice: decoded.branchOffice,
-      region: decoded.region,
-      standard: 'BIS Scheme-I Product Certification',
-      validityGuide: 'Legitimate 7/8-digit Scheme-I product certification format under Quality Control Order (QCO).'
-    }
+    message: `License CM/L-${rawDigits} was NOT found in the official BIS certified registry. If this number appears on a commercial product, it may be an uncertified, substandard, or counterfeit item violating mandatory Quality Control Orders (QCO).`
   };
 }
 

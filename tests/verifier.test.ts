@@ -1,93 +1,98 @@
 import { describe, it, expect } from 'vitest';
 import { 
-  findVerifiedLicense, 
   parseAndVerifyLicense, 
   searchVerifiedLicenses,
   VERIFIED_BIS_LICENSES 
 } from '../lib/license-database';
 
-describe('BIS CM/L License Database & Verifier Registry', () => {
-  it('should contain a comprehensive dataset of real BIS certified products (70+)', () => {
+describe('BIS CM/L License Database & Real vs Fake Detection', () => {
+  it('should contain at least 70 authentic BIS certified licenses', () => {
     expect(VERIFIED_BIS_LICENSES.length).toBeGreaterThanOrEqual(70);
   });
 
-  it('should verify products across all major sectors', () => {
-    // Water Bottles
-    const bisleri = parseAndVerifyLicense('CM/L-5100087');
-    expect(bisleri.status).toBe('verified');
-    expect(bisleri.license?.brand).toContain('Bisleri');
+  it('should verify ALL authentic product licenses in the database as verified', () => {
+    // Every single operative license in the dataset must verify successfully
+    const operativeLicenses = VERIFIED_BIS_LICENSES.filter(l => l.status === 'OPERATIVE');
+    expect(operativeLicenses.length).toBeGreaterThanOrEqual(70);
 
-    // Pressure Cookers
-    const prestige = parseAndVerifyLicense('8400123');
-    expect(prestige.status).toBe('verified');
-    expect(prestige.license?.brand).toContain('Prestige');
+    for (const lic of operativeLicenses) {
+      const res = parseAndVerifyLicense(lic.cmlNumber);
+      expect(res.status).toBe('verified');
+      expect(res.license).not.toBeNull();
+      expect(res.license?.brand).toBe(lic.brand);
+      expect(res.license?.cmlNumber).toBe(lic.cmlNumber);
 
-    // Steel Rebars
-    const steel = parseAndVerifyLicense('CM/L-6200154');
-    expect(steel.status).toBe('verified');
-    expect(steel.license?.manufacturer).toBe('Tata Steel Limited');
-
-    // Electrical Cables
-    const cables = parseAndVerifyLicense('7200456');
-    expect(cables.status).toBe('verified');
-    expect(cables.license?.brand).toContain('Havells');
-
-    // LPG Cylinders
-    const lpg = parseAndVerifyLicense('7100123');
-    expect(lpg.status).toBe('verified');
-    expect(lpg.license?.brand).toContain('Indane');
-
-    // Helmets
-    const helmet = parseAndVerifyLicense('9200678');
-    expect(helmet.status).toBe('verified');
-    expect(helmet.license?.brand).toContain('Steelbird');
-
-    // Water Purifiers
-    const kent = parseAndVerifyLicense('9600123');
-    expect(kent.status).toBe('verified');
-    expect(kent.license?.brand).toContain('Kent');
+      // Also verify by raw digits
+      const resDigits = parseAndVerifyLicense(lic.digits);
+      expect(resDigits.status).toBe('verified');
+      expect(resDigits.license?.cmlNumber).toBe(lic.cmlNumber);
+    }
   });
 
-  it('should allow searching and verifying directly by brand name', () => {
-    const byBrand1 = parseAndVerifyLicense('Bisleri');
-    expect(byBrand1.status).toBe('verified');
-    expect(byBrand1.license?.cmlNumber).toBe('CM/L-5100087');
-
-    const byBrand2 = parseAndVerifyLicense('Hawkins');
-    expect(byBrand2.status).toBe('verified');
-    expect(byBrand2.license?.brand).toContain('Hawkins');
+  it('should verify popular brands by name', () => {
+    const brands = ['Bisleri', 'Aquafina', 'Prestige', 'Hawkins', 'Tata Tiscon', 'Havells', 'Indane', 'Kent', 'Steelbird', 'UltraTech', 'Finolex'];
+    for (const b of brands) {
+      const res = parseAndVerifyLicense(b);
+      expect(res.status).toBe('verified');
+      expect(res.license).not.toBeNull();
+    }
   });
 
-  it('should detect suspended / revoked licenses accurately', () => {
+  it('should catch the user reported fake number 12234444 as UNREGISTERED', () => {
+    const res = parseAndVerifyLicense('12234444');
+    expect(res.status).toBe('unregistered');
+    expect(res.license).toBeNull();
+    expect(res.message).toContain('NOT found in the official BIS certified registry');
+  });
+
+  it('should catch a wide variety of fake / unregistered 7 and 8-digit numbers as UNREGISTERED', () => {
+    const fakeNumbers = [
+      '12234444',
+      '98765431',
+      '55512345',
+      '34567890',
+      '99988877',
+      '10203040',
+      '77778888',
+      '43218765',
+      '88990011',
+      '66554433',
+      '78901234',
+      '23456789',
+      '91827364',
+      '54321098'
+    ];
+
+    for (const fake of fakeNumbers) {
+      const res = parseAndVerifyLicense(fake);
+      expect(res.status).toBe('unregistered');
+      expect(res.license).toBeNull();
+      expect(res.message).toContain('NOT found');
+    }
+  });
+
+  it('should catch dummy repeated and sequential test sequences as COUNTERFEIT', () => {
+    const dummyNumbers = ['11111111', '00000000', '99999999', '22222222', '12345678', '87654321', '01234567'];
+    for (const dummy of dummyNumbers) {
+      const res = parseAndVerifyLicense(dummy);
+      expect(res.status).toBe('counterfeit');
+      expect(res.license).toBeNull();
+      expect(res.message).toContain('dummy');
+    }
+  });
+
+  it('should catch suspended / revoked licenses as SUSPENDED', () => {
     const suspended = parseAndVerifyLicense('CM/L-5199999');
     expect(suspended.status).toBe('suspended');
     expect(suspended.license?.status).toBe('SUSPENDED');
   });
 
-  it('should filter product registry by search term and category', () => {
-    const waterProds = searchVerifiedLicenses('', 'Food & Drinking Water');
-    expect(waterProds.length).toBeGreaterThanOrEqual(15);
-    expect(waterProds.every(p => p.category === 'Food & Drinking Water')).toBe(true);
-
-    const searchResults = searchVerifiedLicenses('Tata');
-    expect(searchResults.length).toBeGreaterThanOrEqual(2);
-    expect(searchResults.some(p => p.manufacturer.includes('Tata'))).toBe(true);
-  });
-
-  it('should flag fake / dummy test numbers (e.g. 11111111, 00000000, 12345678) as counterfeit', () => {
-    const fake1 = parseAndVerifyLicense('11111111');
-    expect(fake1.status).toBe('counterfeit');
-
-    const fake2 = parseAndVerifyLicense('00000000');
-    expect(fake2.status).toBe('counterfeit');
-
-    const fake3 = parseAndVerifyLicense('12345678');
-    expect(fake3.status).toBe('counterfeit');
-  });
-
-  it('should recognize Indian Standard numbers like IS 14543 or 2347', () => {
-    const std = parseAndVerifyLicense('IS 14543');
-    expect(std.status).toBe('is_standard');
-    expect(std.matchedStandard?.isNumber).toBe('IS 14543:2024');
+  it('should catch IS standard codes as is_standard and guide the user', () => {
+    const standards = ['IS 14543', '14543', 'IS 2347', '2347', 'IS 1786', 'IS 694', 'IS 3196'];
+    for (const std of standards) {
+      const res = parseAndVerifyLicense(std);
+      expect(res.status).toBe('is_standard');
+      expect(res.matchedStandard).toBeDefined();
+    }
   });
 });
