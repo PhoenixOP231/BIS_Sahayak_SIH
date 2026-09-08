@@ -86,20 +86,25 @@ export function MarkVerifier({ language }: { language: Language }) {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  // Filtered Directory of all real BIS products
+  const [visibleCount, setVisibleCount] = useState(36);
+
+  // Filtered Directory of all real BIS products (1,000+ Nationwide Dataset)
   const filteredProducts = useMemo(() => {
+    setVisibleCount(36);
     return searchVerifiedLicenses(directorySearch, categoryFilter, statusFilter);
   }, [directorySearch, categoryFilter, statusFilter]);
 
   const categories = [
-    { id: 'all', label: 'All Certified Products', icon: Database, count: 80 },
-    { id: 'Food & Drinking Water', label: 'Water & RO (IS 14543/16240)', icon: Droplets, count: 22 },
-    { id: 'Kitchen & Home Safety', label: 'Cookers & Appliances (IS 2347)', icon: ShoppingBag, count: 14 },
-    { id: 'Civil & Construction', label: 'Steel, Cement & Pipes (IS 1786/269/4985)', icon: Wrench, count: 18 },
-    { id: 'Electrical & Electronics', label: 'Cables, Plugs & LED (IS 694/1293/15885)', icon: Zap, count: 13 },
-    { id: 'Industrial Safety', label: 'LPG Cylinders & Shoes (IS 3196/15298)', icon: Flame, count: 9 },
-    { id: 'Consumer & Personal Safety', label: 'Helmets & PPE (IS 16018)', icon: HardHat, count: 5 },
-    { id: 'Child Safety & Toys', label: 'Toys & Games (IS 9873)', icon: Layers, count: 3 }
+    { id: 'all', label: 'All Certified Products', icon: Database },
+    { id: 'Food & Drinking Water', label: 'Water & RO (IS 14543/10500)', icon: Droplets },
+    { id: 'Kitchen & Home Safety', label: 'Cookers & Kitchen (IS 2347/302)', icon: ShoppingBag },
+    { id: 'Construction Materials', label: 'TMT Steel & Cement (IS 1786/1489)', icon: Wrench },
+    { id: 'Electrical & Electronics', label: 'Cables & Switches (IS 694/3854)', icon: Zap },
+    { id: 'Industrial & Gas Safety', label: 'LPG Valves & Regulators (IS 8737/9798)', icon: Flame },
+    { id: 'Automotive & Road Safety', label: 'Helmets & Two-Wheeler (IS 4151)', icon: HardHat },
+    { id: 'Consumer & Child Safety', label: 'Toys & Safety Goods (IS 9873)', icon: Layers },
+    { id: 'Infrastructure & Piping', label: 'HDPE & Steel Pipes (IS 4984/1239)', icon: Wrench },
+    { id: 'Personal Safety', label: 'Safety Footwear & PPE (IS 15298)', icon: HardHat }
   ];
 
   return (
@@ -726,7 +731,7 @@ export function MarkVerifier({ language }: { language: Language }) {
 
         {/* Product Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredProducts.map((prod) => (
+          {filteredProducts.slice(0, visibleCount).map((prod) => (
             <div
               key={prod.cmlNumber}
               className={`p-4 rounded-2xl border transition hover:shadow-md flex flex-col justify-between ${
@@ -804,6 +809,18 @@ export function MarkVerifier({ language }: { language: Language }) {
             </div>
           ))}
         </div>
+
+        {filteredProducts.length > visibleCount && (
+          <div className="pt-4 text-center">
+            <button
+              type="button"
+              onClick={() => setVisibleCount(prev => prev + 36)}
+              className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition shadow-sm cursor-pointer"
+            >
+              Load More Certified Products ({filteredProducts.length - visibleCount} more)
+            </button>
+          </div>
+        )}
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200 p-6 space-y-3">

@@ -6,8 +6,8 @@ import {
 } from '../lib/license-database';
 
 describe('BIS CM/L License Database & Intelligent Verification', () => {
-  it('should contain at least 80 authentic BIS certified licenses', () => {
-    expect(VERIFIED_BIS_LICENSES.length).toBeGreaterThanOrEqual(80);
+  it('should contain at least 1,000 authentic BIS certified licenses', () => {
+    expect(VERIFIED_BIS_LICENSES.length).toBeGreaterThanOrEqual(1000);
   });
 
   it('should verify Kenson Cooker CM/L-8270877 as AUTHENTIC VERIFIED LICENSE', () => {
@@ -90,8 +90,8 @@ describe('BIS CM/L License Database & Intelligent Verification', () => {
 
     const stats = await getDatabaseStats();
     if (stats.totalLicenses > 0) {
-      expect(stats.totalLicenses).toBeGreaterThanOrEqual(80);
-      expect(stats.operative).toBeGreaterThan(0);
+      expect(stats.totalLicenses).toBeGreaterThanOrEqual(1000);
+      expect(stats.operative).toBeGreaterThan(900);
     }
   });
 });

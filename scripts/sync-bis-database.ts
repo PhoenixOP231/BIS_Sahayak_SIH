@@ -62,8 +62,8 @@ async function runSync() {
   await sql`CREATE INDEX IF NOT EXISTS idx_bis_status ON bis_licenses(status);`;
   console.log('Schema verified successfully.');
 
-  // 2. Load Local Top Flagship Licenses (80+ Verified Products)
-  console.log('Step 2: Loading verified flagship licenses dataset...');
+  // 2. Load Verified Licenses Dataset (1,000+ Nationwide Records)
+  console.log('Step 2: Loading verified licenses dataset...');
   const jsonPath = path.join(process.cwd(), 'data', 'licenses', 'verified-licenses.json');
   if (!fs.existsSync(jsonPath)) {
     console.error('ERROR: verified-licenses.json not found at:', jsonPath);
@@ -88,40 +88,48 @@ async function runSync() {
     return `BIS Regional Directorate (${state})`;
   }
 
-  // 3. Upsert records into Neon PostgreSQL
-  console.log('Step 3: Upserting records into Neon PostgreSQL...');
+  // 3. Upsert records into Neon PostgreSQL in concurrent batches
+  console.log('Step 3: Upserting records into Neon PostgreSQL in concurrent batches...');
   let upsertedCount = 0;
   let errorsCount = 0;
+  const batchSize = 25;
 
-  for (const lic of licenses) {
-    try {
-      const branch = getBranchOffice(lic.digits, lic.state);
-      await sql`
-        INSERT INTO bis_licenses (
-          cml_number, digits, brand, manufacturer, is_number,
-          category, factory_address, state, branch_office,
-          status, valid_until, updated_at
-        ) VALUES (
-          ${lic.cmlNumber}, ${lic.digits}, ${lic.brand}, ${lic.manufacturer}, ${lic.isNumber},
-          ${lic.category}, ${lic.factoryLocation}, ${lic.state}, ${branch},
-          ${lic.status}, ${lic.validUntil}, NOW()
-        )
-        ON CONFLICT (cml_number) DO UPDATE SET
-          brand = EXCLUDED.brand,
-          manufacturer = EXCLUDED.manufacturer,
-          is_number = EXCLUDED.is_number,
-          category = EXCLUDED.category,
-          factory_address = EXCLUDED.factory_address,
-          state = EXCLUDED.state,
-          branch_office = EXCLUDED.branch_office,
-          status = EXCLUDED.status,
-          valid_until = EXCLUDED.valid_until,
-          updated_at = NOW();
-      `;
-      upsertedCount++;
-    } catch (err) {
-      console.error(`Failed to upsert ${lic.cmlNumber}:`, err);
-      errorsCount++;
+  for (let i = 0; i < licenses.length; i += batchSize) {
+    const chunk = licenses.slice(i, i + batchSize);
+    await Promise.all(chunk.map(async (lic) => {
+      try {
+        const branch = getBranchOffice(lic.digits, lic.state);
+        await sql`
+          INSERT INTO bis_licenses (
+            cml_number, digits, brand, manufacturer, is_number,
+            category, factory_address, state, branch_office,
+            status, valid_until, updated_at
+          ) VALUES (
+            ${lic.cmlNumber}, ${lic.digits}, ${lic.brand}, ${lic.manufacturer}, ${lic.isNumber},
+            ${lic.category}, ${lic.factoryLocation}, ${lic.state}, ${branch},
+            ${lic.status}, ${lic.validUntil}, NOW()
+          )
+          ON CONFLICT (cml_number) DO UPDATE SET
+            brand = EXCLUDED.brand,
+            manufacturer = EXCLUDED.manufacturer,
+            is_number = EXCLUDED.is_number,
+            category = EXCLUDED.category,
+            factory_address = EXCLUDED.factory_address,
+            state = EXCLUDED.state,
+            branch_office = EXCLUDED.branch_office,
+            status = EXCLUDED.status,
+            valid_until = EXCLUDED.valid_until,
+            updated_at = NOW();
+        `;
+        upsertedCount++;
+      } catch (err) {
+        console.error(`Failed to upsert ${lic.cmlNumber}:`, err);
+        errorsCount++;
+      }
+    }));
+
+    if ((i + batchSize) % 200 === 0 || i + batchSize >= licenses.length) {
+      console.log(`Synced ${Math.min(i + batchSize, licenses.length)} / ${licenses.length} records...`);
     }
   }
 
