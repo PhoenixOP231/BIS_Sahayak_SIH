@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "project": {
+    "name": "bis-assistant",
+    "productType": null,
+    "stack": [
+      "nextjs",
+      "react",
+      "tailwind-v4"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "app/globals.css"
+    ],
+    "components": [
+      "components/ui"
+    ],
+    "assets": [],
+    "instructions": []
+  },
+  "design": {
+    "colorMode": "light",
+    "colors": {
+      "--background": {
+        "value": "#fafaf9",
+        "source": "app/globals.css"
+      },
+      "--foreground": {
+        "value": "#0f172a",
+        "source": "app/globals.css"
+      },
+      "--card-foreground": {
+        "value": "#0f172a",
+        "source": "app/globals.css"
+      },
+      "--primary": {
+        "value": "#d97706",
+        "source": "app/globals.css"
+      },
+      "--primary-foreground": {
+        "value": "#ffffff",
+        "source": "app/globals.css"
+      },
+      "--border": {
+        "value": "#e2e8f0",
+        "source": "app/globals.css"
+      },
+      "--ring": {
+        "value": "#f59e0b",
+        "source": "app/globals.css"
+      }
+    },
+    "typography": {},
+    "spacing": {},
+    "radius": {},
+    "shadows": {},
+    "motion": {},
+    "density": "unknown"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [],
+    "avoid": []
+  },
+  "decisions": [],
+  "evidence": [
+    {
+      "fact": "components.installed",
+      "source": "components/ui"
+    },
+    {
+      "fact": "design.colorMode:light",
+      "source": "app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "app/globals.css"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:tailwind-v4",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-09-08T12:21:09.736Z"
+}

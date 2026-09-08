@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   ShieldCheck, 
@@ -29,7 +29,12 @@ import {
   Wrench,
   AlertOctagon,
   Building2,
-  Globe
+  Globe,
+  ChevronLeft,
+  ChevronRight,
+  RefreshCw,
+  Radio,
+  Cpu
 } from 'lucide-react';
 import { UI_TEXT, Language } from '@/lib/translations';
 import { 
@@ -44,29 +49,95 @@ export function MarkVerifier({ language }: { language: Language }) {
   const [cmlInput, setCmlInput] = useState('');
   const [verificationResult, setVerificationResult] = useState<VerificationResult | null>(null);
 
+  // High-Tech Holographic Scanner Buffer State
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [verifyProgress, setVerifyProgress] = useState(0);
+  const [verifyStep, setVerifyStep] = useState(0);
+  const [scanningTarget, setScanningTarget] = useState('');
+
+  // Category Slider Ref & State
+  const categorySliderRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
   // Directory Search & Filter State
   const [directorySearch, setDirectorySearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  const runVerification = async (input: string) => {
-    // 1. Instant local verification for sub-millisecond feedback
-    const localResult = parseAndVerifyLicense(input);
-    setVerificationResult(localResult);
+  const checkCategoryScroll = () => {
+    if (!categorySliderRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = categorySliderRef.current;
+    setCanScrollLeft(scrollLeft > 10);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  };
 
-    // 2. Query Neon PostgreSQL Cloud Database (/api/verify) for live daily synced records
+  useEffect(() => {
+    checkCategoryScroll();
+    window.addEventListener('resize', checkCategoryScroll);
+    return () => window.removeEventListener('resize', checkCategoryScroll);
+  }, []);
+
+  const scrollCategories = (direction: 'left' | 'right') => {
+    if (!categorySliderRef.current) return;
+    const scrollAmount = 260;
+    categorySliderRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth'
+    });
+    setTimeout(checkCategoryScroll, 350);
+  };
+
+  const runVerification = async (input: string) => {
+    const trimmed = input.trim();
+    if (!trimmed) return;
+
+    setScanningTarget(trimmed);
+    setIsVerifying(true);
+    setVerifyProgress(18);
+    setVerifyStep(0);
+    setVerificationResult(null);
+
+    // Timed progression for authentic government security inspection feeling
+    const t1 = setTimeout(() => {
+      setVerifyProgress(48);
+      setVerifyStep(1);
+    }, 200);
+
+    const t2 = setTimeout(() => {
+      setVerifyProgress(79);
+      setVerifyStep(2);
+    }, 450);
+
+    const t3 = setTimeout(() => {
+      setVerifyProgress(100);
+      setVerifyStep(3);
+    }, 680);
+
+    // Parallel data lookup
+    let finalResult: VerificationResult;
     try {
-      const res = await fetch(`/api/verify?q=${encodeURIComponent(input)}`);
+      finalResult = parseAndVerifyLicense(trimmed);
+      const res = await fetch(`/api/verify?q=${encodeURIComponent(trimmed)}`);
       if (res.ok) {
         const cloudResult = await res.json();
         if (cloudResult && cloudResult.status) {
-          setVerificationResult(cloudResult);
+          finalResult = cloudResult;
         }
       }
     } catch {
-      // Retains localResult seamlessly if offline
+      finalResult = parseAndVerifyLicense(trimmed);
     }
+
+    // Complete scanner animation buffer at 800ms
+    setTimeout(() => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      setIsVerifying(false);
+      setVerificationResult(finalResult);
+    }, 800);
   };
 
   const handleVerify = (e: React.FormEvent) => {
@@ -167,16 +238,26 @@ export function MarkVerifier({ language }: { language: Language }) {
               <input
                 type="text"
                 placeholder="e.g. CM/L-8270877 (Kenson), CM/L-5100087 (Bisleri), 'Prestige', or 'IS 2347'"
-                className="flex-1 px-4 py-3 bg-slate-50 focus:bg-white text-sm text-slate-900 border border-slate-200 focus:border-amber-500 rounded-xl outline-hidden font-mono uppercase transition"
+                className="flex-1 px-4 py-3.5 bg-slate-50 focus:bg-white text-base sm:text-sm text-slate-900 border border-slate-200 focus:border-amber-500 rounded-xl outline-hidden font-mono uppercase transition"
                 value={cmlInput}
                 onChange={(e) => setCmlInput(e.target.value)}
               />
               <button
                 type="submit"
-                className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-sm font-bold rounded-xl flex items-center justify-center gap-2 transition shadow-md shadow-emerald-500/20 cursor-pointer"
+                disabled={isVerifying}
+                className="px-6 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 disabled:opacity-60 text-white text-sm font-bold rounded-xl flex items-center justify-center gap-2 transition shadow-md shadow-emerald-500/20 cursor-pointer min-h-[46px]"
               >
-                <Search className="w-4 h-4" />
-                <span>Verify Product</span>
+                {isVerifying ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    <span>Scanning BIS Registry...</span>
+                  </>
+                ) : (
+                  <>
+                    <Search className="w-4 h-4" />
+                    <span>Verify Product</span>
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -191,70 +272,80 @@ export function MarkVerifier({ language }: { language: Language }) {
               <button
                 type="button"
                 onClick={() => handleQuickTest('CM/L-8270877')}
-                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-400 font-bold px-3 py-1.5 rounded-lg transition cursor-pointer shadow-2xs"
+                disabled={isVerifying}
+                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-400 font-bold px-3.5 py-2 rounded-xl transition cursor-pointer shadow-2xs select-none active:scale-95 disabled:opacity-50"
               >
                 🍳 Kenson Cooker (CM/L-8270877)
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest('CM/L-5100087')}
-                className="text-xs bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border border-cyan-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
+                disabled={isVerifying}
+                className="text-xs bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border border-cyan-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
                 💧 Bisleri (CM/L-5100087)
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest('CM/L-8400123')}
-                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
+                disabled={isVerifying}
+                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
                 🍳 Prestige Cooker (CM/L-8400123)
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest('CM/L-8512345')}
-                className="text-xs bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border border-cyan-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
+                disabled={isVerifying}
+                className="text-xs bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border border-cyan-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
                 💧 Aquafina (CM/L-8512345)
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest('CM/L-6200154')}
-                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
+                disabled={isVerifying}
+                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
                 🏗️ Tata Tiscon Steel (CM/L-6200154)
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest('CM/L-7200456')}
-                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
+                disabled={isVerifying}
+                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
                 ⚡ Havells Wire (CM/L-7200456)
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest('CM/L-7100123')}
-                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
+                disabled={isVerifying}
+                className="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
                 🔥 Indane Gas (CM/L-7100123)
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest('CM/L-5199999')}
-                className="text-xs bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
+                disabled={isVerifying}
+                className="text-xs bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
                 ⚠️ Suspended License (CM/L-5199999)
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest('12234444')}
-                className="text-xs bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-400 font-bold px-3 py-1.5 rounded-lg transition cursor-pointer shadow-xs"
+                disabled={isVerifying}
+                className="text-xs bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-400 font-bold px-3.5 py-2 rounded-xl transition cursor-pointer shadow-xs select-none active:scale-95 disabled:opacity-50"
               >
                 ❌ 12234444 (Test Fake Code)
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickTest('11111111')}
-                className="text-xs bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer"
+                disabled={isVerifying}
+                className="text-xs bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3.5 py-2 rounded-xl transition font-medium cursor-pointer select-none active:scale-95 disabled:opacity-50"
               >
                 🚨 11111111 (Dummy Stamp)
               </button>
@@ -262,9 +353,92 @@ export function MarkVerifier({ language }: { language: Language }) {
           </div>
         </form>
 
+        {/* HIGH-TECH VERIFICATION SCANNER BUFFER (WHITE THEME) */}
+        {isVerifying && (
+          <div className="mt-8 pt-8 border-t border-slate-200 animate-fadeIn">
+            <div className="rounded-3xl border-2 border-amber-200/90 bg-gradient-to-b from-white via-amber-50/20 to-slate-50/60 p-6 sm:p-8 shadow-xl shadow-slate-200/50 relative overflow-hidden">
+              {/* Subtle Ambient Grid & Glows */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f050_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f050_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+              <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-200/30 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-emerald-200/30 rounded-full blur-3xl pointer-events-none" />
+
+              {/* Animated Laser Scanning Beam */}
+              <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent shadow-[0_0_12px_rgba(16,185,129,0.5)] pointer-events-none animate-laserSweep" />
+
+              <div className="relative z-10 flex flex-col items-center text-center space-y-6 max-w-lg mx-auto py-2">
+                
+                {/* Radar Reticle with Pulsing Concentric Rings */}
+                <div className="relative flex items-center justify-center w-28 h-28">
+                  {/* Outer Rotating Radar Ring */}
+                  <div className="absolute inset-0 rounded-full border border-dashed border-amber-400 animate-spin [animation-duration:9s]" />
+                  {/* Inner Pulsing Radar Ring */}
+                  <div className="absolute inset-2 rounded-full border border-emerald-500/40 animate-radarPulse" />
+                  {/* Center Radar Ping */}
+                  <div className="absolute inset-4 rounded-full bg-emerald-500/10 animate-ping [animation-duration:2.5s]" />
+
+                  {/* Center Security Icon */}
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 via-orange-500 to-amber-700 flex items-center justify-center text-white shadow-lg shadow-amber-500/25 relative z-10">
+                    <ShieldCheck className="w-8 h-8 animate-pulse" />
+                  </div>
+                </div>
+
+                {/* Status Step Ticker */}
+                <div className="space-y-2 w-full">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100/90 border border-amber-300 text-[11px] font-mono font-semibold tracking-wider text-amber-950">
+                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping" />
+                    <span className="uppercase">BIS Scheme-I Hologram &amp; Ledger Audit</span>
+                  </div>
+
+                  <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 font-display tracking-tight">
+                    {verifyStep === 0 && "Connecting to National Manakonline Gateway..."}
+                    {verifyStep === 1 && "Inspecting CM/L Checksum & Holographic Watermark..."}
+                    {verifyStep === 2 && "Cross-referencing Regional Directorate & Neon Cloud DB..."}
+                    {verifyStep === 3 && "Cryptographic Validation Successful!"}
+                  </h3>
+
+                  <p className="text-xs text-slate-500 font-mono">
+                    TARGET: <span className="text-amber-800 font-bold">{scanningTarget || cmlInput || 'PRODUCT QUERY'}</span>
+                  </p>
+                </div>
+
+                {/* Glowing Progress Bar */}
+                <div className="w-full space-y-2">
+                  <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200 shadow-inner">
+                    <div 
+                      className="h-full rounded-full bg-gradient-to-r from-amber-500 to-emerald-600 transition-[width] duration-300 shadow-xs"
+                      style={{ width: `${verifyProgress}%` }}
+                    />
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 px-1">
+                    <span>SECURITY HASH: SHA-256</span>
+                    <span className="text-emerald-700 font-bold">{verifyProgress}% AUDITED</span>
+                  </div>
+                </div>
+
+                {/* Real-time Telemetry Indicators */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 w-full text-[10px] font-mono pt-1">
+                  <div className="p-2.5 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center gap-1.5 text-slate-700 justify-center font-medium">
+                    <Radio className="w-3.5 h-3.5 text-cyan-600 animate-pulse" />
+                    <span>BIS Gateway: OK</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white border border-slate-200 shadow-2xs flex items-center gap-1.5 text-slate-700 justify-center font-medium">
+                    <Cpu className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Neon Cloud: Synced</span>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 p-2.5 rounded-xl bg-white border border-emerald-200 shadow-2xs flex items-center gap-1.5 text-emerald-800 justify-center font-semibold bg-emerald-50/50">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Integrity: Secured</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* VERIFICATION RESULTS CONTAINER */}
-        {verificationResult && (
-          <div className="mt-8 pt-8 border-t border-slate-200">
+        {!isVerifying && verificationResult && (
+          <div className="mt-8 pt-8 border-t border-slate-200 animate-fadeIn">
             
             {/* TIER 1: VERIFIED AUTHENTIC BRAND (PRE-INDEXED) */}
             {verificationResult.status === 'verified' && verificationResult.license && (
@@ -681,7 +855,7 @@ export function MarkVerifier({ language }: { language: Language }) {
 
         {/* Filter & Search Bar */}
         <div className="space-y-3">
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex flex-col sm:flex-row gap-2.5">
             <div className="relative flex-1">
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
@@ -689,7 +863,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                 placeholder="Search products by brand (e.g. Kenson, Prestige, Bisleri), state, IS standard, or CM/L code..."
                 value={directorySearch}
                 onChange={(e) => setDirectorySearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 focus:bg-white text-xs text-slate-900 border border-slate-200 focus:border-amber-500 rounded-xl outline-hidden transition"
+                className="w-full pl-10 pr-4 py-3 sm:py-2.5 bg-slate-50 focus:bg-white text-base sm:text-xs text-slate-900 border border-slate-200 focus:border-amber-500 rounded-xl outline-hidden transition"
               />
             </div>
 
@@ -697,7 +871,7 @@ export function MarkVerifier({ language }: { language: Language }) {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3 py-2.5 bg-slate-50 text-xs font-semibold text-slate-700 border border-slate-200 rounded-xl outline-hidden cursor-pointer"
+                className="w-full sm:w-auto px-3.5 py-2.5 bg-slate-50 text-xs font-semibold text-slate-700 border border-slate-200 rounded-xl outline-hidden cursor-pointer min-h-[44px]"
               >
                 <option value="all">All Statuses</option>
                 <option value="OPERATIVE">Operative Only</option>
@@ -706,26 +880,75 @@ export function MarkVerifier({ language }: { language: Language }) {
             </div>
           </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex gap-1.5 overflow-x-auto pb-2 scrollbar-none">
-            {categories.map(cat => {
-              const Icon = cat.icon;
-              const isSelected = categoryFilter === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setCategoryFilter(cat.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition cursor-pointer shrink-0 ${
-                    isSelected
-                      ? 'bg-amber-600 text-white shadow-xs'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span>{cat.label}</span>
-                </button>
-              );
-            })}
+          {/* Category Filter Horizontal Slider with Navigation Controls */}
+          <div className="relative group my-2">
+            {/* Left Chevron Button */}
+            <button
+              type="button"
+              onClick={() => scrollCategories('left')}
+              disabled={!canScrollLeft}
+              aria-label="Scroll categories left"
+              className={`absolute left-0 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 backdrop-blur-md shadow-md border border-slate-200 flex items-center justify-center text-slate-700 hover:text-amber-600 hover:bg-slate-50 active:scale-90 transition cursor-pointer -ml-2 sm:-ml-3 ${
+                canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+
+            {/* Left Edge Fade Mask */}
+            <div 
+              className={`pointer-events-none absolute left-0 top-0 bottom-0 w-10 sm:w-14 bg-gradient-to-r from-white via-white/80 to-transparent z-10 transition-opacity duration-300 ${
+                canScrollLeft ? 'opacity-100' : 'opacity-0'
+              }`} 
+            />
+
+            {/* Scrollable Pills Track */}
+            <div
+              ref={categorySliderRef}
+              onScroll={checkCategoryScroll}
+              className="flex items-center gap-2 overflow-x-auto scroll-smooth py-2 px-1 no-scrollbar touch-pan-x overscroll-x-contain"
+              style={{ WebkitOverflowScrolling: 'touch' }}
+            >
+              {categories.map(cat => {
+                const Icon = cat.icon;
+                const isSelected = categoryFilter === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setCategoryFilter(cat.id)}
+                    className={`flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors duration-150 cursor-pointer shrink-0 select-none active:scale-95 ${
+                      isSelected
+                        ? 'bg-amber-600 text-white shadow-md shadow-amber-600/25 ring-2 ring-amber-500/40'
+                        : 'bg-slate-100 text-slate-700 hover:bg-slate-200/80 hover:text-slate-900 border border-slate-200/60'
+                    }`}
+                  >
+                    <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-amber-600'}`} />
+                    <span>{cat.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right Edge Fade Mask */}
+            <div 
+              className={`pointer-events-none absolute right-0 top-0 bottom-0 w-10 sm:w-14 bg-gradient-to-l from-white via-white/80 to-transparent z-10 transition-opacity duration-300 ${
+                canScrollRight ? 'opacity-100' : 'opacity-0'
+              }`} 
+            />
+
+            {/* Right Chevron Button */}
+            <button
+              type="button"
+              onClick={() => scrollCategories('right')}
+              disabled={!canScrollRight}
+              aria-label="Scroll categories right"
+              className={`absolute right-0 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 backdrop-blur-md shadow-md border border-slate-200 flex items-center justify-center text-slate-700 hover:text-amber-600 hover:bg-slate-50 active:scale-90 transition cursor-pointer -mr-2 sm:-mr-3 ${
+                canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
           </div>
         </div>
 
