@@ -42,7 +42,19 @@ export function Footer({ language }: { language: Language }) {
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="hover:text-amber-400 transition">
+                <Link
+                  href="/#chat"
+                  onClick={(e) => {
+                    if (typeof window !== 'undefined' && window.location.pathname === '/') {
+                      e.preventDefault();
+                      const chatEl = document.getElementById('chat');
+                      if (chatEl) {
+                        chatEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }
+                  }}
+                  className="hover:text-amber-400 transition"
+                >
                   {t.navHome}
                 </Link>
               </li>

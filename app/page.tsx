@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/HeroSection';
@@ -15,6 +15,17 @@ export default function HomePage() {
   const [selectedPrompt, setSelectedPrompt] = useState<string>('');
 
   const t = UI_TEXT[language];
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#chat') {
+      const el = document.getElementById('chat');
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 120);
+      }
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50/50">
@@ -32,14 +43,20 @@ export default function HomePage() {
         mode={mode}
         setMode={setMode}
         language={language}
-        onSelectPrompt={(prompt) => setSelectedPrompt(prompt)}
+        onSelectPrompt={(prompt) => {
+          setSelectedPrompt(prompt);
+          const chatEl = document.getElementById('chat');
+          if (chatEl) {
+            chatEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }}
       />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-12">
         
         {/* RAG Chat Assistant */}
-        <section id="chat" className="relative">
+        <section id="chat" className="relative scroll-mt-24 sm:scroll-mt-28">
           <ChatInterface
             mode={mode}
             language={language}

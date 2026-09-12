@@ -16,6 +16,18 @@ export function Navbar({ mode, setMode, language, setLanguage }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = UI_TEXT[language];
 
+  const handleNavAssistant = (e: React.MouseEvent) => {
+    if (typeof window !== 'undefined' && window.location.pathname === '/') {
+      e.preventDefault();
+      const chatEl = document.getElementById('chat');
+      if (chatEl) {
+        chatEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-amber-200/80 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +58,8 @@ export function Navbar({ mode, setMode, language, setLanguage }: NavbarProps) {
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
             <Link
-              href="/"
+              href="/#chat"
+              onClick={handleNavAssistant}
               className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
             >
               {t.navHome}
@@ -154,8 +167,11 @@ export function Navbar({ mode, setMode, language, setLanguage }: NavbarProps) {
 
           <div className="flex flex-col gap-1">
             <Link
-              href="/"
-              onClick={() => setMobileMenuOpen(false)}
+              href="/#chat"
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                handleNavAssistant(e);
+              }}
               className="px-3 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-amber-50"
             >
               {t.navHome}

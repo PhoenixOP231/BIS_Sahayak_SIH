@@ -63,15 +63,26 @@ export function ChatInterface({ mode, language, initialQuery, onClearInitialQuer
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [speakingId, setSpeakingId] = useState<string | null>(null);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollToBottom = useCallback((smooth = true) => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, isLoading]);
+    // Prevent unwanted page scroll on initial mount
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    scrollToBottom(true);
+  }, [messages, isLoading, scrollToBottom]);
 
   const handleSendQuery = useCallback(async (queryToSend?: string) => {
     const q = (queryToSend || input).trim();
@@ -225,7 +236,10 @@ export function ChatInterface({ mode, language, initialQuery, onClearInitialQuer
         </div>
 
         {/* Message Stream */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 bg-gradient-to-b from-slate-50/50 via-white to-slate-50/30">
+        <div
+          ref={messagesContainerRef}
+          className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 bg-gradient-to-b from-slate-50/50 via-white to-slate-50/30"
+        >
           {messages.map((msg) => {
             const isUser = msg.role === 'user';
 
@@ -329,8 +343,6 @@ export function ChatInterface({ mode, language, initialQuery, onClearInitialQuer
               </div>
             </div>
           )}
-
-          <div ref={messagesEndRef} />
         </div>
 
         {/* Input Form Box */}
