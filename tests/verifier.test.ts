@@ -2,116 +2,162 @@ import { describe, it, expect } from 'vitest';
 import { 
   parseAndVerifyLicense, 
   searchVerifiedLicenses,
+  resolveStandardId,
   VERIFIED_BIS_LICENSES 
 } from '../lib/license-database';
+import { ALL_STANDARDS, getStandardById } from '../lib/standards-data';
 
-describe('BIS CM/L License Database & Intelligent Verification', () => {
-  it('should contain at least 1,000 authentic BIS certified licenses', () => {
+describe('Truthful BIS CM/L Verification & Safety Invariants', () => {
+  it('should contain indexed demo records with isDemoData flag', () => {
     expect(VERIFIED_BIS_LICENSES.length).toBeGreaterThanOrEqual(1000);
+    const first = VERIFIED_BIS_LICENSES[0];
+    expect(first.isDemoData).toBe(true);
   });
 
-  it('should verify Kenson Cooker CM/L-8270877 as AUTHENTIC VERIFIED LICENSE', () => {
+  it('should return operative for genuine operative demo records', () => {
     const res = parseAndVerifyLicense('CM/L-8270877');
-    expect(res.status).toBe('verified');
-    expect(res.license).not.toBeNull();
+    expect(res.status).toBe('operative');
+    expect(res.license).toBeDefined();
     expect(res.license?.manufacturer).toBe('Kenson Home Appliances');
     expect(res.license?.brand).toContain('Kenson');
     expect(res.license?.isNumber).toBe('IS 2347:2017');
     expect(res.license?.status).toBe('OPERATIVE');
+    expect(res.isDemoData).toBe(true);
 
-    // Also verify by raw 7 digits
+    // Also verify by raw digits
     const resDigits = parseAndVerifyLicense('8270877');
-    expect(resDigits.status).toBe('verified');
+    expect(resDigits.status).toBe('operative');
     expect(resDigits.license?.cmlNumber).toBe('CM/L-8270877');
 
-    // Also verify by brand name
+    // Also verify by brand name lookup
     const resBrand = parseAndVerifyLicense('Kenson');
-    expect(resBrand.status).toBe('verified');
+    expect(resBrand.status).toBe('operative');
     expect(resBrand.license?.cmlNumber).toBe('CM/L-8270877');
   });
 
-  it('should verify ALL authentic products in the dataset', () => {
-    const samples = [
-      { code: 'CM/L-5100087', brand: 'Bisleri' },
-      { code: '8400123', brand: 'Prestige' },
-      { code: 'CM/L-6200154', brand: 'Tata Tiscon' },
-      { code: '7200456', brand: 'Havells' },
-      { code: '7100123', brand: 'Indane' },
-      { code: '8512345', brand: 'Aquafina' },
-      { code: '9200678', brand: 'Steelbird' },
-      { code: '9600123', brand: 'Kent' }
-    ];
+  it('should NEVER treat an unknown 7/8-digit number as verified', () => {
+    // 7-digit number not in local demo index
+    const res7 = parseAndVerifyLicense('7599123');
+    expect(res7.status).toBe('format_valid_unverified');
+    expect(res7.status).not.toBe('operative');
+    expect(res7.status).not.toBe('verified');
+    expect(res7.license).toBeUndefined();
+    expect(res7.message).toContain('cannot confirm its authenticity or branch office');
+    expect(res7.message).toContain('BIS Care');
 
-    for (const s of samples) {
-      const res = parseAndVerifyLicense(s.code);
-      expect(res.status).toBe('verified');
-      expect(res.license?.brand).toContain(s.brand);
-    }
+    // 8-digit plausible number not in local demo index
+    const res8 = parseAndVerifyLicense('84991234');
+    expect(res8.status).toBe('format_valid_unverified');
+    expect(res8.status).not.toBe('operative');
+    expect(res8.license).toBeUndefined();
   });
 
-  it('should strictly catch fake and dummy numbers as COUNTERFEIT', () => {
-    const fakeCodes = ['12234444', '11111111', '00000000', '12345678', '87654321', '99999999'];
-    for (const fake of fakeCodes) {
-      const res = parseAndVerifyLicense(fake);
-      expect(res.status).toBe('counterfeit');
-      expect(res.license).toBeNull();
-    }
+  it('rejects extra characters around a CM/L number', () => {
+    expect(parseAndVerifyLicense('abc8270877').status).toBe('invalid');
+    expect(parseAndVerifyLicense('CM/L-8270877x').status).toBe('invalid');
   });
 
-  it('should decode regional Scheme-I format with live portal gateway for other legitimate plants', () => {
-    // 7-digit number with valid prefix 75 (Pune/Satara) that is not in the top-80 cache
-    const res = parseAndVerifyLicense('7599123');
-    expect(res.status).toBe('regional_verified');
-    expect(res.decodedInfo?.branchOffice).toContain('Pune');
-    expect(res.decodedInfo?.portalUrl).toContain('services.bis.gov.in');
-  });
-
-  it('should catch suspended / revoked licenses as SUSPENDED', () => {
+  it('should identify suspended demo licenses as suspended and NEVER operative', () => {
     const suspended = parseAndVerifyLicense('CM/L-5199999');
     expect(suspended.status).toBe('suspended');
+    expect(suspended.status).not.toBe('operative');
     expect(suspended.license?.status).toBe('SUSPENDED');
+    expect(suspended.message).toContain('SUSPENDED');
   });
 
-  it('should recognize Indian Standard numbers like IS 14543 or 2347', () => {
+  it('should identify expired demo licenses as expired and NEVER operative', () => {
+    const expired = parseAndVerifyLicense('CM/L-8399999');
+    expect(expired.status).toBe('expired');
+    expect(expired.status).not.toBe('operative');
+    expect(expired.license?.status).toBe('EXPIRED');
+    expect(expired.message).toContain('EXPIRED');
+  });
+
+  it('should identify cancelled demo licenses as cancelled and NEVER operative', () => {
+    const cancelled = parseAndVerifyLicense('CM/L-8499999');
+    expect(cancelled.status).toBe('cancelled');
+    expect(cancelled.status).not.toBe('operative');
+    expect(cancelled.license?.status).toBe('CANCELLED');
+    expect(cancelled.message).toContain('CANCELLED');
+  });
+
+  it('should flag repeating or sequential numbers as suspicious_pattern without false criminal accusations', () => {
+    const suspiciousCodes = ['11111111', '00000000', '12345678', '87654321', '99999999', '1234567', '7654321'];
+    for (const code of suspiciousCodes) {
+      const res = parseAndVerifyLicense(code);
+      expect(res.status).toBe('suspicious_pattern');
+      expect(res.license).toBeUndefined();
+      expect(res.message).toContain('pattern');
+      expect(res.message).toContain('BIS Care');
+    }
+  });
+
+  it('should recognize Indian Standard numbers like IS 14543 or IS 2347', () => {
     const std = parseAndVerifyLicense('IS 2347');
     expect(std.status).toBe('is_standard');
     expect(std.matchedStandard?.isNumber).toBe('IS 2347:2017');
+    expect(std.matchedStandard?.id).toBe('IS-2347-2017');
+
+    const stdWater = parseAndVerifyLicense('IS 14543');
+    expect(stdWater.status).toBe('is_standard');
+    expect(stdWater.matchedStandard?.isNumber).toBe('IS 14543:2024');
   });
 
-  it('should query Kenson Cooker CM/L-8270877 from Neon PostgreSQL cloud database', async () => {
-    const { getLicenseByDigits, getDatabaseStats } = await import('../lib/db-licenses');
-    const rec = await getLicenseByDigits('8270877');
-    if (rec) {
-      expect(rec.cml_number).toBe('CM/L-8270877');
-      expect(rec.brand).toContain('Kenson');
-      expect(rec.is_number).toBe('IS 2347:2017');
-      expect(rec.status).toBe('OPERATIVE');
-    }
-
-    const stats = await getDatabaseStats();
-    if (stats.totalLicenses > 0) {
-      expect(stats.totalLicenses).toBeGreaterThanOrEqual(1000);
-      expect(stats.operative).toBeGreaterThan(900);
-    }
+  it('should return invalid for malformed or non-compliant queries', () => {
+    const resInvalid = parseAndVerifyLicense('12345');
+    expect(resInvalid.status).toBe('invalid');
+    expect(resInvalid.message).toContain('7 or 8 digits');
   });
 
-  it('should resolve standardId correctly and prevent undefined 404 links', async () => {
-    const { resolveStandardId } = await import('../lib/license-database');
-    const { getStandardById } = await import('../lib/standards-data');
+  it('should filter directory by status truthfully (OPERATIVE, EXPIRED, SUSPENDED, CANCELLED)', () => {
+    const operativeList = searchVerifiedLicenses('', 'all', 'OPERATIVE');
+    expect(operativeList.length).toBeGreaterThan(0);
+    expect(operativeList.every(l => l.status === 'OPERATIVE')).toBe(true);
 
-    expect(resolveStandardId('IS 2347:2017')).toBe('IS-2347-2017');
-    expect(resolveStandardId('IS 14543:2024')).toBe('IS-14543-2024');
-    expect(resolveStandardId(undefined)).toBe('IS-2347-2017');
+    const suspendedList = searchVerifiedLicenses('', 'all', 'SUSPENDED');
+    expect(suspendedList.length).toBeGreaterThan(0);
+    expect(suspendedList.every(l => l.status === 'SUSPENDED')).toBe(true);
 
-    const stdCooker = getStandardById('IS-2347-2017');
-    expect(stdCooker).toBeDefined();
-    expect(stdCooker?.title).toContain('Cookers');
+    const expiredList = searchVerifiedLicenses('', 'all', 'EXPIRED');
+    expect(expiredList.length).toBeGreaterThan(0);
+    expect(expiredList.every(l => l.status === 'EXPIRED')).toBe(true);
 
-    // Fallback for undefined queries
-    const stdUndefined = getStandardById('undefined');
-    expect(stdUndefined).toBeDefined();
-    expect(stdUndefined?.id).toBe('IS-2347-2017');
+    const cancelledList = searchVerifiedLicenses('', 'all', 'CANCELLED');
+    expect(cancelledList.length).toBeGreaterThan(0);
+    expect(cancelledList.every(l => l.status === 'CANCELLED')).toBe(true);
+  });
+
+  it('should strictly return undefined for unknown standard IDs and undefined inputs', () => {
+    expect(getStandardById(undefined)).toBeUndefined();
+    expect(getStandardById(null)).toBeUndefined();
+    expect(getStandardById('undefined')).toBeUndefined();
+    expect(getStandardById('null')).toBeUndefined();
+    expect(getStandardById('non-existent-standard-12345')).toBeUndefined();
+
+    expect(resolveStandardId(undefined)).toBeUndefined();
+    expect(resolveStandardId(null)).toBeUndefined();
+    expect(resolveStandardId('undefined')).toBeUndefined();
+    expect(resolveStandardId('unknown-standard')).toBeUndefined();
+
+    // Valid standard lookup
+    const cookerStd = getStandardById('IS-2347-2017');
+    expect(cookerStd).toBeDefined();
+    expect(cookerStd?.id).toBe('IS-2347-2017');
+    expect(cookerStd?.title).toContain('Cookers');
+    expect(cookerStd?.sourceMetadata).toBeDefined();
+    expect(cookerStd?.sourceMetadata?.officialUrl).toContain('services.bis.gov.in');
+    expect(cookerStd?.sourceMetadata?.classification).toBe('demonstration_summary');
+  });
+
+  it('should have complete sourceMetadata across all 21 standards in the dataset', () => {
+    expect(ALL_STANDARDS.length).toBeGreaterThanOrEqual(21);
+    for (const std of ALL_STANDARDS) {
+      expect(std.sourceMetadata).toBeDefined();
+      expect(std.sourceMetadata?.officialUrl).toContain('services.bis.gov.in');
+      expect(std.sourceMetadata?.editionYear).toBeDefined();
+      expect(std.sourceMetadata?.clausePageReference).toBeDefined();
+      expect(std.sourceMetadata?.retrievalDate).toBe('2026-09-22');
+      expect(std.sourceMetadata?.classification).toBe('demonstration_summary');
+    }
   });
 });
-
-

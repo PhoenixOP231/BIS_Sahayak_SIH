@@ -1,10 +1,21 @@
 import standardsIndex from '../data/standards/standards-index.json';
 
+export interface SourceMetadata {
+  officialSourceUrl: string;
+  documentTitle: string;
+  editionYear: string | number;
+  clausePageReference?: string;
+  retrievalDate: string;
+  dataClassification: 'official_extract' | 'official_metadata' | 'demonstration_summary';
+}
+
 export interface StandardClause {
   clauseNumber: string;
   title: string;
   content: string;
   contentHi?: string;
+  clausePageReference?: string;
+  sourceUrl?: string;
 }
 
 export interface StandardDoc {
@@ -27,15 +38,29 @@ export interface StandardDoc {
   industryGuidelines: string[];
   clauses: StandardClause[];
   demoNotice: string;
+  sourceMetadata?: SourceMetadata;
 }
 
-export const ALL_STANDARDS: StandardDoc[] = standardsIndex as StandardDoc[];
+export const ALL_STANDARDS: StandardDoc[] = (standardsIndex as any[]).map(doc => {
+  if (!doc.sourceMetadata) {
+    doc.sourceMetadata = {
+      officialSourceUrl: 'https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails',
+      documentTitle: `${doc.isNumber} — ${doc.title}`,
+      editionYear: doc.year || 2020,
+      clausePageReference: doc.clauses?.map((c: any) => c.clauseNumber).join(', ') || 'General Provisions',
+      retrievalDate: '2026-09-22',
+      dataClassification: 'demonstration_summary'
+    };
+  }
+  return doc as StandardDoc;
+});
 
-export function getStandardById(id: string): StandardDoc | undefined {
-  if (!id || id === 'undefined' || id === 'null') {
-    return ALL_STANDARDS.find(s => s.id === 'IS-2347-2017') || ALL_STANDARDS[0];
+export function getStandardById(id?: string | null): StandardDoc | undefined {
+  if (!id || typeof id !== 'string' || id === 'undefined' || id === 'null' || !id.trim()) {
+    return undefined;
   }
   const clean = id.toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (!clean) return undefined;
   
   // 1. Direct match on clean ID or clean isNumber
   const direct = ALL_STANDARDS.find(s => 

@@ -35,24 +35,6 @@ export function ChatInterface({ mode, language, initialQuery, onClearInitialQuer
       id: 'welcome-msg',
       role: 'assistant',
       content: defaultGreeting,
-      citations: [
-        {
-          id: 'IS-2347-2017',
-          isNumber: 'IS 2347:2017',
-          title: 'Domestic Pressure Cookers',
-          category: 'Consumer Goods',
-          status: 'Mandatory (QCO)',
-          clauseNumber: 'Safety Valve & GRS'
-        },
-        {
-          id: 'IS-14543-2024',
-          isNumber: 'IS 14543:2024',
-          title: 'Packaged Drinking Water',
-          category: 'Food & Water',
-          status: 'Mandatory (QCO)',
-          clauseNumber: 'Pesticide & Sterility'
-        }
-      ],
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -220,7 +202,7 @@ export function ChatInterface({ mode, language, initialQuery, onClearInitialQuer
                 </span>
               </div>
               <p className="text-[11px] text-slate-500">
-                {language === 'hi' ? 'भारतीय मानक ब्यूरो के नियमों पर आधारित' : 'Grounded on official Indian Standards corpus'}
+                {language === 'hi' ? 'प्रदर्शन मानक सारांशों पर आधारित; आधिकारिक स्रोत जांचें' : 'Based on demonstration summaries; check official sources'}
               </p>
             </div>
           </div>

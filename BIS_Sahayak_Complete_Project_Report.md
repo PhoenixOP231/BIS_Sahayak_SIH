@@ -1,150 +1,50 @@
-# BIS Sahayak (बीआईएस सहायक) 🇮🇳
-### AI-Powered Intelligent Assistant for Indian Standards & BIS Services
-**Smart India Hackathon 2026 • Problem Statement SIH26107**
+# BIS Sahayak: current project report
 
----
+**Smart India Hackathon 2026, SIH26107**  
+**Team:** Logic Lords, Arvind Gavali College of Engineering, Satara  
+**Updated:** 26 September 2026  
+**Prototype:** https://sih2026-bis-assistant.vercel.app
 
-## 📌 Problem Overview & Objectives (SIH26107)
+## Problem and proposed answer
 
-In India, navigating the thousands of Indian Standards published by the **Bureau of Indian Standards (BIS)** is complex for both everyday consumers and MSME industrial manufacturers.
+Consumers and MSMEs often struggle to identify a relevant Indian Standard, understand technical material, and find the next BIS service. BIS Sahayak is an independent conversational prototype. It explains curated standard summaries in English or Hindi, in consumer or industry mode, then links users to an inspectable summary and official BIS source. It is not an authorised BIS service.
 
-**SIH26107 (Consumer & Industry Assistance)**:
-- Provide instant, bilingual (English & Hindi) guidance on product conformity, safety regulations, and mandatory **Quality Control Orders (QCOs)**.
-- **Dual-Persona Experience**:
-  - **Consumer Mode**: Plain language explanations, counterfeit prevention, ISI mark verification, and consumer protection rights.
-  - **Industry Mode**: Technical specifications, testing parameters, numerical tolerance limits, conformity schemes, and HS codes.
-- **Real-Time Clause Citations**: Interactive drawer standard inspectors allowing clause-by-clause inspection with one click.
-- **Web Speech API Audio Playback**: Read AI responses aloud in natural Hindi or Indian-accented English directly in the browser.
-- **4-Step ISI Mark Authenticity Verifier**: Live 7/8-digit CM/L license format validation with step-by-step BIS Care App integration instructions.
+## Working prototype
 
----
+- Chat retrieves from 21 local **demonstration** standard summaries, then sends selected context to Gemini 3.5 Flash-Lite. If the model is unavailable, the API returns a deterministic fallback and marks it with a fallback flag.
+- The standards directory and citation drawer expose summary metadata and official-source links. They are not licensed full-text standards.
+- The CM/L checker validates 7- or 8-digit format and searches fictional demonstration licence records. Unknown plausible numbers remain **unverified**. Users must confirm current status in BIS Care or e-BIS.
+- Separate pages explain conformity schemes, hallmarking and HUID, BIS laboratories, and a six-step MSME licensing route. Lab details and fee concessions link to BIS sources.
+- The interface offers English/Hindi modes, consumer/industry modes, sample questions, responsive layout, and browser speech playback.
 
-## 🚀 Key Features
+## Architecture
 
-- **🏛️ Dual Personas (Consumer vs. Industry)**:
-  - *Consumer*: "Is my pressure cooker safe? How do I spot a fake ISI mark?"
-  - *Industry*: "What is the minimum yield stress and elongation under IS 1786 for Fe 500D TMT bars?"
-- **🌐 100% Bilingual Support (English / हिन्दी)**:
-  - Complete UI, sample queries, citation chips, speech synthesis, and AI grounding in both English and Hindi.
-- **🔍 4-Step ISI Mark Authenticity Verifier (`/verify`)**:
-  - Live 7/8-digit CM/L license pattern validator with BIS Care App integration guidelines.
-- **📚 Standards Directory & Clause Inspector (`/standards`)**:
-  - Searchable catalog of 21 authentic Indian Standards across Steel, Electrical, Safety, Food & Water, Electronics, Toys, Footwear, Cement, and Batteries with multi-tab detailed view.
-- **⚡ Hybrid RAG Pipeline**:
-  - Serverless PostgreSQL vector retrieval powered by **Neon `pgvector`** with fallback in-memory cosine similarity and domain-aware stop-word filtering.
-- **🔊 Web Speech API Audio Assist**:
-  - Listen to AI responses in natural Hindi or Indian-accented English directly in the browser.
+Next.js 15, React 19, TypeScript and Tailwind CSS run the app. A local JSON index supports chat retrieval. `lib/vector-store.ts` uses weighted lexical matching and cosine similarity over 768-dimensional **hashed** word vectors. `lib/gemini.ts` selects up to five relevant chunks and prepares persona/language instructions for Gemini. The current production chat path does **not** query pgvector. Neon connection code exists for optional database operations; it should not be presented as a proven production vector-search backend.
 
----
+The public app is deployed on Vercel. The chatbot has a 1,000-character query limit, capped conversation history and an in-memory per-instance rate limiter. The limiter does not provide global, multi-instance protection.
 
-## 🛠️ Tech Stack & Architecture
+## Data and safety boundaries
 
-- **Frontend**: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4, Lucide Icons
-- **AI & Grounding**: Google Gemini 2.5 Flash (`@google/genai`), 768-dimensional normalized embeddings
-- **Database & Vector Search**: Neon Serverless PostgreSQL with `pgvector` & in-memory vector index
-- **Testing**: Vitest automated test suite (`tests/api-chat.test.ts`, `tests/ingestion.test.ts`)
-- **Typography & Styling**: Plus Jakarta Sans, Outfit, warm saffron `#D97706` & navy `#0F172A` GovTech palette
+The 21 standards records are educational summaries. Metadata and official links do not establish that every clause or number is current. The licence dataset is fictional demonstration data. A local match must never be described as a legal BIS certification decision. The product does not claim zero hallucinations, universal QCO coverage, guaranteed uptime, or measurable consumer impact.
 
----
+Current official references include [Know Your Standard](https://www.bis.gov.in/know-your-standard/?lang=en), [BIS Care](https://www.bis.gov.in/bis-apps/?lang=en), [BIS laboratory information](https://lims.bis.gov.in/home/bis_labs/), [hallmarking FAQs](https://www.bis.gov.in/hallmarking-overview/hallmarking-faqs/hallmarking-faq/?lang=en), and the [Scheme-I concession notice](https://www.bis.gov.in/wp-content/uploads/2026/03/Scheme-1-Concession-Extension-31May2029.pdf). Check these sources again before a public or regulatory decision.
 
-## 📁 Repository Structure
+## Verification as of 26 September 2026
 
-```
-├── app/
-│   ├── api/
-│   │   ├── chat/route.ts          # Multi-turn RAG chat API endpoint
-│   │   ├── standards/route.ts     # Standards catalog API
-│   │   └── standards/[id]/route.ts# Individual standard details API
-│   ├── globals.css                # Tailwind CSS tokens & GovTech variables
-│   ├── layout.tsx                 # Root layout with fonts & Navbar/Footer
-│   ├── page.tsx                   # Main AI Assistant conversation portal
-│   ├── standards/page.tsx         # Searchable Standards directory with filters
-│   ├── standards/[id]/page.tsx    # Multi-tab standard inspection page
-│   └── verify/page.tsx            # ISI Mark & CM/L license verifier
-├── components/
-│   ├── Chat/
-│   │   ├── ChatInterface.tsx      # Interactive chat with audio & citations
-│   │   ├── ChatMessageContent.tsx # Formatted chat message with expandable details
-│   │   └── CitationChip.tsx       # Clickable standard pill trigger
-│   ├── Standards/
-│   │   ├── StandardCard.tsx       # Standard summary card
-│   │   ├── StandardDrawer.tsx     # Slide-out clause inspector
-│   │   └── StandardFilter.tsx     # Filter toolbar
-│   ├── Verifier/
-│   │   └── MarkVerifier.tsx       # 4-step ISI mark validation tool
-│   ├── HeroSection.tsx            # GovTech hero banner with sample pills
-│   ├── Navbar.tsx                 # Mode switcher & language toggle
-│   └── Footer.tsx                 # Official BIS links & SIH attribution
-├── data/
-│   ├── standards/                 # 21 authentic Indian Standards JSON docs
-│   └── standards-vectors.json     # Precomputed 768-dim embeddings & corpus
-├── lib/
-│   ├── gemini.ts                  # Gemini 2.5 Flash RAG prompt engineering
-│   ├── prisma.ts                  # Neon PostgreSQL connection pooling
-│   ├── standards-data.ts          # Strongly-typed standards schema
-│   ├── translations.ts            # Complete English & Hindi dictionary
-│   └── vector-store.ts            # Hybrid cosine + lexical search engine
-├── tests/
-│   ├── api-chat.test.ts           # RAG retrieval & citation unit tests
-│   └── ingestion.test.ts          # Vector index integrity tests
-└── scripts/
-    ├── build_clean_vectors.py     # Clean vector generation pipeline
-    ├── ingest_to_neon.py          # Vector ingestion to Neon pgvector
-    └── seed-standards.ts          # Ingestion script for standards corpus
-```
+- Four Vitest suites: **32/32 tests passed**.
+- ESLint and Next.js production build passed.
+- Production dependency audit reported zero vulnerabilities.
+- Public pages and API smoke checks passed. A live chat request returned a Gemini response without fallback.
 
----
+These checks establish software behavior for the tested cases, not clause correctness or real-world user outcomes.
 
-## 🏃 Getting Started
+## Pilot before official use
 
-### 1. Prerequisites
-- Node.js 18+ (Node.js 20+ recommended)
-- npm or pnpm
+1. Obtain lawful access to current BIS content, version every record, and have subject-matter reviewers sign off on high-risk numerical guidance.
+2. Test consumer and MSME tasks against manual BIS portal search. The pitch proposes 20 consumers and 10 MSME users, plus 100 reviewed queries. The targets are **not achieved results**.
+3. Add consent, retention limits and redaction if chat queries are logged. Measure model cost, answer latency, fallback frequency, citation precision, and unsupported numerical claims.
+4. Consider broader indexing or a vector database only after the evaluated corpus requires it.
 
-### 2. Installation
-```bash
-# Clone the repository
-git clone https://github.com/your-username/SIH2026-BIS-Assistant.git
-cd SIH2026-BIS-Assistant
+## Submission status
 
-# Install dependencies
-npm install
-```
-
-### 3. Environment Variables
-Create a `.env.local` file in the root directory:
-```env
-GEMINI_API_KEY=your_gemini_api_key
-DATABASE_URL=postgresql://user:password@your-neon-endpoint.aws.neon.tech/neondb?sslmode=require
-```
-
-### 4. Run Automated Tests
-```bash
-npm run test
-```
-All automated test suites will execute and verify the ingestion corpus, RAG retrieval quality, and dual persona responses.
-
-### 5. Run Local Development Server
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### 6. Production Build
-```bash
-npm run build
-npm run start
-```
-
----
-
-## 🏆 Smart India Hackathon 2026 Alignment
-
-| Problem Statement | Solution Component | Technical Implementation |
-| :--- | :--- | :--- |
-| **SIH26107** | Dual Persona AI Assistant + ISI Verifier + Standards Directory | Multi-turn RAG chat (`/api/chat`) grounded on 21 authentic IS standards, interactive clause citations with drawer inspection, Web Speech audio synthesis, 7/8-digit CM/L license validation (`/verify`), and searchable standards registry (`/standards`). |
-
----
-
-## 📜 License & Acknowledgements
-Developed for **Smart India Hackathon 2026 (SIH26107)**. Data sourced and structured in compliance with publicly available **Bureau of Indian Standards (BIS)** notifications, Quality Control Orders, and Ministry of Consumer Affairs circulars.
+The six-slide idea deck follows the supplied SIH template. The registered team ID is missing. Confirm the exact problem title/theme in the SIH portal before exporting or uploading the final submission. The team has not submitted this prototype or deck to BIS.

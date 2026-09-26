@@ -35,11 +35,50 @@ export function ChatMessageContent({ content, isUser }: ChatMessageContentProps)
       .trim();
   }
 
-  const formatInlineMarkdown = (str: string) => {
-    return str
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-950">$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em class="italic text-slate-800">$1</em>')
-      .replace(/`([^`]+)`/g, '<code class="bg-amber-100/70 text-amber-900 px-1 py-0.5 rounded text-[11px] font-mono">$1</code>');
+  const parseInlineMarkdown = (str: string): React.ReactNode[] => {
+    const tokens: React.ReactNode[] = [];
+    let remaining = str;
+    let key = 0;
+    const tokenRegex = /(\*\*[^*]+\*\*|`[^`]+`|\*[^*]+\*)/;
+
+    while (remaining.length > 0) {
+      const match = tokenRegex.exec(remaining);
+      if (!match) {
+        tokens.push(remaining);
+        break;
+      }
+
+      if (match.index > 0) {
+        tokens.push(remaining.substring(0, match.index));
+      }
+
+      const matchedStr = match[0];
+      if (matchedStr.startsWith('**') && matchedStr.endsWith('**')) {
+        tokens.push(
+          <strong key={key++} className="font-bold text-slate-950">
+            {matchedStr.slice(2, -2)}
+          </strong>
+        );
+      } else if (matchedStr.startsWith('`') && matchedStr.endsWith('`')) {
+        tokens.push(
+          <code key={key++} className="bg-amber-100/70 text-amber-900 px-1 py-0.5 rounded text-[11px] font-mono">
+            {matchedStr.slice(1, -1)}
+          </code>
+        );
+      } else if (matchedStr.startsWith('*') && matchedStr.endsWith('*')) {
+        tokens.push(
+          <em key={key++} className="italic text-slate-800">
+            {matchedStr.slice(1, -1)}
+          </em>
+        );
+      } else {
+        tokens.push(matchedStr);
+      }
+
+      remaining = remaining.substring(match.index + matchedStr.length);
+    }
+
+    return tokens;
   };
 
   const renderFormattedText = (text: string) => {
@@ -65,7 +104,7 @@ export function ChatMessageContent({ content, isUser }: ChatMessageContentProps)
         return (
           <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700 my-1 pl-1">
             <span className="text-amber-600 font-bold mt-0.5">•</span>
-            <div className="flex-1" dangerouslySetInnerHTML={{ __html: formatInlineMarkdown(bulletText) }} />
+            <div className="flex-1">{parseInlineMarkdown(bulletText)}</div>
           </div>
         );
       }
@@ -74,8 +113,9 @@ export function ChatMessageContent({ content, isUser }: ChatMessageContentProps)
         <p
           key={idx}
           className="text-xs sm:text-sm text-slate-800 leading-relaxed my-0.5"
-          dangerouslySetInnerHTML={{ __html: formatInlineMarkdown(trimmed) }}
-        />
+        >
+          {parseInlineMarkdown(trimmed)}
+        </p>
       );
     });
   };

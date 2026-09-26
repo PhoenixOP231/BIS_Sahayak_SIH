@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { getStandardById, ALL_STANDARDS } from '@/lib/standards-data';
+import { getStandardById } from '@/lib/standards-data';
 import { Language, UI_TEXT } from '@/lib/translations';
-import { ArrowLeft, Shield, AlertTriangle, CheckCircle, Activity, FileText, Share2, Layers, Award } from 'lucide-react';
+import { ArrowLeft, Shield, AlertTriangle, CheckCircle, Activity, FileText, Share2, Layers, Award, ExternalLink } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface PageProps {
@@ -16,8 +16,7 @@ interface PageProps {
 
 export default function StandardDetailPage({ params }: PageProps) {
   const { id } = use(params);
-  const resolved = getStandardById(id);
-  const standard = resolved || ALL_STANDARDS.find(s => s.id === 'IS-2347-2017') || ALL_STANDARDS[0];
+  const standard = getStandardById(id);
 
   const [mode, setMode] = useState<'consumer' | 'industry'>('consumer');
   const [language, setLanguage] = useState<Language>('en');
@@ -206,6 +205,44 @@ export default function StandardDetailPage({ params }: PageProps) {
                   </div>
                 </div>
               )}
+
+              {/* Source Provenance & Data Classification */}
+              <div className="bg-amber-50/80 border border-amber-200/90 rounded-2xl p-5 space-y-3 mt-4">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="text-sm font-bold text-amber-950 uppercase tracking-wider flex items-center gap-2">
+                    <FileText className="w-4 h-4 text-amber-700" />
+                    <span>Official Source Provenance & Classification</span>
+                  </h3>
+                  <span className="text-xs font-bold bg-amber-200 text-amber-950 px-2.5 py-0.5 rounded-full border border-amber-300">
+                    {standard.sourceMetadata?.dataClassification === 'demonstration_summary' ? 'Demonstration Summary' : 'Official Extract'}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-700 leading-relaxed">
+                  This record is a curated engineering and consumer summary prepared for the Smart India Hackathon 2026 (SIH26107). While modeled closely on official Bureau of Indian Standards specifications, it does not replace the full copyrighted gazetted standard.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-1">
+                  <div className="p-3 bg-white rounded-xl border border-amber-200">
+                    <span className="text-slate-500 block text-[11px]">Official Document Title</span>
+                    <span className="font-bold text-slate-900">{standard.sourceMetadata?.documentTitle || standard.title}</span>
+                  </div>
+                  <div className="p-3 bg-white rounded-xl border border-amber-200">
+                    <span className="text-slate-500 block text-[11px]">Edition / Verification Date</span>
+                    <span className="font-bold text-slate-900">Edition {standard.sourceMetadata?.editionYear || standard.year} • Verified {standard.sourceMetadata?.retrievalDate || '2026-09-22'}</span>
+                  </div>
+                </div>
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-2 border-t border-amber-200/80">
+                  <span className="text-xs text-slate-500">For complete official clauses:</span>
+                  <a
+                    href={standard.sourceMetadata?.officialSourceUrl || 'https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 hover:text-amber-950 underline"
+                  >
+                    <span>Inspect on Official e-BIS Portal</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
             </div>
           )}
 

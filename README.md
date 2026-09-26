@@ -13,9 +13,9 @@ In India, navigating the thousands of Indian Standards published by the **Bureau
 - **Dual-Persona Experience**:
   - **Consumer Mode**: Plain language explanations, counterfeit prevention, ISI mark verification, and consumer protection rights.
   - **Industry Mode**: Technical specifications, testing parameters, numerical tolerance limits, conformity schemes, and HS codes.
-- **Real-Time Clause Citations**: Interactive drawer standard inspectors allowing clause-by-clause inspection with one click.
+- **Inspectable demonstration citations**: Interactive drawers show curated standard summaries and links to official BIS sources.
 - **Web Speech API Audio Playback**: Read AI responses aloud in natural Hindi or Indian-accented English directly in the browser.
-- **4-Step ISI Mark Authenticity Verifier**: Live 7/8-digit CM/L license format validation with step-by-step BIS Care App integration instructions.
+- **CM/L format checker**: 7/8-digit format checks, fictional demo records, and a handoff to BIS Care for official verification.
 
 ---
 
@@ -24,14 +24,22 @@ In India, navigating the thousands of Indian Standards published by the **Bureau
 - **🏛️ Dual Personas (Consumer vs. Industry)**:
   - *Consumer*: "Is my pressure cooker safe? How do I spot a fake ISI mark?"
   - *Industry*: "What is the minimum yield stress and elongation under IS 1786 for Fe 500D TMT bars?"
-- **🌐 100% Bilingual Support (English / हिन्दी)**:
+- **🌐 English and Hindi support**:
   - Complete UI, sample queries, citation chips, speech synthesis, and AI grounding in both English and Hindi.
-- **🔍 4-Step ISI Mark Authenticity Verifier (`/verify`)**:
-  - Live 7/8-digit CM/L license pattern validator with BIS Care App integration guidelines.
+- **🔍 Truthful Scheme-I ISI Mark Verifier (`/verify`)**:
+  - Checks 7/8-digit CM/L number length, flags obvious test patterns, distinguishes demonstration records from unknown numbers, and links to the official BIS Care App (`com.bis.bisapp`) for verification.
+- **📋 BIS Certification Schemes Guide (`/schemes`)**:
+  - Detailed side-by-side comparison of Scheme-I (ISI Mark), CRS (Compulsory Registration Scheme), FMCS (Foreign Manufacturers), and Scheme-X.
+- **💎 Hallmarking & HUID Guide (`/hallmarking`)**:
+  - Guide to 3 mandatory gold hallmark signs, interactive 6-character HUID format tester, fineness levels (22K916, 18K750, 14K585), and consumer testing rights.
+- **🔬 Official BIS Laboratory Discovery (`/labs`)**:
+  - Searchable directory of Central (CL Sahibabad), Regional (WRL, ERL, SRL, NRL), and Branch testing laboratories with LIMS integration links.
+- **🏭 MSME Licensing Roadmap (`/licensing`)**:
+  - 6-step interactive licensing journey, document checklist, and Scheme-I annual minimum marking fee concessions linked to the current BIS notice.
 - **📚 Standards Directory & Clause Inspector (`/standards`)**:
-  - Searchable catalog of 21 authentic Indian Standards across Steel, Electrical, Safety, Food & Water, Electronics, Toys, Footwear, Cement, and Batteries with multi-tab detailed view.
-- **⚡ Hybrid RAG Pipeline**:
-  - Serverless PostgreSQL vector retrieval powered by **Neon `pgvector`** with fallback in-memory cosine similarity and domain-aware stop-word filtering.
+  - Searchable catalog of 21 Indian Standards with clause-by-clause inspection drawers, source provenance metadata, and direct e-BIS portal links.
+- **⚡ Retrieval-backed assistant**:
+  - Local demonstration-summary retrieval, source metadata, Gemini generation, and deterministic conversational fallback.
 - **🔊 Web Speech API Audio Assist**:
   - Listen to AI responses in natural Hindi or Indian-accented English directly in the browser.
 
@@ -40,9 +48,9 @@ In India, navigating the thousands of Indian Standards published by the **Bureau
 ## 🛠️ Tech Stack & Architecture
 
 - **Frontend**: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4, Lucide Icons
-- **AI & Grounding**: Google Gemini 2.5 Flash (`@google/genai`), 768-dimensional normalized embeddings
-- **Database & Vector Search**: Neon Serverless PostgreSQL with `pgvector` & in-memory vector index
-- **Testing**: Vitest automated test suite (`tests/api-chat.test.ts`, `tests/ingestion.test.ts`)
+- **AI & Retrieval**: Google Gemini 3.5 Flash-Lite (`@google/genai`), local weighted lexical and hashed-vector search
+- **Database**: Neon Serverless PostgreSQL for optional database operations; production chat retrieval uses a local JSON index, not `pgvector`
+- **Testing**: Vitest automated test suite (`tests/verifier.test.ts`, `tests/security-api.test.ts`, `tests/api-chat.test.ts`, `tests/ingestion.test.ts`)
 - **Typography & Styling**: Plus Jakarta Sans, Outfit, warm saffron `#D97706` & navy `#0F172A` GovTech palette
 
 ---
@@ -52,45 +60,43 @@ In India, navigating the thousands of Indian Standards published by the **Bureau
 ```
 ├── app/
 │   ├── api/
-│   │   ├── chat/route.ts          # Multi-turn RAG chat API endpoint
+│   │   ├── chat/route.ts          # Multi-turn RAG chat with sliding rate-limiting
 │   │   ├── standards/route.ts     # Standards catalog API
-│   │   └── standards/[id]/route.ts# Individual standard details API
-│   ├── globals.css                # Tailwind CSS tokens & GovTech variables
-│   ├── layout.tsx                 # Root layout with fonts & Navbar/Footer
-│   ├── page.tsx                   # Main AI Assistant conversation portal
+│   │   ├── standards/[id]/route.ts# Individual standard details API
+│   │   └── verify/route.ts        # Truthful CM/L license format verification API
+│   ├── hallmarking/page.tsx       # 3 Mandatory marks & 6-char HUID tester
+│   ├── labs/page.tsx              # BIS Central & Regional lab directory
+│   ├── licensing/page.tsx         # 6-step MSME licensing & concession guide
+│   ├── schemes/page.tsx           # Scheme-I, CRS, FMCS, Scheme-X comparisons
 │   ├── standards/page.tsx         # Searchable Standards directory with filters
-│   ├── standards/[id]/page.tsx    # Multi-tab standard inspection page
-│   └── verify/page.tsx            # ISI Mark & CM/L license verifier
+│   ├── standards/[id]/page.tsx    # Multi-tab standard inspection page with provenance
+│   ├── verify/page.tsx            # Truthful ISI Mark & CM/L license verifier
+│   └── page.tsx                   # Main AI Assistant conversation portal
 ├── components/
-│   ├── Chat/
-│   │   ├── ChatInterface.tsx      # Interactive chat with audio & citations
-│   │   ├── ChatMessageContent.tsx # Formatted chat message with expandable details
-│   │   └── CitationChip.tsx       # Clickable standard pill trigger
-│   ├── Standards/
-│   │   ├── StandardCard.tsx       # Standard summary card
-│   │   ├── StandardDrawer.tsx     # Slide-out clause inspector
-│   │   └── StandardFilter.tsx     # Filter toolbar
-│   ├── Verifier/
-│   │   └── MarkVerifier.tsx       # 4-step ISI mark validation tool
-│   ├── HeroSection.tsx            # GovTech hero banner with sample pills
-│   ├── Navbar.tsx                 # Mode switcher & language toggle
-│   └── Footer.tsx                 # Official BIS links & SIH attribution
+│   ├── Chat/                      # Grounded chat, citation chips, audio assist
+│   ├── Hallmarking/               # Gold hallmarking rules & HUID validator
+│   ├── Labs/                      # BIS laboratory search & LIMS links
+│   ├── Licensing/                 # MSME licensing workflow & fee concessions
+│   ├── Schemes/                   # Certification scheme matrices
+│   ├── Standards/                 # Catalog cards, filters, and clause drawer
+│   └── Verifier/                  # Truthful MarkVerifier with BIS Care handoff
 ├── data/
-│   ├── standards/                 # 21 authentic Indian Standards JSON docs
+│   ├── licenses/                  # Demonstration license dataset (~1,000 records)
+│   ├── standards/                 # 21 Indian Standards with sourceMetadata
 │   └── standards-vectors.json     # Precomputed 768-dim embeddings & corpus
 ├── lib/
-│   ├── gemini.ts                  # Gemini 2.5 Flash RAG prompt engineering
-│   ├── prisma.ts                  # Neon PostgreSQL connection pooling
-│   ├── standards-data.ts          # Strongly-typed standards schema
+│   ├── gemini.ts                  # Gemini 3.5 Flash-Lite RAG & conversational fallback
+│   ├── license-database.ts        # Verification engine with realistic statuses
+│   ├── standards-data.ts          # Standards schema & provenance types
 │   ├── translations.ts            # Complete English & Hindi dictionary
 │   └── vector-store.ts            # Hybrid cosine + lexical search engine
 ├── tests/
+│   ├── verifier.test.ts           # CM/L format, demo statuses, BIS Care handoff
+│   ├── security-api.test.ts       # Rate-limiting, XSS prevention, input caps
 │   ├── api-chat.test.ts           # RAG retrieval & citation unit tests
 │   └── ingestion.test.ts          # Vector index integrity tests
 └── scripts/
-    ├── build_clean_vectors.py     # Clean vector generation pipeline
-    ├── ingest_to_neon.py          # Vector ingestion to Neon pgvector
-    └── seed-standards.ts          # Ingestion script for standards corpus
+    └── deploy-demo-licenses.ts    # Local demonstration license deployment
 ```
 
 ---
@@ -142,9 +148,19 @@ npm run start
 
 | Problem Statement | Solution Component | Technical Implementation |
 | :--- | :--- | :--- |
-| **SIH26107** | Dual Persona AI Assistant + ISI Verifier + Standards Directory | Multi-turn RAG chat (`/api/chat`) grounded on 21 authentic IS standards, interactive clause citations with drawer inspection, Web Speech audio synthesis, 7/8-digit CM/L license validation (`/verify`), and searchable standards registry (`/standards`). |
+| **SIH26107** | Dual Persona AI Assistant + ISI Number Checker + Standards Directory | Multi-turn chat (`/api/chat`) using 21 demonstration standard summaries, interactive clause views, Web Speech audio, 7/8-digit CM/L number checks (`/verify`), and a searchable demonstration standards catalog (`/standards`). Official BIS sources remain the authority for standards and licences. |
 
 ---
 
 ## 📜 License & Acknowledgements
-Developed for **Smart India Hackathon 2026 (SIH26107)**. Data sourced and structured in compliance with publicly available **Bureau of Indian Standards (BIS)** notifications, Quality Control Orders, and Ministry of Consumer Affairs circulars.
+Developed for **Smart India Hackathon 2026 (SIH26107)**. Standard summaries and licence records are demonstration data; use the linked **Bureau of Indian Standards (BIS)** portals for current authoritative information.
+
+## Current SIH pitch and reports
+
+- [Editable six-slide idea deck](output/Logic_Lords_BIS_Sahayak_SIH2026_Current.pptx)
+- [Slide-only submission PDF](output/pdf/Logic_Lords_BIS_Sahayak_SIH2026_Current.pdf)
+- [Current project report](output/pdf/BIS_Sahayak_Current_Project_Report.pdf)
+- [Current evaluation Q&A](output/pdf/SIH2026_Current_Evaluation_QA.pdf)
+- [Past-winner research notes](output/SIH_Winner_Research_Notes.md)
+
+Older presentation and report PDFs in the repository are archival and may contain outdated prototype claims. Use the files marked **Current** above. Add the registered team ID and confirm the problem title/theme in the SIH portal before submission.

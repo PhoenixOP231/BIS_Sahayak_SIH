@@ -40,8 +40,20 @@
       "clauseNumber": "Clause 6.2",
       "title": "Compressive Strength",
       "content": "Compressive strength of mortar cubes shall not be less than 53 MPa at 28 days for 53 Grade OPC.",
-      "contentHi": "53 ग्रेड ओपीसी के लिए 28 दिनों में शक्ति 53 MPa से कम नहीं होनी चाहिए।"
+      "contentHi": "53 ग्रेड ओपीसी के लिए 28 दिनों में शक्ति 53 MPa से कम नहीं होनी चाहिए।",
+      "clausePageReference": "Clause 6.2",
+      "sourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails"
     }
   ],
-  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes.",
+  "sourceMetadata": {
+    "officialSourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "documentTitle": "IS 269:2015 — Ordinary Portland Cement (33, 43 and 53 Grade) — Specification",
+    "editionYear": "2015",
+    "clausePageReference": "Clause 6.2",
+    "retrievalDate": "2026-09-22",
+    "dataClassification": "demonstration_summary",
+    "officialUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "classification": "demonstration_summary"
+  }
 }

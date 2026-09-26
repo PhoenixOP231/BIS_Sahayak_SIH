@@ -40,8 +40,20 @@
       "clauseNumber": "Clause 6.1",
       "title": "Conductor Properties and Resistance",
       "content": "Conductors shall consist of annealed high conductivity copper or EC grade aluminium wires conforming to IS 8130.",
-      "contentHi": "कंडक्टर IS 8130 के अनुसार उच्च चालकता वाले तांबे या एल्युमिनियम तारों से बने होंगे।"
+      "contentHi": "कंडक्टर IS 8130 के अनुसार उच्च चालकता वाले तांबे या एल्युमिनियम तारों से बने होंगे।",
+      "clausePageReference": "Clause 6.1",
+      "sourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails"
     }
   ],
-  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes.",
+  "sourceMetadata": {
+    "officialSourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "documentTitle": "IS 694:2010 — PVC Insulated Cables for Working Voltages up to and including 1100 V — Specification",
+    "editionYear": "2010",
+    "clausePageReference": "Clause 6.1",
+    "retrievalDate": "2026-09-22",
+    "dataClassification": "demonstration_summary",
+    "officialUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "classification": "demonstration_summary"
+  }
 }

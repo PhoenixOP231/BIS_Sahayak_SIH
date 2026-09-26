@@ -101,7 +101,7 @@ export function Footer({ language }: { language: Language }) {
               </li>
               <li>
                 <a
-                  href="https://play.google.com/store/apps/details?id=com.bis.biscare"
+                  href="https://play.google.com/store/apps/details?id=com.bis.bisapp"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-amber-400 transition inline-flex items-center gap-1"

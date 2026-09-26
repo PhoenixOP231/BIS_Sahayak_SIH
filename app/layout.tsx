@@ -17,9 +17,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: 'BIS Sahayak • AI Assistant for Indian Standards & BIS Services (SIH26107)',
-  description: 'Intelligent AI Companion for Indian Standards (IS), QCO compliance, testing procedures, and ISI mark authenticity verification. Ministry of Consumer Affairs, Govt of India.',
+  description: 'Independent SIH prototype with demonstration Indian Standard summaries, BIS service guidance, and links to official verification.',
   keywords: ['BIS', 'Bureau of Indian Standards', 'ISI Mark', 'Indian Standards', 'SIH2026', 'SIH26107', 'Quality Control Order', 'Consumer Affairs'],
-  authors: [{ name: 'Team Antigravity' }],
+  authors: [{ name: 'Logic Lords' }],
   creator: 'Smart India Hackathon 2026',
   icons: {
     icon: '/icon.svg',

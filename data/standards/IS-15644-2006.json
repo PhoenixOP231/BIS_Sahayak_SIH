@@ -39,8 +39,20 @@
       "clauseNumber": "Clause 7.1",
       "title": "Supply Voltage Constraints",
       "content": "Electric toys shall not be powered by voltages exceeding 24 V DC or AC RMS.",
-      "contentHi": "इलेक्ट्रिक खिलौनों को 24 V DC या AC से अधिक वोल्टेज पर नहीं चलाया जाएगा।"
+      "contentHi": "इलेक्ट्रिक खिलौनों को 24 V DC या AC से अधिक वोल्टेज पर नहीं चलाया जाएगा।",
+      "clausePageReference": "Clause 7.1",
+      "sourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails"
     }
   ],
-  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes.",
+  "sourceMetadata": {
+    "officialSourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "documentTitle": "IS 15644:2006 — Safety of Electric Toys",
+    "editionYear": "2006",
+    "clausePageReference": "Clause 7.1",
+    "retrievalDate": "2026-09-22",
+    "dataClassification": "demonstration_summary",
+    "officialUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "classification": "demonstration_summary"
+  }
 }

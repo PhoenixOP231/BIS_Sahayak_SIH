@@ -1,0 +1,7 @@
+.ppt-build/
+output/
+*.pptx
+*.pdf
+*.zip
+tests/
+PROGRESS.md

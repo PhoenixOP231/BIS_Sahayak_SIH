@@ -41,4 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Private presentation renders and validators
+.ppt-build/
+
 .vercel

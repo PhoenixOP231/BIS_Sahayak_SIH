@@ -16158,5 +16158,37 @@
     "scheme": "Scheme-I (Product Certification Scheme)",
     "standardId": "IS-13947-2004",
     "branchOffice": "BIS Jaipur / Rajasthan Branch Office"
+  },
+  {
+    "cmlNumber": "CM/L-8499999",
+    "digits": "8499999",
+    "manufacturer": "Revoked Industrial Packaging Ltd.",
+    "brand": "Demo Cancelled Goods",
+    "isNumber": "IS 2347:2017",
+    "standardTitle": "Domestic Pressure Cookers - Specification",
+    "category": "Kitchen & Home Safety",
+    "factoryLocation": "Industrial Estate, Kanpur",
+    "state": "Uttar Pradesh",
+    "status": "CANCELLED",
+    "validUntil": "01-Jan-2024 (CANCELLED)",
+    "scheme": "Scheme-I (Product Certification Scheme)",
+    "standardId": "IS-2347-2017",
+    "branchOffice": "BIS Kanpur / UP Branch Office"
+  },
+  {
+    "cmlNumber": "CM/L-8399999",
+    "digits": "8399999",
+    "manufacturer": "Lapsed Manufacturing Works",
+    "brand": "Demo Expired Kitchenware",
+    "isNumber": "IS 2347:2017",
+    "standardTitle": "Domestic Pressure Cookers - Specification",
+    "category": "Kitchen & Home Safety",
+    "factoryLocation": "MIDC Industrial Area, Pune",
+    "state": "Maharashtra",
+    "status": "EXPIRED",
+    "validUntil": "31-Dec-2023 (EXPIRED)",
+    "scheme": "Scheme-I (Product Certification Scheme)",
+    "standardId": "IS-2347-2017",
+    "branchOffice": "BIS Pune / Western Regional Office"
   }
 ]

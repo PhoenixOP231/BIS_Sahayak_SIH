@@ -1,6 +1,8 @@
-// scripts/sync-bis-database.ts
-// Automated ETL Pipeline for Bureau of Indian Standards (BIS) Scheme-I Licenses
-// Syncs verified records, handles daily delta updates, and upserts into Neon Serverless PostgreSQL
+// scripts/deploy-demo-licenses.ts
+// Local Demonstration Dataset Deployment Pipeline
+// Loads curated demonstration licence records into Neon Serverless PostgreSQL for offline prototype indexing.
+// NOTE: This script does NOT connect to official government BIS servers or live e-BIS APIs.
+// For official real-time verification, users must use the official BIS Care Mobile App or e-BIS portal (services.bis.gov.in).
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -23,10 +25,11 @@ interface LicenseSeed {
   validUntil: string;
 }
 
-async function runSync() {
+async function runDeploy() {
   const startTime = Date.now();
-  console.log('=== BIS SAHAYAK: NATIONWIDE LICENSE DATABASE SYNC PIPELINE ===');
+  console.log('=== BIS SAHAYAK: DEMO LICENCE DATABASE DEPLOYMENT ===');
   console.log('Timestamp:', new Date().toISOString());
+  console.log('Notice: Deploying local demonstration records into Neon PostgreSQL.');
 
   const dbUrl = process.env.DATABASE_URL;
   if (!dbUrl || dbUrl.includes('placeholder')) {
@@ -62,8 +65,8 @@ async function runSync() {
   await sql`CREATE INDEX IF NOT EXISTS idx_bis_status ON bis_licenses(status);`;
   console.log('Schema verified successfully.');
 
-  // 2. Load Verified Licenses Dataset (1,000+ Nationwide Records)
-  console.log('Step 2: Loading verified licenses dataset...');
+  // 2. Load Demonstration Licences Dataset
+  console.log('Step 2: Loading local demonstration licences dataset...');
   const jsonPath = path.join(process.cwd(), 'data', 'licenses', 'verified-licenses.json');
   if (!fs.existsSync(jsonPath)) {
     console.error('ERROR: verified-licenses.json not found at:', jsonPath);
@@ -72,24 +75,10 @@ async function runSync() {
 
   const fileData = fs.readFileSync(jsonPath, 'utf-8');
   const licenses: LicenseSeed[] = JSON.parse(fileData);
-  console.log(`Loaded ${licenses.length} verified licenses from local repository.`);
-
-  // Helper to decode branch office
-  function getBranchOffice(digits: string, state: string): string {
-    const p2 = parseInt(digits.substring(0, 2), 10);
-    if (p2 >= 51 && p2 <= 55) return 'BIS Mumbai / Western Regional Office';
-    if ((p2 >= 56 && p2 <= 60) || (p2 >= 71 && p2 <= 73)) return 'BIS Delhi / NCR Northern Regional Office';
-    if (p2 >= 61 && p2 <= 66) return 'BIS Kolkata / Eastern Regional Office';
-    if (p2 >= 67 && p2 <= 70) return 'BIS Ahmedabad / Gujarat Branch Office';
-    if (p2 >= 74 && p2 <= 78) return 'BIS Pune / Satara Branch Office';
-    if (p2 >= 81 && p2 <= 84) return 'BIS Bengaluru / Southern Regional Office';
-    if (p2 >= 85 && p2 <= 88) return 'BIS Hyderabad / Telangana Branch Office';
-    if (p2 >= 91 && p2 <= 95) return 'BIS Chandigarh / Punjab & HP Branch Office';
-    return `BIS Regional Directorate (${state})`;
-  }
+  console.log(`Loaded ${licenses.length} demonstration licence records from local file.`);
 
   // 3. Upsert records into Neon PostgreSQL in concurrent batches
-  console.log('Step 3: Upserting records into Neon PostgreSQL in concurrent batches...');
+  console.log('Step 3: Upserting demo records into Neon PostgreSQL in concurrent batches...');
   let upsertedCount = 0;
   let errorsCount = 0;
   const batchSize = 25;
@@ -98,7 +87,6 @@ async function runSync() {
     const chunk = licenses.slice(i, i + batchSize);
     await Promise.all(chunk.map(async (lic) => {
       try {
-        const branch = getBranchOffice(lic.digits, lic.state);
         await sql`
           INSERT INTO bis_licenses (
             cml_number, digits, brand, manufacturer, is_number,
@@ -106,7 +94,7 @@ async function runSync() {
             status, valid_until, updated_at
           ) VALUES (
             ${lic.cmlNumber}, ${lic.digits}, ${lic.brand}, ${lic.manufacturer}, ${lic.isNumber},
-            ${lic.category}, ${lic.factoryLocation}, ${lic.state}, ${branch},
+            ${lic.category}, ${lic.factoryLocation}, ${lic.state}, ${lic.state ? `State: ${lic.state}` : 'BIS Region'},
             ${lic.status}, ${lic.validUntil}, NOW()
           )
           ON CONFLICT (cml_number) DO UPDATE SET
@@ -129,7 +117,7 @@ async function runSync() {
     }));
 
     if ((i + batchSize) % 200 === 0 || i + batchSize >= licenses.length) {
-      console.log(`Synced ${Math.min(i + batchSize, licenses.length)} / ${licenses.length} records...`);
+      console.log(`Uploaded ${Math.min(i + batchSize, licenses.length)} / ${licenses.length} records...`);
     }
   }
 
@@ -138,15 +126,14 @@ async function runSync() {
   const totalInDb = countRes[0]?.total || 0;
   const elapsedSec = ((Date.now() - startTime) / 1000).toFixed(2);
 
-  console.log('=== SYNC SUMMARY ===');
-  console.log(`Successfully Upserted: ${upsertedCount} records`);
+  console.log('=== DEPLOYMENT SUMMARY ===');
+  console.log(`Successfully Upserted: ${upsertedCount} demo records`);
   console.log(`Errors: ${errorsCount}`);
-  console.log(`Total Active Licenses in Database: ${totalInDb}`);
+  console.log(`Total Records in Cloud Demo Database: ${totalInDb}`);
   console.log(`Execution Time: ${elapsedSec} seconds`);
-  console.log('Daily ETL sync completed successfully.');
 }
 
-runSync().catch(err => {
-  console.error('Fatal sync error:', err);
+runDeploy().catch(err => {
+  console.error('Fatal deployment error:', err);
   process.exit(1);
 });

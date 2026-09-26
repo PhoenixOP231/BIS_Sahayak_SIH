@@ -39,8 +39,20 @@
       "clauseNumber": "Clause 9.1",
       "title": "Live Part Contact Protection",
       "content": "Sockets shall prevent access to live parts when a plug is withdrawn.",
-      "contentHi": "प्लग निकालने पर सॉकेट के शटर स्वतः बंद होने चाहिए।"
+      "contentHi": "प्लग निकालने पर सॉकेट के शटर स्वतः बंद होने चाहिए।",
+      "clausePageReference": "Clause 9.1",
+      "sourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails"
     }
   ],
-  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes.",
+  "sourceMetadata": {
+    "officialSourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "documentTitle": "IS 1293:2019 — Plugs and Socket-Outlets of Rated Voltage up to 250 V and Current up to 16 A — Specification",
+    "editionYear": "2019",
+    "clausePageReference": "Clause 9.1",
+    "retrievalDate": "2026-09-22",
+    "dataClassification": "demonstration_summary",
+    "officialUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "classification": "demonstration_summary"
+  }
 }

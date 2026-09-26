@@ -37,8 +37,20 @@
       "clauseNumber": "Clause 5.1",
       "title": "Classification",
       "content": "Adhesives classified Type 1 to Type 5 based on bond strength.",
-      "contentHi": "टाइल एडहेसिव को ताकत के अनुसार टाइप 1 से 5 तक वर्गीकृत किया गया है।"
+      "contentHi": "टाइल एडहेसिव को ताकत के अनुसार टाइप 1 से 5 तक वर्गीकृत किया गया है।",
+      "clausePageReference": "Clause 5.1",
+      "sourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails"
     }
   ],
-  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes.",
+  "sourceMetadata": {
+    "officialSourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "documentTitle": "IS 15477:2019 — Adhesives for Use with Ceramic, Mosaic and Stone Tiles — Specification",
+    "editionYear": "2019",
+    "clausePageReference": "Clause 5.1",
+    "retrievalDate": "2026-09-22",
+    "dataClassification": "demonstration_summary",
+    "officialUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "classification": "demonstration_summary"
+  }
 }

@@ -37,12 +37,13 @@ import {
   Cpu
 } from 'lucide-react';
 import { UI_TEXT, Language } from '@/lib/translations';
-import { 
+import {
   parseAndVerifyLicense, 
   VerificationResult,
   searchVerifiedLicenses,
   resolveStandardId
 } from '@/lib/license-database';
+import { getStandardById } from '@/lib/standards-data';
 import { ISIMarkLogo } from './ISIMarkLogo';
 
 export function MarkVerifier({ language }: { language: Language }) {
@@ -178,14 +179,18 @@ export function MarkVerifier({ language }: { language: Language }) {
 
   const [visibleCount, setVisibleCount] = useState(36);
 
-  // Filtered Directory of all real BIS products (1,000+ Nationwide Dataset)
+  // Filtered demonstration directory
   const filteredProducts = useMemo(() => {
-    setVisibleCount(36);
     return searchVerifiedLicenses(directorySearch, categoryFilter, statusFilter);
   }, [directorySearch, categoryFilter, statusFilter]);
+  useEffect(() => setVisibleCount(36), [directorySearch, categoryFilter, statusFilter]);
+
+  const selectedStandardId = verificationResult?.license
+    ? getStandardById(verificationResult.license.standardId)?.id || getStandardById(resolveStandardId(verificationResult.license.isNumber))?.id
+    : undefined;
 
   const categories = [
-    { id: 'all', label: language === 'hi' ? 'सभी प्रमाणित उत्पाद (1,000+)' : 'All Certified Products', icon: Database },
+    { id: 'all', label: language === 'hi' ? 'सभी डेमो रिकॉर्ड (1,000+)' : 'All Demo Records', icon: Database },
     { id: 'Food & Drinking Water', label: language === 'hi' ? 'पेयजल एवं आरओ (IS 14543/10500)' : 'Water & RO (IS 14543/10500)', icon: Droplets },
     { id: 'Kitchen & Home Safety', label: language === 'hi' ? 'कुकर एवं रसोई सुरक्षा (IS 2347/302)' : 'Cookers & Kitchen (IS 2347/302)', icon: ShoppingBag },
     { id: 'Construction Materials', label: language === 'hi' ? 'टीएमटी सरिया एवं सीमेंट (IS 1786/1489)' : 'TMT Steel & Cement (IS 1786/1489)', icon: Wrench },
@@ -469,8 +474,8 @@ export function MarkVerifier({ language }: { language: Language }) {
         {!isVerifying && verificationResult && (
           <div className="mt-8 pt-8 border-t border-slate-200 animate-fadeIn">
             
-            {/* TIER 1: VERIFIED AUTHENTIC BRAND (PRE-INDEXED) */}
-            {verificationResult.status === 'verified' && verificationResult.license && (
+            {/* TIER 1: OPERATIVE DEMO RECORD */}
+            {(verificationResult.status === 'operative' || (verificationResult as any).status === 'verified') && verificationResult.license && (
               <div className="rounded-3xl border-2 border-emerald-500/80 bg-gradient-to-b from-emerald-50/90 via-emerald-50/40 to-white p-6 sm:p-8 shadow-lg shadow-emerald-500/10 space-y-6">
                 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-emerald-200/80">
@@ -484,14 +489,12 @@ export function MarkVerifier({ language }: { language: Language }) {
                           {t.authenticLicenseBadge}
                         </span>
                         <span className="text-xs font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full">
-                          {t.statusPrefix} {verificationResult.license.status === 'OPERATIVE' ? t.statusOperative : verificationResult.license.status === 'SUSPENDED' ? t.statusSuspendedVal : verificationResult.license.status}
+                          {t.statusPrefix} {t.statusOperative}
                         </span>
-                        {(verificationResult as any)?.source === 'neon_postgresql_cloud' && (
-                          <span className="text-xs font-semibold text-teal-800 bg-teal-100/90 border border-teal-300 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
-                            <span>{t.cloudDbSyncedBadge}</span>
-                          </span>
-                        )}
+                        <span className="text-xs font-semibold text-teal-800 bg-teal-100/90 border border-teal-300 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
+                          <span>{t.cloudDbSyncedBadge}</span>
+                        </span>
                       </div>
                       <h3 className="font-extrabold text-xl sm:text-2xl text-slate-900 font-display mt-1">
                         {verificationResult.license.brand}
@@ -544,47 +547,49 @@ export function MarkVerifier({ language }: { language: Language }) {
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>{t.crossRefRegistryNotice}</span>
                   </span>
-                  <Link
-                    href={`/standards/${verificationResult.license.standardId || resolveStandardId(verificationResult.license.isNumber)}`}
-                    className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-900 hover:underline"
-                  >
-                    <span>{t.viewLimitsAction.replace('{isNumber}', verificationResult.license.isNumber.split(':')[0])}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+                  {selectedStandardId && (
+                    <Link
+                      href={`/standards/${selectedStandardId}`}
+                      className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-900 hover:underline"
+                    >
+                      <span>{t.viewLimitsAction.replace('{isNumber}', verificationResult.license.isNumber.split(':')[0])}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  )}
                 </div>
 
               </div>
             )}
 
-            {/* TIER 2: VALID SCHEME-I REGIONAL PLANT LICENSE (DECODED + LIVE GATEWAY) */}
-            {verificationResult.status === 'regional_verified' && verificationResult.decodedInfo && (
+            {/* TIER 2: FORMAT VALID UNVERIFIED (PLAUSIBLE FORMAT ONLY) */}
+            {verificationResult.status === 'format_valid_unverified' && (
               <div className="rounded-3xl border-2 border-teal-500/80 bg-gradient-to-b from-teal-50/90 via-teal-50/40 to-white p-6 sm:p-8 shadow-lg shadow-teal-500/10 space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-teal-200/80">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center shadow-md shadow-teal-600/20 shrink-0">
-                      <CheckCircle2 className="w-7 h-7" />
+                      <Info className="w-7 h-7" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-extrabold uppercase tracking-wider bg-teal-600 text-white px-2.5 py-0.5 rounded-full">
-                          {t.regionalBadge}
+                          {t.formatValidBadge}
                         </span>
                         <span className="text-xs font-bold text-teal-800 bg-teal-100 border border-teal-300 px-2 py-0.5 rounded-full font-mono">
                           {verificationResult.inputNumber}
                         </span>
                       </div>
                       <h3 className="font-extrabold text-xl sm:text-2xl text-slate-900 font-display mt-1">
-                        {verificationResult.decodedInfo.branchOffice}
+                        {t.formatValidBadge}
                       </h3>
                       <p className="text-xs text-slate-600 font-medium">
-                        {verificationResult.decodedInfo.region} • {t.regionalPlantSubtitle}
+                        {t.formatValidSubtitle}
                       </p>
                     </div>
                   </div>
 
                   <div className="shrink-0 flex justify-center">
                     <ISIMarkLogo 
-                      isNumber="IS 14543 / IS 2347" 
+                      isNumber="IS Specification" 
                       cmlNumber={verificationResult.inputNumber} 
                     />
                   </div>
@@ -594,27 +599,27 @@ export function MarkVerifier({ language }: { language: Language }) {
                   <div className="p-4 rounded-2xl bg-white border border-teal-100 space-y-1.5 shadow-2xs">
                     <h4 className="font-bold text-slate-900 flex items-center gap-1.5">
                       <Building2 className="w-4 h-4 text-teal-600" />
-                      <span>{t.regulatoryFormatTitle}</span>
+                      <span>{t.formatValidNoticeTitle}</span>
                     </h4>
                     <p className="text-slate-600 leading-relaxed">
-                      {t.regulatoryFormatDesc}
+                      {t.formatValidNoticeDesc}
                     </p>
                   </div>
 
                   <div className="p-4 rounded-2xl bg-white border border-teal-100 space-y-1.5 shadow-2xs">
                     <h4 className="font-bold text-slate-900 flex items-center gap-1.5">
                       <Globe className="w-4 h-4 text-teal-600" />
-                      <span>{t.livePortalTitle}</span>
+                      <span>{t.officialHandoffTitle}</span>
                     </h4>
                     <p className="text-slate-600 leading-relaxed">
-                      {t.livePortalDesc}
+                      {t.officialHandoffDesc}
                     </p>
                   </div>
                 </div>
 
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
                   <a
-                    href={verificationResult.decodedInfo.portalUrl}
+                    href={verificationResult.portalUrl || 'https://www.manakonline.in'}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-1.5 font-bold text-teal-700 hover:text-teal-900 hover:underline"
@@ -636,8 +641,8 @@ export function MarkVerifier({ language }: { language: Language }) {
               </div>
             )}
 
-            {/* STATE 3: SUSPENDED OR REVOKED LICENSE */}
-            {verificationResult.status === 'suspended' && verificationResult.license && (
+            {/* TIER 3: EXPIRED LICENSE */}
+            {verificationResult.status === 'expired' && verificationResult.license && (
               <div className="rounded-3xl border-2 border-amber-500 bg-gradient-to-b from-amber-50/90 via-amber-50/40 to-white p-6 sm:p-8 shadow-lg shadow-amber-500/10 space-y-6">
                 <div className="flex items-start gap-4 pb-6 border-b border-amber-200/80">
                   <div className="w-12 h-12 rounded-2xl bg-amber-600 text-white flex items-center justify-center shadow-md shadow-amber-600/20 shrink-0">
@@ -646,7 +651,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-extrabold uppercase tracking-wider bg-amber-600 text-white px-2.5 py-0.5 rounded-full">
-                        {t.suspendedLicenseBadge}
+                        {t.expiredLicenseBadge}
                       </span>
                       <span className="text-xs font-mono font-bold text-amber-900 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-full">
                         {verificationResult.license.cmlNumber}
@@ -656,7 +661,7 @@ export function MarkVerifier({ language }: { language: Language }) {
                       {verificationResult.license.brand}
                     </h3>
                     <p className="text-xs text-amber-900 font-medium mt-1 leading-relaxed">
-                      {verificationResult.message || t.suspendedDefaultMsg}
+                      {verificationResult.message}
                     </p>
                   </div>
                 </div>
@@ -668,34 +673,78 @@ export function MarkVerifier({ language }: { language: Language }) {
               </div>
             )}
 
-            {/* STATE 4: DUMMY / COUNTERFEIT WARNING */}
-            {verificationResult.status === 'counterfeit' && (
-              <div className="rounded-3xl border-2 border-rose-600 bg-gradient-to-b from-rose-100/90 via-rose-50/50 to-white p-6 sm:p-8 shadow-xl shadow-rose-600/20 space-y-6">
-                <div className="flex items-start gap-4 pb-6 border-b border-rose-300">
-                  <div className="w-14 h-14 rounded-2xl bg-rose-700 text-white flex items-center justify-center shadow-lg shadow-rose-700/30 shrink-0">
+            {/* TIER 4: SUSPENDED OR CANCELLED LICENSE */}
+            {(verificationResult.status === 'suspended' || verificationResult.status === 'cancelled') && verificationResult.license && (
+              <div className="rounded-3xl border-2 border-rose-500 bg-gradient-to-b from-rose-50/90 via-rose-50/40 to-white p-6 sm:p-8 shadow-lg shadow-rose-500/10 space-y-6">
+                <div className="flex items-start gap-4 pb-6 border-b border-rose-200/80">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center shadow-md shadow-rose-600/20 shrink-0">
+                    <AlertTriangle className="w-7 h-7" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-extrabold uppercase tracking-wider bg-rose-600 text-white px-2.5 py-0.5 rounded-full">
+                        {verificationResult.status === 'cancelled' ? t.cancelledLicenseBadge : t.suspendedLicenseBadge}
+                      </span>
+                      <span className="text-xs font-mono font-bold text-rose-900 bg-rose-100 border border-rose-300 px-2 py-0.5 rounded-full">
+                        {verificationResult.license.cmlNumber}
+                      </span>
+                    </div>
+                    <h3 className="font-extrabold text-xl sm:text-2xl text-slate-900 font-display mt-1">
+                      {verificationResult.license.brand}
+                    </h3>
+                    <p className="text-xs text-rose-900 font-medium mt-1 leading-relaxed">
+                      {verificationResult.message || t.suspendedDefaultMsg}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white border border-rose-200 text-xs text-slate-600 space-y-2">
+                  <h4 className="font-bold text-slate-900">{t.consumerAdvisoryHeading}</h4>
+                  <p>{t.consumerAdvisoryBody}</p>
+                </div>
+              </div>
+            )}
+
+            {/* TIER 5: SUSPICIOUS PATTERN WARNING */}
+            {(verificationResult.status === 'suspicious_pattern' || (verificationResult as any).status === 'counterfeit') && (
+              <div className="rounded-3xl border-2 border-amber-600 bg-gradient-to-b from-amber-100/90 via-amber-50/50 to-white p-6 sm:p-8 shadow-xl shadow-amber-600/20 space-y-6">
+                <div className="flex items-start gap-4 pb-6 border-b border-amber-300">
+                  <div className="w-14 h-14 rounded-2xl bg-amber-600 text-white flex items-center justify-center shadow-lg shadow-amber-600/30 shrink-0">
                     <AlertOctagon className="w-8 h-8" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-black uppercase tracking-wider bg-rose-700 text-white px-3 py-1 rounded-full">
-                        {t.fakeBadge}
+                      <span className="text-xs font-black uppercase tracking-wider bg-amber-600 text-white px-3 py-1 rounded-full">
+                        {t.suspiciousPatternBadge}
                       </span>
-                      <span className="text-xs font-mono font-bold text-rose-900 bg-rose-100 border border-rose-300 px-2.5 py-0.5 rounded-full">
+                      <span className="text-xs font-mono font-bold text-amber-900 bg-amber-100 border border-amber-300 px-2.5 py-0.5 rounded-full">
                         {verificationResult.inputNumber}
                       </span>
                     </div>
-                    <h3 className="font-black text-xl sm:text-2xl text-rose-950 font-display mt-2">
-                      {t.fakeDetectedTitle}
+                    <h3 className="font-black text-xl sm:text-2xl text-amber-950 font-display mt-2">
+                      {t.suspiciousPatternTitle}
                     </h3>
-                    <p className="text-xs text-rose-900 font-semibold mt-1 leading-relaxed">
+                    <p className="text-xs text-amber-900 font-semibold mt-1 leading-relaxed">
                       {verificationResult.message}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white border border-rose-200 text-xs text-slate-700 space-y-2">
-                  <h4 className="font-bold text-rose-950">{t.criminalPenaltyTitle}</h4>
-                  <p>{t.criminalPenaltyBody}</p>
+                <div className="p-4 rounded-2xl bg-white border border-amber-200 text-xs text-slate-700 space-y-2">
+                  <h4 className="font-bold text-amber-950">{t.suspiciousAdvisoryTitle}</h4>
+                  <p>{t.suspiciousPatternDesc}</p>
+                </div>
+
+                <div className="pt-2 flex justify-end">
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.bis.bisapp"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl transition flex items-center gap-1.5 shadow-md text-xs"
+                  >
+                    <Smartphone className="w-3.5 h-3.5" />
+                    <span>{t.verifyBisCareBtn}</span>
+                  </a>
                 </div>
               </div>
             )}
@@ -903,7 +952,9 @@ export function MarkVerifier({ language }: { language: Language }) {
               >
                 <option value="all">{t.statusAll}</option>
                 <option value="OPERATIVE">{t.statusOperativeOnly}</option>
+                <option value="EXPIRED">{t.statusExpiredOnly}</option>
                 <option value="SUSPENDED">{t.statusSuspendedOnly}</option>
+                <option value="CANCELLED">{t.statusCancelledOnly}</option>
               </select>
             </div>
           </div>
@@ -986,8 +1037,10 @@ export function MarkVerifier({ language }: { language: Language }) {
             <div
               key={prod.cmlNumber}
               className={`p-4 rounded-2xl border transition hover:shadow-md flex flex-col justify-between ${
-                prod.status === 'SUSPENDED'
+                prod.status === 'SUSPENDED' || prod.status === 'CANCELLED'
                   ? 'bg-rose-50/60 border-rose-200'
+                  : prod.status === 'EXPIRED'
+                  ? 'bg-amber-50/60 border-amber-200'
                   : 'bg-white border-slate-200/90 hover:border-amber-300'
               }`}
             >
@@ -1015,10 +1068,18 @@ export function MarkVerifier({ language }: { language: Language }) {
                     className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full ${
                       prod.status === 'OPERATIVE'
                         ? 'bg-emerald-100 text-emerald-800'
+                        : prod.status === 'EXPIRED'
+                        ? 'bg-amber-100 text-amber-800'
                         : 'bg-rose-100 text-rose-800'
                     }`}
                   >
-                    {prod.status === 'OPERATIVE' ? t.statusOperative : t.statusSuspendedVal}
+                    {prod.status === 'OPERATIVE'
+                      ? t.statusOperative
+                      : prod.status === 'EXPIRED'
+                      ? t.statusExpired
+                      : prod.status === 'SUSPENDED'
+                      ? t.statusSuspendedVal
+                      : t.statusCancelled}
                   </span>
                 </div>
 

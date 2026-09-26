@@ -49,8 +49,20 @@
       "clauseNumber": "Clause 8.1",
       "title": "Mechanical Properties",
       "content": "Tensile properties of deformed bars shall conform to Table 3. Total elongation at maximum force (Agst) shall not be less than 5% for D grades.",
-      "contentHi": "D ग्रेड के लिए अधिकतम बल पर बढ़ाव 5% से कम नहीं होना चाहिए।"
+      "contentHi": "D ग्रेड के लिए अधिकतम बल पर बढ़ाव 5% से कम नहीं होना चाहिए।",
+      "clausePageReference": "Clause 8.1",
+      "sourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails"
     }
   ],
-  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes.",
+  "sourceMetadata": {
+    "officialSourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "documentTitle": "IS 1786:2008 — High Strength Deformed Steel Bars and Wires for Concrete Reinforcement — Specification (TMT Rebars)",
+    "editionYear": "2008",
+    "clausePageReference": "Clause 8.1",
+    "retrievalDate": "2026-09-22",
+    "dataClassification": "demonstration_summary",
+    "officialUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "classification": "demonstration_summary"
+  }
 }

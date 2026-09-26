@@ -40,8 +40,20 @@
       "clauseNumber": "Clause 7.1",
       "title": "Shell Thickness and Design Stress",
       "content": "The minimum wall thickness of the cylindrical shell shall be calculated such that calculated stress at test pressure does not exceed 80% of minimum guaranteed yield strength.",
-      "contentHi": "सिलेंडर की न्यूनतम दीवार की मोटाई इस प्रकार रखी जाएगी कि परीक्षण दबाव पर प्रतिबल मूल धातु की उपज शक्ति के 80% से अधिक न हो।"
+      "contentHi": "सिलेंडर की न्यूनतम दीवार की मोटाई इस प्रकार रखी जाएगी कि परीक्षण दबाव पर प्रतिबल मूल धातु की उपज शक्ति के 80% से अधिक न हो।",
+      "clausePageReference": "Clause 7.1",
+      "sourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails"
     }
   ],
-  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes.",
+  "sourceMetadata": {
+    "officialSourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "documentTitle": "IS 3196 (Part 1):2013 — Welded Low Carbon Steel Cylinders for Low Pressure Liquefiable Gases — Part 1: Cylinders for LPG",
+    "editionYear": "2013",
+    "clausePageReference": "Clause 7.1",
+    "retrievalDate": "2026-09-22",
+    "dataClassification": "demonstration_summary",
+    "officialUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "classification": "demonstration_summary"
+  }
 }

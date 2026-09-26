@@ -56,25 +56,49 @@ export function Navbar({ mode, setMode, language, setLanguage }: NavbarProps) {
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          <nav className="hidden xl:flex items-center gap-1">
             <Link
               href="/#chat"
               onClick={handleNavAssistant}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
+              className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
             >
               {t.navHome}
             </Link>
             <Link
               href="/standards"
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
+              className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
             >
               {t.navStandards}
             </Link>
             <Link
               href="/verify"
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
+              className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
             >
               {t.navVerify}
+            </Link>
+            <Link
+              href="/schemes"
+              className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
+            >
+              {t.navSchemes}
+            </Link>
+            <Link
+              href="/hallmarking"
+              className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
+            >
+              {t.navHallmarking}
+            </Link>
+            <Link
+              href="/labs"
+              className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
+            >
+              {t.navLabs}
+            </Link>
+            <Link
+              href="/licensing"
+              className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-800 hover:bg-amber-50 transition"
+            >
+              {t.navLicensing}
             </Link>
           </nav>
 
@@ -189,6 +213,34 @@ export function Navbar({ mode, setMode, language, setLanguage }: NavbarProps) {
               className="px-3 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-amber-50"
             >
               {t.navVerify}
+            </Link>
+            <Link
+              href="/schemes"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-amber-50"
+            >
+              {t.navSchemes}
+            </Link>
+            <Link
+              href="/hallmarking"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-amber-50"
+            >
+              {t.navHallmarking}
+            </Link>
+            <Link
+              href="/labs"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-amber-50"
+            >
+              {t.navLabs}
+            </Link>
+            <Link
+              href="/licensing"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-amber-50"
+            >
+              {t.navLicensing}
             </Link>
           </div>
 

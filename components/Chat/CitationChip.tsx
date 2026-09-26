@@ -29,6 +29,14 @@ export function CitationChip({ citation, onClick }: CitationChipProps) {
           {citation.clauseNumber}
         </span>
       )}
+      {citation.sourceMetadata && (
+        <span
+          className="text-[9px] font-mono text-emerald-800 bg-emerald-100/90 border border-emerald-300 px-1 py-0.5 rounded"
+          title={`Official Source: ${citation.sourceMetadata.documentTitle} (${citation.sourceMetadata.editionYear})`}
+        >
+          {citation.sourceMetadata.editionYear}
+        </span>
+      )}
       <ArrowUpRight className="w-3 h-3 text-amber-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
     </button>
   );

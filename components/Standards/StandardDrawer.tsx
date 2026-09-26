@@ -153,6 +153,34 @@ export function StandardDrawer({ standardId, isOpen, onClose, language }: Standa
             )}
           </div>
 
+          {/* Source Provenance Metadata Card */}
+          <div className="bg-amber-50/70 rounded-xl p-3.5 border border-amber-200/90 text-xs space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-amber-950 uppercase tracking-wider text-[11px] flex items-center gap-1">
+                <FileText className="w-3.5 h-3.5 text-amber-700" />
+                <span>Source Provenance & Classification</span>
+              </span>
+              <span className="text-[10px] font-bold bg-amber-200/90 text-amber-900 px-2 py-0.5 rounded-full border border-amber-300">
+                {standard.sourceMetadata?.dataClassification === 'demonstration_summary' ? 'Demo Summary' : 'Official Extract'}
+              </span>
+            </div>
+            <p className="text-slate-600 text-[11px] leading-relaxed">
+              Curated summary modeled after BIS technical specifications for SIH26107. Not a substitute for authoritative gazetted standards.
+            </p>
+            <div className="pt-1 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+              <span className="text-slate-500">Edition: <strong>{standard.sourceMetadata?.editionYear || standard.year}</strong> (Verified: {standard.sourceMetadata?.retrievalDate || '2026-09-22'})</span>
+              <a
+                href={standard.sourceMetadata?.officialSourceUrl || 'https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-bold text-amber-800 hover:text-amber-950 underline"
+              >
+                <span>Official BIS Portal</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+
         </div>
 
         {/* Drawer Footer */}

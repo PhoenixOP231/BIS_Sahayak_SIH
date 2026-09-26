@@ -39,8 +39,20 @@
       "clauseNumber": "Clause 5.3.2",
       "title": "Impact Resistance",
       "content": "Footwear tested at impact energy of 200 J shall retain clearance beneath toecap ≥ 14 mm.",
-      "contentHi": "200 जूल प्रभाव ऊर्जा पर परीक्षण में टो-कैप के नीचे निकासी 14 मिमी से कम नहीं होनी चाहिए।"
+      "contentHi": "200 जूल प्रभाव ऊर्जा पर परीक्षण में टो-कैप के नीचे निकासी 14 मिमी से कम नहीं होनी चाहिए।",
+      "clausePageReference": "Clause 5.3.2",
+      "sourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails"
     }
   ],
-  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes.",
+  "sourceMetadata": {
+    "officialSourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "documentTitle": "IS 15298 (Part 2):2016 — Personal Protective Equipment — Part 2: Safety Footwear",
+    "editionYear": "2016",
+    "clausePageReference": "Clause 5.3.2",
+    "retrievalDate": "2026-09-22",
+    "dataClassification": "demonstration_summary",
+    "officialUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "classification": "demonstration_summary"
+  }
 }

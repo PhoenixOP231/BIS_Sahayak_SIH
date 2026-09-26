@@ -16,7 +16,7 @@ const eslintConfig = [
       ".next/**",
       "out/**",
       "build/**",
-      "scripts/**",
+      ".ppt-build/**",
       "next-env.d.ts",
     ],
   },
@@ -26,6 +26,12 @@ const eslintConfig = [
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": "warn",
       "react-hooks/exhaustive-deps": "warn",
+    },
+  },
+  {
+    files: ["scripts/**/*.js"],
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
     },
   },
 ];

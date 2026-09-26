@@ -37,8 +37,20 @@
       "clauseNumber": "Clause 5.2",
       "title": "Citizen Charter",
       "content": "Public organization shall publish a Citizen Charter detailing service standards and grievance channels.",
-      "contentHi": "सार्वजनिक सेवा संगठन सेवा मानकों और शिकायत निवारण का नागरिक चार्टर प्रकाशित करेगा।"
+      "contentHi": "सार्वजनिक सेवा संगठन सेवा मानकों और शिकायत निवारण का नागरिक चार्टर प्रकाशित करेगा।",
+      "clausePageReference": "Clause 5.2",
+      "sourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails"
     }
   ],
-  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes."
+  "demoNotice": "SAMPLE/DEMO DATA — Modeled closely after official Bureau of Indian Standards specifications for demonstration purposes.",
+  "sourceMetadata": {
+    "officialSourceUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "documentTitle": "IS 15700:2018 — Quality Management Systems — Requirements for Service Quality by Public Service Organizations (Sevottam)",
+    "editionYear": "2018",
+    "clausePageReference": "Clause 5.2",
+    "retrievalDate": "2026-09-22",
+    "dataClassification": "demonstration_summary",
+    "officialUrl": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails",
+    "classification": "demonstration_summary"
+  }
 }

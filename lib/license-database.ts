@@ -10,38 +10,51 @@ export interface VerifiedLicense {
   category: string;
   factoryLocation: string;
   state: string;
-  status: 'OPERATIVE' | 'EXPIRED' | 'SUSPENDED';
+  status: 'OPERATIVE' | 'EXPIRED' | 'SUSPENDED' | 'CANCELLED';
   validUntil: string;
   scheme: string;
   standardId: string;
   branchOffice?: string;
+  isDemoData?: boolean;
 }
 
+export type VerificationStatus =
+  | 'verified'                 // Deprecated alias for operative
+  | 'format_valid_unverified'  // Valid 7 or 8-digit format, but unverified (requires BIS Care/e-BIS check)
+  | 'operative'                // Found in local demonstration dataset with OPERATIVE status
+  | 'expired'                  // Found in dataset with EXPIRED status
+  | 'suspended'                // Found in dataset with SUSPENDED status
+  | 'cancelled'                // Found in dataset with CANCELLED status
+  | 'suspicious_pattern'       // Repeated or sequential test pattern (e.g. 11111111, 12345678)
+  | 'is_standard'              // User entered an IS standard code instead of a CM/L number
+  | 'invalid';                 // Malformed input
+
 export interface VerificationResult {
-  status: 'verified' | 'regional_verified' | 'suspended' | 'counterfeit' | 'is_standard' | 'invalid';
-  license: VerifiedLicense | null;
+  status: VerificationStatus;
+  license?: VerifiedLicense;
   inputNumber: string;
   matchedStandard?: {
     isNumber: string;
     title: string;
     category: string;
     id: string;
-  } | null;
-  decodedInfo?: {
-    branchOffice: string;
-    region: string;
-    portalUrl: string;
-  } | null;
+  };
+  formatNotice?: string;
+  authoritativeStep?: string;
+  portalUrl?: string;
   message?: string;
+  isDemoData?: boolean;
 }
 
-export const VERIFIED_BIS_LICENSES: VerifiedLicense[] = rawLicenses as VerifiedLicense[];
+export const VERIFIED_BIS_LICENSES: VerifiedLicense[] = (rawLicenses as VerifiedLicense[]).map(lic => ({
+  ...lic,
+  isDemoData: true
+}));
 
 // Map of common Indian Standards that users often type from product labels
 export const INDIAN_STANDARDS_LOOKUP: Record<string, { isNumber: string; title: string; category: string; id: string }> = {
   '14543': { isNumber: 'IS 14543:2024', title: 'Packaged Drinking Water (Other than Natural Mineral Water)', category: 'Food & Drinking Water', id: 'IS-14543-2024' },
   '10500': { isNumber: 'IS 10500:2012', title: 'Drinking Water (Potable Piped Water) - Specification', category: 'Food & Drinking Water', id: 'IS-10500-2012' },
-  '13428': { isNumber: 'IS 13428:2024', title: 'Packaged Natural Mineral Water - Specification', category: 'Food & Drinking Water', id: 'IS-14543-2024' },
   '2347': { isNumber: 'IS 2347:2017', title: 'Domestic Pressure Cookers - Specification', category: 'Kitchen & Home Safety', id: 'IS-2347-2017' },
   '1786': { isNumber: 'IS 1786:2008', title: 'High Strength Deformed Steel Bars (Fe 500D) for Concrete Reinforcement', category: 'Civil & Construction', id: 'IS-1786-2008' },
   '694': { isNumber: 'IS 694:2010', title: 'PVC Insulated Cables for Working Voltages up to 1100 V', category: 'Electrical & Electronics', id: 'IS-694-2010' },
@@ -58,19 +71,15 @@ export const INDIAN_STANDARDS_LOOKUP: Record<string, { isNumber: string; title: 
   '15477': { isNumber: 'IS 15477:2019', title: 'Adhesives for Ceramic and Stone Tiles', category: 'Civil & Construction', id: 'IS-15477-2019' }
 };
 
-export function resolveStandardId(isNumber?: string): string {
-  if (!isNumber) return 'IS-2347-2017';
+export function resolveStandardId(isNumber?: string | null): string | undefined {
+  if (!isNumber || isNumber === 'undefined' || isNumber === 'null') return undefined;
   const clean = isNumber.toUpperCase().trim();
   for (const [key, val] of Object.entries(INDIAN_STANDARDS_LOOKUP)) {
     if (clean.includes(key)) {
       return val.id;
     }
   }
-  const digits = clean.replace(/[^0-9]/g, '');
-  if (digits) {
-    return `IS-${digits}`;
-  }
-  return 'IS-2347-2017';
+  return undefined;
 }
 
 export function resolveStandardTitle(isNumber?: string, fallbackTitle?: string): string {
@@ -84,13 +93,13 @@ export function resolveStandardTitle(isNumber?: string, fallbackTitle?: string):
   return fallbackTitle || `${isNumber} Specification`;
 }
 
-// Check if a number is a known dummy, test or counterfeit sequence
-export function isDummyOrCounterfeitNumber(digits: string): boolean {
+// Check if a number matches an invalid, dummy, or suspicious test pattern
+export function isSuspiciousTestPattern(digits: string): boolean {
   // All identical digits like 1111111, 11111111, 00000000, 99999999
   if (/^(\d)\1+$/.test(digits)) return true;
 
   // Obvious sequential or dummy test numbers
-  const dummyList = [
+  const testPatterns = [
     '1234567', '12345678', '87654321', '7654321',
     '0123456', '01234567', '0000000', '1111111',
     '2222222', '3333333', '4444444', '5555555',
@@ -98,128 +107,171 @@ export function isDummyOrCounterfeitNumber(digits: string): boolean {
     '1212121', '12121212', '9876543', '12234444',
     '1231231', '12312312', '88889999', '00001111'
   ];
-  return dummyList.includes(digits);
+  return testPatterns.includes(digits);
 }
 
-// Decode BIS Branch Office from 2-digit Scheme-I prefix
-export function decodeBisBranchOffice(prefix2: string): { branchOffice: string; region: string } {
-  const code = parseInt(prefix2, 10);
-  if (code >= 51 && code <= 55) {
-    return { branchOffice: 'BIS Mumbai / Western Regional Office', region: 'Western Region (Maharashtra, Goa, Gujarat)' };
-  } else if ((code >= 56 && code <= 60) || (code >= 71 && code <= 73)) {
-    return { branchOffice: 'BIS Delhi / NCR Northern Regional Office', region: 'Northern Region (Delhi, Haryana, UP, Rajasthan)' };
-  } else if (code >= 61 && code <= 66) {
-    return { branchOffice: 'BIS Kolkata / Eastern Regional Office', region: 'Eastern Region (West Bengal, Bihar, Jharkhand, Odisha)' };
-  } else if (code >= 67 && code <= 70) {
-    return { branchOffice: 'BIS Ahmedabad / Gujarat Branch Office', region: 'Western Region (Gujarat, Daman & Diu)' };
-  } else if (code >= 74 && code <= 78) {
-    return { branchOffice: 'BIS Pune / Satara Branch Office', region: 'Western Region (Maharashtra)' };
-  } else if (code >= 81 && code <= 82) {
-    return { branchOffice: 'BIS Southern Regional Office (Bengaluru / Chennai)', region: 'Southern Region (Karnataka, Tamil Nadu, Kerala)' };
-  } else if (code >= 83 && code <= 84) {
-    return { branchOffice: 'BIS Bengaluru / Karnataka Branch Office', region: 'Southern Region (Karnataka)' };
-  } else if (code >= 85 && code <= 88) {
-    return { branchOffice: 'BIS Hyderabad / Andhra Pradesh Branch Office', region: 'Southern Region (Telangana, Andhra Pradesh)' };
-  } else if (code >= 91 && code <= 95) {
-    return { branchOffice: 'BIS Chandigarh / Punjab & HP Branch Office', region: 'Northern Region (Punjab, HP, J&K, Chandigarh)' };
-  }
-  return { branchOffice: 'Bureau of Indian Standards (BIS) Regional Directorate', region: 'National Certification Directorate (Scheme-I)' };
-}
+// Backwards compatibility alias
+export const isDummyOrCounterfeitNumber = isSuspiciousTestPattern;
 
 export function parseAndVerifyLicense(input: string): VerificationResult {
   const clean = input.trim().toUpperCase();
   if (!clean) {
     return {
       status: 'invalid',
-      license: null,
       inputNumber: '',
+      isDemoData: true,
       message: 'Please enter a valid CM/L license number, brand name, or IS standard number.'
     };
   }
 
   const rawDigits = clean.replace(/[^0-9]/g, '');
+  const licenseDigits = /^(?:CM\/L[\s-]*)?(\d{7,8})$/.exec(clean)?.[1];
 
   // 1. Check if user typed an Indian Standard Number (e.g. "14543", "IS 14543", "IS-10500", "IS 2347")
   if (INDIAN_STANDARDS_LOOKUP[rawDigits] && (clean.includes('IS') || rawDigits.length <= 5)) {
     const std = INDIAN_STANDARDS_LOOKUP[rawDigits];
     return {
       status: 'is_standard',
-      license: null,
       inputNumber: std.isNumber,
       matchedStandard: std,
+      isDemoData: true,
+      authoritativeStep: 'Verify CM/L licence under ISI mark using BIS Care Mobile App',
+      portalUrl: 'https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails',
       message: `You entered the Indian Standard number (${std.isNumber}) for ${std.title}. Look directly underneath the ISI logo on your product for the 7 or 8-digit CM/L license number (e.g. CM/L-8270877).`
     };
   }
 
-  // 2. Check if user typed a Brand / Manufacturer Name (e.g. "Kenson", "Bisleri", "Prestige", "Aquafina", "Tata Tiscon", "Anchor", "Indane", "Steelbird", "Kent")
-  if (rawDigits.length < 5 && clean.length >= 3) {
+  // 2. Direct brand name query lookup in demonstration dataset
+  if (!clean.startsWith('CM/L') && rawDigits.length < 7) {
     const brandMatch = VERIFIED_BIS_LICENSES.find(lic => 
       lic.brand.toUpperCase().includes(clean) || 
       lic.manufacturer.toUpperCase().includes(clean)
     );
     if (brandMatch) {
+      if (brandMatch.status === 'EXPIRED') {
+        return {
+          status: 'expired',
+          license: brandMatch,
+          inputNumber: brandMatch.cmlNumber,
+          isDemoData: true,
+          authoritativeStep: 'Verify current renewal status on official BIS Care App',
+          portalUrl: 'https://www.services.bis.gov.in',
+          message: `Notice: Demonstration record for ${brandMatch.brand} (${brandMatch.cmlNumber}) is listed as EXPIRED. Products manufactured after expiry are not certified.`
+        };
+      }
+      if (brandMatch.status === 'SUSPENDED') {
+        return {
+          status: 'suspended',
+          license: brandMatch,
+          inputNumber: brandMatch.cmlNumber,
+          isDemoData: true,
+          authoritativeStep: 'Verify suspension / revocation status on official BIS Care App',
+          portalUrl: 'https://www.services.bis.gov.in',
+          message: `WARNING: Demonstration record for ${brandMatch.brand} (${brandMatch.cmlNumber}) is marked as SUSPENDED in this dataset. Confirm its current status with BIS.`
+        };
+      }
+      if (brandMatch.status === 'CANCELLED') {
+        return {
+          status: 'cancelled',
+          license: brandMatch,
+          inputNumber: brandMatch.cmlNumber,
+          isDemoData: true,
+          authoritativeStep: 'Verify cancellation status on official BIS Care App',
+          portalUrl: 'https://www.services.bis.gov.in',
+          message: `WARNING: Demonstration record for ${brandMatch.brand} (${brandMatch.cmlNumber}) is marked as CANCELLED in this dataset. Confirm its current status with BIS.`
+        };
+      }
       return {
-        status: brandMatch.status === 'SUSPENDED' ? 'suspended' : 'verified',
+        status: 'operative',
         license: brandMatch,
-        inputNumber: brandMatch.cmlNumber
+        inputNumber: brandMatch.cmlNumber,
+        isDemoData: true,
+        authoritativeStep: 'Cross-check real-time operative status on official BIS Care App or e-BIS',
+        portalUrl: 'https://www.services.bis.gov.in',
+        message: `Demonstration record: ${brandMatch.brand} (${brandMatch.cmlNumber}) is indexed as OPERATIVE in our demonstration dataset. Confirm on official BIS Care App.`
       };
     }
   }
 
   // 3. Format validation: must be 7 or 8 digits
-  if (rawDigits.length !== 7 && rawDigits.length !== 8) {
+  if (!licenseDigits) {
     return {
       status: 'invalid',
-      license: null,
       inputNumber: clean,
+      isDemoData: true,
       message: 'CM/L license number must contain exactly 7 or 8 digits (e.g. CM/L-8270877, CM/L-5100087, or 8400123). You can also search by brand name.'
     };
   }
 
-  // 4. Check for known dummy / counterfeit test sequences (e.g. 11111111, 12234444, 12345678)
-  if (isDummyOrCounterfeitNumber(rawDigits)) {
+  // 4. Check for known dummy / test / suspicious patterns
+  if (isSuspiciousTestPattern(licenseDigits)) {
     return {
-      status: 'counterfeit',
-      license: null,
+      status: 'suspicious_pattern',
       inputNumber: `CM/L-${rawDigits}`,
-      message: `The license number CM/L-${rawDigits} is a known counterfeit / dummy test pattern. Substandard products carrying fake stamps violate Section 29 of the BIS Act, 2016 and carry severe domestic hazards.`
+      isDemoData: true,
+      authoritativeStep: 'Inspect physical packaging and verify on official BIS Care Mobile App',
+      portalUrl: 'https://www.services.bis.gov.in',
+      message: `The license number CM/L-${rawDigits} matches an invalid or suspicious test pattern. This is not confirmed as an authentic licence. Please verify packaging and cross-check on the official BIS Care Mobile App.`
     };
   }
 
-  // 5. Look up in verified database of authentic BIS licenses (Tier 1: Pre-Indexed Instant Cache)
-  const matched = VERIFIED_BIS_LICENSES.find(lic => lic.digits === rawDigits);
+  // 5. Look up in demonstration dataset of BIS licenses
+  const matched = VERIFIED_BIS_LICENSES.find(lic => lic.digits === licenseDigits);
   if (matched) {
+    if (matched.status === 'EXPIRED') {
+      return {
+        status: 'expired',
+        license: matched,
+        inputNumber: matched.cmlNumber,
+        isDemoData: true,
+        authoritativeStep: 'Verify renewal status on official BIS Care App',
+        portalUrl: 'https://www.services.bis.gov.in',
+        message: `Notice: Demonstration record for CM/L-${rawDigits} (${matched.brand}) is listed as EXPIRED. Products manufactured after expiry are not certified.`
+      };
+    }
     if (matched.status === 'SUSPENDED') {
       return {
         status: 'suspended',
         license: matched,
         inputNumber: matched.cmlNumber,
-        message: `WARNING: The license CM/L-${rawDigits} (${matched.brand}) was SUSPENDED / REVOKED by BIS for non-compliance. Do NOT purchase or distribute this product.`
+        isDemoData: true,
+        authoritativeStep: 'Verify suspension notice on official BIS Care App',
+        portalUrl: 'https://www.services.bis.gov.in',
+        message: `WARNING: Demonstration record for CM/L-${rawDigits} (${matched.brand}) is marked as SUSPENDED in this dataset. Confirm its current status with BIS.`
+      };
+    }
+    if (matched.status === 'CANCELLED') {
+      return {
+        status: 'cancelled',
+        license: matched,
+        inputNumber: matched.cmlNumber,
+        isDemoData: true,
+        authoritativeStep: 'Verify cancellation notice on official BIS Care App',
+        portalUrl: 'https://www.services.bis.gov.in',
+        message: `WARNING: Demonstration record for CM/L-${rawDigits} (${matched.brand}) is marked as CANCELLED in this dataset. Confirm its current status with BIS.`
       };
     }
     return {
-      status: 'verified',
+      status: 'operative',
       license: matched,
-      inputNumber: matched.cmlNumber
+      inputNumber: matched.cmlNumber,
+      isDemoData: true,
+      authoritativeStep: 'Confirm live operative validity on official BIS Care App (com.bis.bisapp)',
+      portalUrl: 'https://www.services.bis.gov.in',
+      message: `Demonstration record: CM/L-${rawDigits} (${matched.brand}) is listed as OPERATIVE in our prototype dataset. For official real-time verification, check the BIS Care Mobile App.`
     };
   }
 
-  // 6. Tier 2: Valid Scheme-I Regional Plant License
-  // For other authentic regional manufacturing plants across India not yet cached locally,
-  // decode the BIS Regional Branch Office and provide direct live query gateway to the Central Government BIS portal.
-  const prefix2 = rawDigits.substring(0, 2);
-  const decoded = decodeBisBranchOffice(prefix2);
-
+  // 6. Unknown 7/8-digit number: plausible length, but UNVERIFIED
+  // Never treat an unknown number as verified!
   return {
-    status: 'regional_verified',
-    license: null,
+    status: 'format_valid_unverified',
     inputNumber: `CM/L-${rawDigits}`,
-    decodedInfo: {
-      branchOffice: decoded.branchOffice,
-      region: decoded.region,
-      portalUrl: 'https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails'
-    },
-    message: `License CM/L-${rawDigits} complies with the Bureau of Indian Standards (BIS) Scheme-I numbering format under Central QCO mandates.`
+    isDemoData: true,
+    authoritativeStep: 'Check licence details on official BIS Care Mobile App or e-BIS portal',
+    portalUrl: 'https://www.services.bis.gov.in',
+    formatNotice: 'This number has a plausible 7 or 8-digit length. That does not prove a BIS licence exists.',
+    message: `CM/L-${rawDigits} has a plausible number length but is not present in this demonstration dataset. This tool cannot confirm its authenticity or branch office. Check the official BIS Care Mobile App or e-BIS portal for current licence details.`
   };
 }
 
